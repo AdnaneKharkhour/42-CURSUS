@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akharkho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 19:51:58 by akharkho          #+#    #+#             */
-/*   Updated: 2024/10/21 19:53:29 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/10/29 07:42:53 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isprintint(int c)
+int	ft_isprint(int c)
 {
 	if (c >= ' ' && c <= '~')
 		return (c);

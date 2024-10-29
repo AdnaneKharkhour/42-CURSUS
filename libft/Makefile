@@ -10,7 +10,6 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c \
       ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
 	  ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 
-BONUS = ft_lstnew_bonus.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -24,11 +23,9 @@ $(NAME): $(OBJ)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(OBJBONUS)
-	ar rcs $(NAME) $(OBJBONUS)
 
 clean:
-	rm -f $(OBJ) $(OBJBONUS)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
