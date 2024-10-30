@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:16:30 by akharkho          #+#    #+#             */
-/*   Updated: 2024/10/27 15:53:22 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:24:39 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,20 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*str;
 	char	*start;
 	char	*final;
+	size_t	len;
 
+	if (!s1 || !set || !*s1)
+		return (ft_strdup(s1));
 	start = (char *)s1;
-	final = (char *)s1 + (ft_strlen(s1) - 1);
-	while (trim(*final, set) == 1)
+	final = (char *)s1 + ft_strlen(s1) - 1;
+	while (trim(*final, set) && final >= start)
 		final--;
-	++final;
-	*final = '\0';
-	while (trim (*start, set) == 1)
+	while (trim (*start, set) && start <= final)
 		start++;
-	str = malloc(sizeof(char) * (final - start + 1));
+	len = final - start + 1;
+	str = malloc(len + 1 * sizeof(char));
 	if (!str)
-		return (0);
-	ft_strlcpy(str, start, (final - start + 1));
+		return (NULL);
+	ft_strlcpy(str, start, len + 1);
 	return (str);
 }

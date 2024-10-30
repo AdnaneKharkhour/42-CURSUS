@@ -6,15 +6,13 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:11:04 by akharkho          #+#    #+#             */
-/*   Updated: 2024/10/29 08:10:27 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:26:05 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stddef.h>
-# include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
 
@@ -52,4 +50,9 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+typedef struct s_list
+{
+void *content;
+struct s_list *next;
+} t_list;
 #endif
