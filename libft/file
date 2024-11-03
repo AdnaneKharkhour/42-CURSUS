@@ -1,20 +1,39 @@
 NAME = libft.a
+
 CC = cc
+
 FLAGS = -Wall -Wextra -Werror
+
 SRC = ft_atoi.c ft_calloc.c
+
 BONUS = ft_lstadd_baack_bonus.c
+
 OBJ = $(SRC:.c=.o)
+
 OBJBONUS = $(BONUS:.c=.o)
+
 all:$(NAME)
+
 $(NAME):$(OBJ)
+
 	ar rcs $(NAME) $(OBJ)
+
 %.o:%.c
+
 	$(CC) $(FLAGS) -c $< -o $@
+
 bonus:$(OBJBONUS)
+
 	ar rcs $(NAME) $(OBJBONUS)
+
 clean:
+
 	rm -f $(OBJ) $(OBJBONUS)
+
 fclean:clean
+
 	rm -f $(NAME)
+
 re:fclean
+
 .PHONY : all bonus clean fclean re
