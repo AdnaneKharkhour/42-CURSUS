@@ -35,5 +35,4 @@ fclean:clean
 	rm -f $(NAME)
 
 re:fclean
-
 .PHONY : all bonus clean fclean re
