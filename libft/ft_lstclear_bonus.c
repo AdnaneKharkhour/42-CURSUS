@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:28:05 by akharkho          #+#    #+#             */
-/*   Updated: 2024/10/31 19:46:28 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/04 11:03:01 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 	if (!*lst || !lst)
 		return ;
 	curr = *lst;
-	while (curr->next)
+	while (curr)
 	{
 		follow = curr->next;
 		del(curr->content);

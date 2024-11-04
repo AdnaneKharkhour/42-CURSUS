@@ -6,13 +6,13 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 16:16:18 by akharkho          #+#    #+#             */
-/*   Updated: 2024/10/30 14:54:53 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/04 13:39:25 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*string_fill(char *s, unsigned int n, long len)
+char	*str_fill(char *s, unsigned int n, long len)
 {
 	while (n > 0)
 	{
@@ -22,7 +22,7 @@ char	*string_fill(char *s, unsigned int n, long len)
 	return (s);
 }
 
-long	numb_len(int nbr)
+long	numlen(int nbr)
 {
 	long	len;
 
@@ -42,7 +42,7 @@ char	*numtostr(int n, char *str)
 	long			len;
 	unsigned int	nb;
 
-	len = numb_len(n);
+	len = numlen(n);
 	str[len] = '\0';
 	if (n == 0)
 	{
@@ -53,11 +53,11 @@ char	*numtostr(int n, char *str)
 	{
 		nb = -n;
 		str[0] = '-';
-		return (string_fill(str + 1, nb, len - 1));
+		return (str_fill(str + 1, nb, len - 1));
 	}
 	else
 		nb = n;
-	return (string_fill(str, nb, len));
+	return (str_fill(str, nb, len));
 }
 
 void	ft_putnbr_fd(int n, int fd)

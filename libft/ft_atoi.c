@@ -6,30 +6,42 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:38:35 by akharkho          #+#    #+#             */
-/*   Updated: 2024/10/26 16:00:21 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/04 13:33:50 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+void	space_sign(const char **s, int *sign)
+{
+	while (**s == 32 || (**s >= 9 && **s <= 13))
+		(*s)++;
+	if (**s == '+' || **s == '-')
+	{
+		if (**s == '-')
+			*sign *= -1; 
+		(*s)++;
+	}
+}
+
 int	ft_atoi(const char *str)
 {
-	int	rs;
-	int	n;
-	int	s;
+	long	rs;
+	int		s;
 
 	s = 1;
-	while (*str == 32 || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			s *= -1; 
-		str++;
-	}
+	space_sign(&str, &s);
 	rs = 0;
-	while (*str >= '0' && *str <= '9')
+	while (ft_isdigit(*str))
 	{
-		n = *str - '0';
-		rs = rs * 10 + n;
+		if (rs > (9223372036854775807 - *str - '\0') / 10)
+		{
+			if (s == 1)
+				return (-1);
+			else
+				return (0);
+		}
+		rs = rs * 10 + (*str - '0');
 		str++;
 	}
 	return (rs * s);
