@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 16:10:47 by akharkho          #+#    #+#             */
-/*   Updated: 2024/10/28 16:13:50 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/05 11:39:13 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
+	if (!s)
+		return ;
 	while (*s != '\0')
 	{
 		ft_putchar_fd(*s, fd);

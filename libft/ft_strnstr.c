@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 11:23:48 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/04 20:54:18 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/05 11:23:04 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,4 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 		i++;
 	}
 	return (NULL);
-}
-int main()
-{
-	char *haystack = "Hello World";
-	char *needle = "World";
-	size_t len = 11;
-	printf("%s\n", ft_strnstr(NULL,NULL, 0));
-	printf("%s\n", strnstr(NULL, NULL, 0));
-	return 0;
 }

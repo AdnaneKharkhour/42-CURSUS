@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:28:05 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/04 11:03:01 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/05 11:43:34 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
 	t_list	*curr;
-	t_list	*follow;
+	t_list	*temp;
 
-	if (!*lst || !lst)
+	if (!lst || !*lst || !del)
 		return ;
 	curr = *lst;
 	while (curr)
 	{
-		follow = curr->next;
+		temp = curr->next;
 		del(curr->content);
 		free(curr);
-		curr = follow;
+		curr = temp;
 	}
 	*lst = NULL;
 }

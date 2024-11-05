@@ -21,13 +21,13 @@ OBJBONUS = $(BONUS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+	ar rcs $(NAME) $(OBJ) $?
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: $(OBJBONUS)
-	ar rcs $(NAME) $(OBJBONUS)
+	ar rcs $(NAME) $(OBJBONUS) $?
 
 clean:
 	rm -f $(OBJ) $(OBJBONUS)

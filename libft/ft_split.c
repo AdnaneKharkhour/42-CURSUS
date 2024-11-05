@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:17:58 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/04 11:40:41 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:19:09 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	count_words(char const *str, char sep)
 	return (c);
 }
 
-char	*ft_word(const char *str, char sep)
+char	*ft_word_allocator(const char *str, char sep)
 {
 	int		i;
 	int		j;
@@ -73,7 +73,7 @@ char	**ft_split(char const *s, char c)
 			s++;
 		if (*s)
 		{
-			string[i] = ft_word(s, c);
+			string[i] = ft_word_allocator(s, c);
 			i++;
 		}
 		while (!check_sep(*s, c) && *s)
