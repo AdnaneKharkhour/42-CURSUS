@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:05:11 by akharkho          #+#    #+#             */
-/*   Updated: 2024/10/29 16:10:47 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:18:35 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char	*destanation;
-	unsigned char	*source;
+	char		*destanation;
+	const char	*source;
 
-	destanation = (unsigned char *)dst;
-	source = (unsigned char *)src;
+	if (dst == src)
+		return (dst);
+	destanation = (char *)dst;
+	source = (const char *)src;
 	if (!dst && !src)
 		return (dst);
 	if (dst > src)

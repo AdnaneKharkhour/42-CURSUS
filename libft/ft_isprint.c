@@ -6,13 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 19:51:58 by akharkho          #+#    #+#             */
-/*   Updated: 2024/10/29 07:42:53 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:36:08 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isprint(int c)
 {
-	if (c >= ' ' && c <= '~')
-		return (c);
-	return (0);
+	return (c >= ' ' && c <= '~');
 }

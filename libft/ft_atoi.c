@@ -6,21 +6,21 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:38:35 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/04 13:33:50 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/07 17:28:16 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	space_sign(const char **s, int *sign)
+static void	space_sign(const char *s, int *sign)
 {
-	while (**s == 32 || (**s >= 9 && **s <= 13))
-		(*s)++;
-	if (**s == '+' || **s == '-')
+	while (*s == 32 || (*s >= 9 && *s <= 13))
+		s++;
+	if (*s == '+' || *s == '-')
 	{
-		if (**s == '-')
+		if (*s == '-')
 			*sign *= -1; 
-		(*s)++;
+		s++;
 	}
 }
 
@@ -30,11 +30,11 @@ int	ft_atoi(const char *str)
 	int		s;
 
 	s = 1;
-	space_sign(&str, &s);
+	space_sign(str, &s);
 	rs = 0;
 	while (ft_isdigit(*str))
 	{
-		if (rs > (9223372036854775807 - *str - '\0') / 10)
+		if (rs > (LONG_MAX - *str - '\0') / 10)
 		{
 			if (s == 1)
 				return (-1);

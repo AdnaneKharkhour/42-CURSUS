@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akharkho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:56:57 by akharkho          #+#    #+#             */
-/*   Updated: 2024/10/21 18:58:49 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:34:14 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isdigit(int n)
 {
-	if (n >= '0' && n <= '9')
-		return (n);
-	return (0);
+	return (n >= '0' && n <= '9');
 }

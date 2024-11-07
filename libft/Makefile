@@ -21,20 +21,23 @@ OBJBONUS = $(BONUS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ) $?
+	ar rcs $(NAME) $?
 
-%.o: %.c
+%.o: %.c libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(OBJBONUS)
-	ar rcs $(NAME) $(OBJBONUS) $?
+bonus: .bonusupdater
+
+.bonusupdater: $(OBJBONUS)
+	ar rcs $(NAME) $?
+	touch .bonusupdater
 
 clean:
-	rm -f $(OBJ) $(OBJBONUS)
+	rm -f $(OBJ) $(OBJBONUS) $(.bonusupdater)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all bonus clean fclean re .bonusUpdater

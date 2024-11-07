@@ -6,18 +6,18 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:17:58 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/05 13:19:09 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:40:15 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	check_sep(char c, char sep)
+static int	check_sep(char c, char sep)
 {
 	return (c == sep);
 }
 
-int	count_words(char const *str, char sep)
+static int	count_words(char const *str, char sep)
 {
 	int	c;
 
@@ -34,7 +34,7 @@ int	count_words(char const *str, char sep)
 	return (c);
 }
 
-char	*ft_word_allocator(const char *str, char sep)
+static char	*ft_word_allocator(const char *str, char sep)
 {
 	int		i;
 	int		j;
@@ -45,9 +45,9 @@ char	*ft_word_allocator(const char *str, char sep)
 		i++;
 	word = malloc(sizeof(char) * (i + 1));
 	if (!word)
-		return (0);
+		return (NULL);
 	j = 0;
-	while (str[j] && j < i)
+	while (j < i)
 	{
 		word[j] = str[j];
 		j++;
@@ -56,16 +56,25 @@ char	*ft_word_allocator(const char *str, char sep)
 	return (word);
 }
 
+static char	**free_string(char **string, int i)
+{
+	while (i >= 0)
+	{
+		free(string[i]);
+		i--;
+	}
+	free(string);
+	return (NULL);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**string;
 	int		i;
 
-	if (!s)
-		return (NULL);
 	string = malloc(sizeof(char *) * (count_words(s, c) + 1));
 	if (!string)
-		return (0);
+		return (NULL);
 	i = 0;
 	while (*s)
 	{
@@ -74,11 +83,13 @@ char	**ft_split(char const *s, char c)
 		if (*s)
 		{
 			string[i] = ft_word_allocator(s, c);
+			if (!string[i])
+				return (free_string(string, i));
 			i++;
 		}
 		while (!check_sep(*s, c) && *s)
 			s++;
 	}
-	string[i] = 0;
+	string[i] = NULL;
 	return (string);
 }
