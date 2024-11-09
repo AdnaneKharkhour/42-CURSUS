@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 16:55:01 by akharkho          #+#    #+#             */
-/*   Updated: 2024/10/29 17:32:13 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:28:45 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	final;
 	char	*str;
+	size_t	final;
 	size_t	slen;
 
 	if (!s)

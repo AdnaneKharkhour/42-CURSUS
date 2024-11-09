@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:17:58 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/07 12:40:15 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:11:47 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ char	**ft_split(char const *s, char c)
 	char	**string;
 	int		i;
 
+	if (!s)
+		return (NULL);
 	string = malloc(sizeof(char *) * (count_words(s, c) + 1));
 	if (!string)
 		return (NULL);

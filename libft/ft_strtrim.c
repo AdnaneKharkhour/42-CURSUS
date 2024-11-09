@@ -6,13 +6,13 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:16:30 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/04 11:40:57 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:27:22 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	trim(char c, char const	*set)
+static int	trim(char c, char const	*set)
 {
 	while (*set != '\0')
 	{

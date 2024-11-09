@@ -26,18 +26,15 @@ $(NAME): $(OBJ)
 %.o: %.c libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: .bonusupdater
-
-.bonusupdater: $(OBJBONUS)
+bonus: $(OBJBONUS)
 	ar rcs $(NAME) $?
-	touch .bonusupdater
 
 clean:
-	rm -f $(OBJ) $(OBJBONUS) $(.bonusupdater)
+	rm -f $(OBJ) $(OBJBONUS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re .bonusUpdater
+.PHONY: all bonus clean fclean re

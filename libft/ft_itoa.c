@@ -6,13 +6,13 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 18:08:31 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/04 11:55:23 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:10:10 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*string_fill(char *s, unsigned int n, long len)
+static char	*string_fill(char *s, unsigned int n, long len)
 {
 	while (n > 0)
 	{
@@ -22,7 +22,7 @@ char	*string_fill(char *s, unsigned int n, long len)
 	return (s);
 }
 
-long	numb_len(int nbr)
+static long	numb_len(int nbr)
 {
 	long	len;
 

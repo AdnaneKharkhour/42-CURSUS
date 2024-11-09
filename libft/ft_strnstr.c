@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 11:23:48 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/06 15:04:44 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:02:02 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	if (needle == haystack || *needle == '\0')
 		return ((char *)haystack);
 	i = 0;
-	while (haystack[i] != '\0' && i < len)
+	while (i < len && haystack[i] != '\0')
 	{
 		j = 0;
 		while (haystack[i + j] == needle[j] && needle [j] != '\0' 

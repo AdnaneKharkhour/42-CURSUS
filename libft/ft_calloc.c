@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:12:58 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/07 17:03:04 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:45:01 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	char	*p;
 
-	if (count != 0 && size > SIZE_T_MAX / count)
+	if (count != 0 && size > SIZE_MAX / count)
 		return (NULL);
 	p = malloc(count * size);
 	if (!p)
