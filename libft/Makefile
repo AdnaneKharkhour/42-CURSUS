@@ -26,11 +26,15 @@ $(NAME): $(OBJ)
 %.o: %.c libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(OBJBONUS)
+bonus: .additional
+	
+.additional: $(OBJBONUS)
 	ar rcs $(NAME) $?
+	touche .additional
 
 clean:
 	rm -f $(OBJ) $(OBJBONUS)
+	rm -f .additional
 
 fclean: clean
 	rm -f $(NAME)
