@@ -6,9 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:55:25 by akharkho          #+#    #+#             */
-/*   Updated: 2024/10/29 08:13:10 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:40:10 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_tolower(int c)
 {

@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:45:38 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/09 17:33:04 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:41:04 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,3 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	}
 	return (lista);
 }
-
-
-// int main (){
-// 	t_list	*(*myfunc)(t_list *, void *(*)(void *), void (*)(void *)) = ft_lstmap;
-// 	t_list	*(*myfunc[])(t_list *, void *(*)(void *), void (*)(void *)) = {ft_lstmap};
-// 	myfunc[](list,ft_toupper,free);
-// }

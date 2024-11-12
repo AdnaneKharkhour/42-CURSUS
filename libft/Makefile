@@ -30,7 +30,7 @@ bonus: .additional
 	
 .additional: $(OBJBONUS)
 	ar rcs $(NAME) $?
-	touche .additional
+	touch .additional
 
 clean:
 	rm -f $(OBJ) $(OBJBONUS)
