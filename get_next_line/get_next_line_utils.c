@@ -10,17 +10,37 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strchr(char *s, int c)
 {
-	while (*s)
+	int i;
+
+	i = 0;
+	while (s[i])
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		if (s[i] == (char)c)
+			return (i);
+		i++;
 	}
-	if (*s == (char)c)
-		return ((char *)s);
-	return (NULL);
+	if (s[i] == (char)c)
+		return (i);
+	return (-1);
+}
+size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t  i;
+
+	if (!dst || !src)
+			return (ft_strlen(src));
+	if (dstsize == 0)
+			return (ft_strlen(src));
+	i = 0;
+	while (i < dstsize - 1 && src[i] != '\0')
+	{
+			dst[i] = src[i];
+			i++;
+	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }
 
 char	*ft_strdup(const char *s1)
@@ -43,31 +63,39 @@ char	*ft_strdup(const char *s1)
 	return (dup);
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char    *ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*joined;
-	size_t	len1;
-	size_t	len2;
-	size_t	i;
-	size_t	j;
+	char    *str;
+	size_t  final;
+	size_t  slen;
 
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	joined = (char *)malloc((len1 + len2 + 1) * sizeof(char));
-	if (!joined)
+	if (!s)
+			return ((char *)s);
+	slen = ft_strlen(s);
+	if (start >= slen)
+			return (ft_strdup(""));
+	final = slen - start;
+	if (final > len)
+			final = len;
+	str = (char *)malloc(sizeof(char) * (final + 1));
+	if (!str)
+			return (0);
+	ft_strlcpy (str, (char *)(s + start), final + 1);
+	return (str);
+}
+
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*str;
+
+	if (!s1 || !s2)
 		return (NULL);
-	i = 0;
-	while (i < len1)
-	{
-		joined[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (j < len2)
-	{
-		joined[i + j] = s2[j];
-		j++;
-	}
-	joined[i + j] = '\0';
-	return (joined);
+	str = (char *)malloc(sizeof (char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (NULL);
+	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
+	ft_strlcpy(str + ft_strlen(s1), s2, ft_strlen(s2) + 1);
+	free(s1);
+	return (str);
 }

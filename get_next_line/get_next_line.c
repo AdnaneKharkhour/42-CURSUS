@@ -1,40 +1,63 @@
 
 #include "get_next_line.h"
+#include <stdio.h> 
+#include <stdlib.h> 
 
-char	*get_next_line(int fd)
+char *read_line(int fd)
 {
-	char	*buffer;
-	char	*line;
+	char *line;
+	char *buffer;
+	ssize_t bytes_read;
 
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
+	line = NULL;
+	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	line = (char *)malloc(1);
-	if (!line)
+	bytes_read = read(fd, buffer, BUFFER_SIZE);
+	while (bytes_read > 0)
 	{
-		free(buffer);
-		return (NULL);
-	}
-
-	while (read(fd, buffer, BUFFER_SIZE))
-	{
+		buffer[bytes_read] = '\0';
 		line = ft_strjoin(line, buffer);
-		if (!line)
-		{
-			free(buffer);
-			return (NULL);
-		}
-		if (ft_strchr(buffer, '\n'))
+		if (ft_strchr(buffer, '\n') >= 0)
 			break ;
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
 	}
-
+	free(buffer);
 	return (line);
 }
 
-int main (){
-	int fd;
-	fd = open("file.txt", O_RDONLY);
-	char *line = get_next_line(fd);
-	printf("%s\n", line);
-	return 0;
+char *extract_line(char *line)
+{
+	char *extracted_line;
+
+	extracted_line = ft_substr(line, 0, ft_strchr(line, '\n') + 1);
+	if (!extracted_line)
+		return (NULL);
+	return (extracted_line);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*rs;
+
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
+	{
+		free(rs);
+		return (NULL);
+	}
+	rs = read_line(fd);
+	printf("%s", rs);
+	if (!rs)
+		return (NULL);
+	if (ft_strchr(rs, '\n') >= 0)
+		rs = ft_substr(rs, 0, ft_strchr(rs, '\n') + 1);
+	return (extract_line(rs));
+}
+
+int main()
+{
+    int fd = open("file.txt", O_CREAT | O_RDWR, 0777);
+    char *line = get_next_line(fd);
+     printf("%s", line);
+    return 0;
 }
