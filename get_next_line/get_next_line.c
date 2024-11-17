@@ -14,11 +14,9 @@
 
 static char	*read_line(int fd, char *rs)
 {
-	// char *line;
-	char buffer[BUFFER_SIZE + 1];
-	ssize_t bytes_readed;
+	char	buffer[BUFFER_SIZE + 1];
+	ssize_t	bytes_readed;
 
-	// line = NULL;
 	bytes_readed = read(fd, buffer, BUFFER_SIZE);
 	while (bytes_readed > 0)
 	{
@@ -37,29 +35,25 @@ static char	*read_line(int fd, char *rs)
 	return (rs);
 }
 
-static char *one_line(char **rs)
+static char	*one_line(char **rs)
 {
-	char *line;
-	char *temp;
-	int nl;
+	char	*line;
+	char	*temp;
+	int		nl;
 
 	nl = ft_strchr(*rs, '\n');
 	if (nl >= 0)
 	{
 		line = ft_substr(*rs, 0, nl + 1);
 		temp = ft_strdup(*rs + nl + 1);
-		free(*rs);
-		*rs = temp;
 	}
 	else
 	{
 		line = ft_strdup(*rs);
-		// temp = NULL;
-		free(*rs);
-		*rs = NULL;
+		temp = NULL;
 	}
-	// free(*rs);
-	// *rs = temp;
+	free(*rs);
+	*rs = temp;
 	return (line);
 }
 

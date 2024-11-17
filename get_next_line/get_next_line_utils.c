@@ -12,19 +12,9 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
-}
-
 int	ft_strchr(const char *s, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!s)
@@ -37,12 +27,17 @@ int	ft_strchr(const char *s, int c)
 	}
 	return (-1);
 }
-size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize)
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
+	size_t	src_len;
 
+	src_len = 0;
+	while (src[src_len])
+		src_len++;
 	if (dstsize == 0)
-		return (ft_strlen(src));
+		return (src_len);
 	i = 0;
 	while (i < dstsize - 1 && src[i] != '\0')
 	{
@@ -50,7 +45,7 @@ size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		i++;
 	}
 	dst[i] = '\0';
-	return (ft_strlen(src));
+	return (src_len);
 }
 
 char	*ft_strdup(const char *s1)
@@ -60,7 +55,9 @@ char	*ft_strdup(const char *s1)
 
 	if (!s1)
 		return (NULL);
-	len = ft_strlen(s1);
+	len = 0;
+	while (s1[len])
+		len++;
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
@@ -68,15 +65,17 @@ char	*ft_strdup(const char *s1)
 	return (str);
 }
 
-char    *ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
-	char    *str;
-	size_t  final;
-	size_t  slen;
+	char	*str;
+	size_t	final;
+	size_t	slen;
 
 	if (!s)
 		return (NULL);
-	slen = ft_strlen(s);
+	slen = 0;
+	while (s[slen])
+		slen++;
 	final = slen - start;
 	if (final > len)
 		final = len;
