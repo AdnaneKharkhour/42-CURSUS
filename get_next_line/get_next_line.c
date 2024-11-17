@@ -1,9 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/17 11:30:15 by akharkho          #+#    #+#             */
+/*   Updated: 2024/11/17 11:30:15 by akharkho         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h> 
-#include <stdlib.h> 
 
-static char *read_line(int fd, char *rs)
+static char	*read_line(int fd, char *rs)
 {
 	// char *line;
 	char buffer[BUFFER_SIZE + 1];
@@ -15,7 +24,7 @@ static char *read_line(int fd, char *rs)
 	{
 		buffer[bytes_readed] = '\0';
 		rs = ft_strjoin(rs, buffer);
-		if (ft_strchr(buffer, '\n'))
+		if (ft_strchr(buffer, '\n') != -1)
 			break ;
 		bytes_readed = read(fd, buffer, BUFFER_SIZE);
 	}
@@ -28,28 +37,30 @@ static char *read_line(int fd, char *rs)
 	return (rs);
 }
 
-static char *extract_line(char **rs)
+static char *one_line(char **rs)
 {
-	char *extracted_line;
+	char *line;
 	char *temp;
+	int nl;
 
-	if (ft_strchr(*rs, '\n') >= 0)
+	nl = ft_strchr(*rs, '\n');
+	if (nl >= 0)
 	{
-		extracted_line = ft_substr(*rs, 0, ft_strchr(*rs, '\n') + 1);
-		temp = ft_strdup(*rs + ft_strchr(*rs, '\n') + 1);
-		// free(*rs);
-		// *rs = temp;
+		line = ft_substr(*rs, 0, nl + 1);
+		temp = ft_strdup(*rs + nl + 1);
+		free(*rs);
+		*rs = temp;
 	}
 	else
 	{
-		extracted_line = ft_strdup(*rs);
-		temp = NULL;
-		// free(*rs);
-		// *rs = NULL;
+		line = ft_strdup(*rs);
+		// temp = NULL;
+		free(*rs);
+		*rs = NULL;
 	}
-	free(*rs);
-	*rs = temp;
-	return (extracted_line);
+	// free(*rs);
+	// *rs = temp;
+	return (line);
 }
 
 char	*get_next_line(int fd)
@@ -63,21 +74,21 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	rs = read_line(fd, rs);
-	if (!rs)
+	if (!rs || *rs == '\0')
 	{
 		free(rs);
 		rs = NULL;
 		return (NULL);
 	}
-	return (extract_line(&rs));
+	return (one_line(&rs));
 }
 
-int main()
-{
-    int fd = open("file.txt", O_CREAT | O_RDWR, 0777);
-    char *line = get_next_line(fd);
-    printf("%s", line);
-	char *line1 = get_next_line(fd);
-	printf("%s", line1);
-    return 0;
-}
+// int main()
+// {
+//     int fd = open("file.txt", O_CREAT | O_RDWR, 0777);
+//     char *line = get_next_line(fd);
+//     printf("%s", line);
+// 	char *line1 = get_next_line(fd);
+// 	printf("%s", line1);
+//     return 0;
+// }
