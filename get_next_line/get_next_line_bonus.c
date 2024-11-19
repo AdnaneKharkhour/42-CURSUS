@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*read_line(int fd, char *rs)
 {
@@ -30,7 +30,11 @@ static char	*read_line(int fd, char *rs)
 		bytes_readed = read(fd, buffer, BUFFER_SIZE);
 	}
 	if (bytes_readed < 0)
-		return (free(buffer), free(rs), rs = NULL, NULL);
+	{
+		free(rs);
+		rs = NULL;
+		return (NULL);
+	}
 	return (free(buffer), rs);
 }
 
@@ -60,30 +64,31 @@ static char	*one_line(char **rs)
 
 char	*get_next_line(int fd)
 {
-	static char	*rs;
+	static char	*rs[10240];
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
+	if (fd < 0 || fd > 10240 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
 	{
-		free(rs);
-		rs = NULL;
+		free(rs[fd]);
+		rs[fd] = NULL;
 		return (NULL);
 	}
-	rs = read_line(fd, rs);
-	if (!rs || *rs == '\0')
+	rs[fd] = read_line(fd, rs[fd]);
+	if (!rs[fd] || *rs[fd] == '\0')
 	{
-		free(rs);
-		rs = NULL;
+		free(rs[fd]);
+		rs[fd] = NULL;
 		return (NULL);
 	}
-	return (one_line(&rs));
+	return (one_line(&rs[fd]));
 }
 
 // int main()
 // {
-//     int fd = open("file.txt", O_CREAT | O_RDWR, 0777);
+//     int fd = open("file.txt", O_RDONLY);
+//     int fd2 = open("file2.txt", O_RDONLY);
 //     char *line = get_next_line(fd);
 //     printf("%s", line);
-// 	char *line1 = get_next_line(fd);
-// 	printf("%s", line1);
+// 	line = get_next_line(fd2);
+// 	printf("%s", line);
 //     return 0;
 // }
