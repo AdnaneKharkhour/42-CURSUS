@@ -73,7 +73,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	rs[fd] = read_line(fd, rs[fd]);
-	if (!rs[fd])
+	if (!rs[fd] || *rs[fd] == '\0')
 	{
 		free(rs[fd]);
 		rs[fd] = NULL;

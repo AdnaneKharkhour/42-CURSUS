@@ -69,7 +69,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	rs = read_line(fd, rs);
-	if (!rs)
+	if (!rs || *rs == '\0')
 	{
 		free(rs);
 		rs = NULL;
@@ -103,7 +103,6 @@ char	*get_next_line(int fd)
 // 	{
 // 		line = get_next_line(fd);
 // 		printf("%s", line);
-    
 // 	}
 // 	lineupper = to_uppercase(line);
 // 	close (fd);
@@ -123,8 +122,5 @@ char	*get_next_line(int fd)
 // 		line = get_next_line(fd);
 // 		printf("%s", line);
 // 	}
-	
-
-
 //     return 0;
 // }
