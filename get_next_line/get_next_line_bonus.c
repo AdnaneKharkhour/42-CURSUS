@@ -38,7 +38,7 @@ static char	*read_line(int fd, char *rs)
 	return (free(buffer), rs);
 }
 
-static char	*one_line(char **rs)
+static char	*extract_one_line(char **rs)
 {
 	char	*line;
 	char	*temp;
@@ -73,13 +73,13 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	rs[fd] = read_line(fd, rs[fd]);
-	if (!rs[fd] || *rs[fd] == '\0')
+	if (!rs[fd])
 	{
 		free(rs[fd]);
 		rs[fd] = NULL;
 		return (NULL);
 	}
-	return (one_line(&rs[fd]));
+	return (extract_one_line(&rs[fd]));
 }
 
 // int main()
