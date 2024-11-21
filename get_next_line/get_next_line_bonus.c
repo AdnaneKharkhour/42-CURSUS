@@ -35,7 +35,7 @@ static char	*read_line(int fd, char *rs)
 		rs = NULL;
 		return (NULL);
 	}
-	return (free(buffer), rs);
+	return (free(buffer), buffer = NULL, rs);
 }
 
 static char	*extract_one_line(char **rs)
@@ -49,6 +49,8 @@ static char	*extract_one_line(char **rs)
 	{
 		line = ft_substr(*rs, 0, nl + 1);
 		temp = ft_strdup(*rs + nl + 1);
+		if (!temp)
+			temp = ft_strdup("");
 	}
 	else
 	{
@@ -64,9 +66,9 @@ static char	*extract_one_line(char **rs)
 
 char	*get_next_line(int fd)
 {
-	static char	*rs[10240];
+	static char	*rs[OPEN_MAX];
 
-	if (fd < 0 || fd > 10240 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
 	{
 		free(rs[fd]);
 		rs[fd] = NULL;
@@ -81,14 +83,3 @@ char	*get_next_line(int fd)
 	}
 	return (extract_one_line(&rs[fd]));
 }
-
-// int main()
-// {
-//     int fd = open("file.txt", O_RDONLY);
-//     int fd2 = open("file2.txt", O_RDONLY);
-//     char *line = get_next_line(fd);
-//     printf("%s", line);
-// 	line = get_next_line(fd2);
-// 	printf("%s", line);
-//     return 0;
-// }

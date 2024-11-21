@@ -31,7 +31,7 @@ static char	*read_line(int fd, char *rs)
 	}
 	if (bytes_readed < 0)
 		return (free(buffer), free(rs), rs = NULL, NULL);
-	return (free(buffer), rs);
+	return (free(buffer), buffer = NULL, rs);
 }
 
 static char	*extract_one_line(char **rs)
@@ -45,6 +45,8 @@ static char	*extract_one_line(char **rs)
 	{
 		line = ft_substr(*rs, 0, nl + 1);
 		temp = ft_strdup(*rs + nl + 1);
+		if (!temp)
+			temp = ft_strdup("");
 	}
 	else
 	{
@@ -77,50 +79,3 @@ char	*get_next_line(int fd)
 	}
 	return (extract_one_line(&rs));
 }
-// #include <stdio.h>
-// #include<fcntl.h>
-// #include <string.h>
-//  char *to_uppercase(char *str)
-//  {
-// 	 int i = 0;
-// 	 while (str[i] != '\0')
-// 	 {
-// 		 if (str[i] >= 'a' && str[i] <= 'z')
-// 		 {
-// 			 str[i] = str[i] - 32;
-// 		 }
-// 		 i++;
-// 	 }
-// 	 return str;
-//  }
-// int main()
-// {
-//     int fd = open("file.txt", O_RDWR, 0777);
-// 	char *line;
-// 	char *lineupper;
-// 	int i = 1;
-// 	while (i++ < 6)
-// 	{
-// 		line = get_next_line(fd);
-// 		printf("%s", line);
-// 	}
-// 	lineupper = to_uppercase(line);
-// 	close (fd);
-// 	fd = open ("file.txt", O_RDWR, 0777);
-// 	i = 1;
-// 	while (i++ < 5)
-// 	{
-// 		line = get_next_line(fd);
-// 		printf("%s", line);
-// 	}
-// 	write(fd, lineupper, strlen(lineupper));
-// 	close (fd);
-// 	fd = open ("file.txt", O_RDWR, 0777);
-// 	i = 1;
-// 	while (i++ <= 6 )
-// 	{
-// 		line = get_next_line(fd);
-// 		printf("%s", line);
-// 	}
-//     return 0;
-// }
