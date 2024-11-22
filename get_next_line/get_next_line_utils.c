@@ -92,8 +92,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	s1_len;
 	size_t	s2_len;
 
-	if (!s2)
-		return (NULL);
 	s1_len = 0;
 	s2_len = 0;
 	if (s1)
@@ -101,16 +99,17 @@ char	*ft_strjoin(char *s1, char *s2)
 		while (s1[s1_len])
 			s1_len++;
 	}
-	while (s2[s2_len])
-		s2_len++;
+	if (s2)
+	{
+		while (s2[s2_len])
+			s2_len++;
+	}
 	str = (char *)malloc(sizeof (char) * (s1_len + s2_len + 1));
 	if (!str)
-		return (free(s1), NULL);
+		return (NULL);
 	if (s1)
-	{
 		ft_strlcpy(str, s1, s1_len + 1);
-		free(s1);
-	}
-	ft_strlcpy(str + s1_len, s2, s2_len + 1);
+	if (s2)
+		ft_strlcpy(str + s1_len, s2, s2_len + 1);
 	return (str);
 }

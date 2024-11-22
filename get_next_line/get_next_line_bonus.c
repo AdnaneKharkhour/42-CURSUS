@@ -16,26 +16,24 @@ static char	*read_line(int fd, char *rs)
 {
 	char	*buffer;
 	ssize_t	bytes_readed;
+	char	*temp;
 
 	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (free(buffer), free(rs), rs = NULL, NULL);
-	bytes_readed = read(fd, buffer, BUFFER_SIZE);
-	while (bytes_readed > 0)
+	while (ft_strchr(rs, '\n') == -1)
 	{
-		buffer[bytes_readed] = '\0';
-		rs = ft_strjoin(rs, buffer);
-		if (ft_strchr(buffer, '\n') != -1)
-			break ;
 		bytes_readed = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_readed <= 0)
+			return (free(buffer), rs);
+		buffer[bytes_readed] = '\0';
+		temp = ft_strjoin(rs, buffer);
+		free (rs);
+		rs = temp;
+		if (!rs)
+			return (free(buffer), NULL);
 	}
-	if (bytes_readed < 0)
-	{
-		free(rs);
-		rs = NULL;
-		return (NULL);
-	}
-	return (free(buffer), buffer = NULL, rs);
+	return (free(buffer), rs);
 }
 
 static char	*extract_one_line(char **rs)
@@ -45,18 +43,14 @@ static char	*extract_one_line(char **rs)
 	int		nl;
 
 	nl = ft_strchr(*rs, '\n');
-	if (nl >= 0)
+	if (nl == -1)
 	{
-		line = ft_substr(*rs, 0, nl + 1);
-		temp = ft_strdup(*rs + nl + 1);
-		if (!temp)
-			temp = ft_strdup("");
+		nl = 0;
+		while (*rs[nl] != '\0')
+			nl++;
 	}
-	else
-	{
-		line = ft_strdup(*rs);
-		temp = NULL;
-	}
+	line = ft_substr(*rs, 0, nl + 1);
+	temp = ft_strdup(*rs + nl + 1);
 	free(*rs);
 	*rs = temp;
 	if (!line || (*rs && !**rs))
@@ -67,19 +61,24 @@ static char	*extract_one_line(char **rs)
 char	*get_next_line(int fd)
 {
 	static char	*rs[OPEN_MAX];
+	char		*rst;
 
-	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
-	{
-		free(rs[fd]);
-		rs[fd] = NULL;
-		return (NULL);
-	}
+	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
+		return (free(rs[fd]), rs[fd] = NULL, NULL);
+	if (!rs[fd])
+		rs[fd] = ft_strdup("");
+	if (!rs[fd])
+		return (free(rs[fd]), NULL);
 	rs[fd] = read_line(fd, rs[fd]);
 	if (!rs[fd] || *rs[fd] == '\0')
+		return (free (rs[fd]), rs[fd] = NULL, NULL);
+	if (ft_strchr(rs[fd], '\n') != -1)
+		rst = extract_one_line(&rs[fd]);
+	else
 	{
+		rst = ft_strdup(rs[fd]);
 		free(rs[fd]);
 		rs[fd] = NULL;
-		return (NULL);
 	}
-	return (extract_one_line(&rs[fd]));
+	return (rst);
 }
