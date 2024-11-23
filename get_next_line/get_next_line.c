@@ -44,13 +44,9 @@ static char	*extract_one_line(char **rs)
 
 	nl = ft_strchr(*rs, '\n');
 	if (nl == -1)
-	{
-		nl = 0;
-		while (*rs[nl] != '\0')
-			nl++;
-	}
-	line = ft_substr(*rs, 0, nl + 1);
-	temp = ft_strdup(*rs + nl + 1);
+		nl = ft_strlen(*rs);
+	line = ft_strdup(*rs, nl + 1);
+	temp = ft_strdup(*rs + nl + 1, ft_strlen(*rs) - nl - 1);
 	free(*rs);
 	*rs = temp;
 	if (!line || (*rs && !**rs))
@@ -66,7 +62,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
 		return (free(rs), rs = NULL, NULL);
 	if (!rs)
-		rs = ft_strdup("");
+		rs = ft_strdup("", 0);
 	if (!rs)
 		return (NULL);
 	rs = read_line(fd, rs);
@@ -76,7 +72,7 @@ char	*get_next_line(int fd)
 		rst = extract_one_line(&rs);
 	else
 	{
-		rst = ft_strdup(rs);
+		rst = ft_strdup(rs, ft_strlen(rs));
 		free(rs);
 		rs = NULL;
 	}
