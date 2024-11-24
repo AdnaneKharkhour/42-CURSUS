@@ -44,11 +44,7 @@ static char	*extract_one_line(char **rs)
 
 	nl = ft_strchr(*rs, '\n');
 	if (nl == -1)
-	{
-		nl = 0;
-		while (*rs[nl] != '\0')
-			nl++;
-	}
+		nl = ft_strlen(*rs);
 	line = ft_strdup(*rs, nl + 1);
 	temp = ft_strdup(*rs + nl + 1, ft_strlen(*rs) - nl - 1);
 	free(*rs);
