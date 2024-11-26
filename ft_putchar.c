@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 12:01:14 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/24 16:00:08 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:36:29 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 int	ft_putchar(char c)
 {
-	return (write(1, &c, 1));
+	write(1, &c, 1);
+	return (1);
 }

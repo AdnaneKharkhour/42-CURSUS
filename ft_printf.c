@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 19:41:43 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/25 13:51:16 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/26 19:02:31 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,19 @@ int	ft_printf(const char *format, ...)
 
 	count = 0;
 	va_start(args, format);
-	if (!format || write(1, "", 0) == -1)
+	if (write(1, NULL, 0) == -1)
 		return (-1);
 	while (*format)
 	{
-		if (*format == '%')
+		if (*format == '%' && *(format + 1))
 		{
 			format++;
 			check_format(format, args, &count);
 		}
-		else
+		else if (*format != '%')
 			count += ft_putchar(*format);
 		format++;
 	}
 	va_end(args);
 	return (count);
 }
-
-// int main()
-// {
-// 	printf("%d", ft_printf(" %x ", -1));
-// 	printf("%d", printf(" %x ", -1));
-// 	return 0;
-// }
