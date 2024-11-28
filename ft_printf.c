@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 19:41:43 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/26 19:02:31 by akharkho         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:54:40 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	check_format(const char *format, va_list args, int *count)
 	}
 	else if (*format == '%')
 		*count += ft_putchar('%');
+	else if (*format)
+		*count += ft_putchar(*format);
 }
 
 int	ft_printf(const char *format, ...)

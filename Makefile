@@ -10,7 +10,7 @@ OBJ = $(SRC:.c=.o)
 
 all : $(NAME)
 
-%.o : %.c
+%.o : %.c ft_printf.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJ)
@@ -22,3 +22,5 @@ fclean : clean
 	rm -f $(NAME)
 
 re : fclean all
+
+>PHONY: all clean fclean re
