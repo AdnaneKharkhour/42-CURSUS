@@ -8,7 +8,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-MLX = -lmlx -lmlx -framework OpenGL -framework AppKit
+MLX =  libmlx.a -framework OpenGL -framework AppKit
 
 all:$(NAME)
 
