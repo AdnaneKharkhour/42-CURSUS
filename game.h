@@ -9,6 +9,6 @@ typedef	struct	s_game
 	void	*player_img;
 	void	*wall_img;
 	void	*floor_img;
-	int		win_height;
-	int		win_width;
+	int		player_x;
+	int		player_y;
 }	t_game;

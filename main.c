@@ -18,28 +18,17 @@ void	loading_images(t_game *game)
 }
 
 void render_map(t_game *game) {
-    int y;
-	int	x;
+    int y, x;
+    y = 0;
 
-	y = 0;
     while (game->map[y]) {
         x = 0;
         while (game->map[y][x]) {
-            void *img_to_draw = NULL;
-
+            mlx_put_image_to_window(game->mlx, game->win, game->floor_img, x * TILE_SIZE, y * TILE_SIZE);
             if (game->map[y][x] == '1') {
-                img_to_draw = game->wall_img;
-            } else if (game->map[y][x] == '0') {
-                img_to_draw = game->floor_img;
+                mlx_put_image_to_window(game->mlx, game->win, game->wall_img, x * TILE_SIZE, y * TILE_SIZE);
             } else if (game->map[y][x] == 'P') {
-                img_to_draw = game->player_img;
-            }
-
-            if (img_to_draw) {
-                mlx_put_image_to_window(game->mlx, game->win, img_to_draw, x * TILE_SIZE, y * TILE_SIZE);
-            } else {
-                fprintf(stderr, "Error: Unknown map character '%c'\n", game->map[y][x]);
-                exit(1);
+                mlx_put_image_to_window(game->mlx, game->win, game->player_img, x * TILE_SIZE, y * TILE_SIZE);
             }
 
             x++;
@@ -48,29 +37,63 @@ void render_map(t_game *game) {
     }
 }
 
+
+int	key_hook(int keycode,	t_game *game)
+{
+	int	x_mov,y_mov;
+
+	x_mov = game->player_x;
+	y_mov = game->player_y;
+	if (keycode == 123)
+		x_mov--;
+	else if (keycode == 124)
+		x_mov++;
+	else if (keycode == 125)
+		y_mov++;
+	else if (keycode == 126)
+		y_mov--;
+	else if (keycode == 53)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->map[y_mov][x_mov] != '1')
+	{
+		game->map[game->player_y][game->player_x] = '0';
+		game->player_x = x_mov;
+		game->player_y = y_mov;
+		game->map[game->player_y][game->player_x] = 'P';
+	}
+	printf("%d\n", keycode);
+	render_map(game);
+	return (0);
+}
+
 int main()
 {
 	char *map[] = {
-    "111111",
-    "100001",
-    "100P01",
-    "100001",
-    "111111",
+    "1111111111",
+    "1000000001",
+    "1000000001",
+    "1000P00001",
+    "1000000001",
+    "1000000001",
+    "1000000001",
+    "1111111111",
     NULL
 	};
 
 	t_game game;
 
 	game.mlx = mlx_init();
-	
+
 	game.map = map;
+	game.player_x = 4;
+	game.player_y = 3;
 
-	game.win = mlx_new_window(game.mlx, 1500,900, "pacman");
-
+	game.win = mlx_new_window(game.mlx, 10 * TILE_SIZE,8 * TILE_SIZE, "pacman");
 	loading_images(&game);
 
 	render_map(&game);
 
+	mlx_key_hook(game.win, key_hook, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }
