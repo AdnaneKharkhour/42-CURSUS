@@ -1,6 +1,6 @@
 NAME = so_long
 
-SRC = main.c
+SRC = main.c map.c libft/get_next_line.c libft/get_next_line_utils.c
 
 OBJ = $(SRC:.c=.o)
 
