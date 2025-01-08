@@ -12,8 +12,11 @@ typedef	struct	s_game
 	void	*wall_img;
 	void	*floor_img;
 	void	*coin_img;
+	void	*exit_img;
 	int		player_x;
 	int		player_y;
+	int		score;
+	int		moves;
 }	t_game;
 #ifndef MAP_H
 #define MAP_H
