@@ -6,12 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:45:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/08 17:48:56 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:17:31 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
-#include <stdio.h>
 #include "libft/get_next_line.h"
 
 int	count_lines(const char *file)
@@ -25,6 +24,16 @@ int	count_lines(const char *file)
 		count++;
 	close(fd);
 	return (count);
+}
+
+char	*remove_nl(char	*line)
+{
+	int	len;
+
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	return (line);
 }
 
 char	**load_map(const char *file)
@@ -44,6 +53,7 @@ char	**load_map(const char *file)
 	line = get_next_line(fd);
 	while (line)
 	{
+		remove_nl(line);
 		map[i++] = line;
 		line = get_next_line(fd);
 	}
