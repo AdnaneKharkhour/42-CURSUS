@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:24:52 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/09 18:36:19 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/11 13:03:17 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ void	render_map(t_game *game)
 		}
 		y++;
 	}
+	display_score(game);
 }

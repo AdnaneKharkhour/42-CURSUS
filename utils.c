@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:40:03 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/09 18:43:44 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/11 13:15:22 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ char	*ft_itoa(int n)
 	int		nb;
 
 	nb = n;
-	len = 1;
+	len = 0;
+	if (nb == 0)
+		return (ft_strdup("0", 2));
 	while (nb)
 	{
 		len++;

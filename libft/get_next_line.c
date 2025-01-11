@@ -44,9 +44,9 @@ static char	*extract_one_line(char **rs)
 
 	nl = ft_strchr(*rs, '\n');
 	if (nl == -1)
-		nl = ft_strlen(*rs);
+		nl = ft_strlen_get(*rs);
 	line = ft_strdup(*rs, nl + 1);
-	temp = ft_strdup(*rs + nl + 1, ft_strlen(*rs) - nl - 1);
+	temp = ft_strdup(*rs + nl + 1, ft_strlen_get(*rs) - nl - 1);
 	free(*rs);
 	*rs = temp;
 	if (!line || (*rs && !**rs))
@@ -72,7 +72,7 @@ char	*get_next_line(int fd)
 		rst = extract_one_line(&rs);
 	else
 	{
-		rst = ft_strdup(rs, ft_strlen(rs));
+		rst = ft_strdup(rs, ft_strlen_get(rs));
 		free(rs);
 		rs = NULL;
 	}

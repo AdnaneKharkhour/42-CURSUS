@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_render.c                                      :+:      :+:    :+:   */
+/*   load_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 18:05:42 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/09 18:14:15 by akharkho         ###   ########.fr       */
+/*   Created: 2025/01/11 12:58:30 by akharkho          #+#    #+#             */
+/*   Updated: 2025/01/11 16:24:12 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	loading_images(t_game *game)
 		|| !game->player_img_left || !game->player_img_up 
 		|| !game->player_img_down || !game->open_exit_img)
 	{
-		fprintf(stderr, "Error: Failed to load textures\n");
+		ft_printf("Error: Failed to load textures\n");
 		exit(1);
 	}
 }

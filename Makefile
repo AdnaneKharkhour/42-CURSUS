@@ -1,6 +1,6 @@
 NAME = so_long
 
-SRC = main.c map.c load_images.c render_map.c utils.c libft/get_next_line.c libft/get_next_line_utils.c
+SRC = main.c map.c load_images.c render_map.c utils.c libft/get_next_line.c libft/get_next_line_utils.c libft/ft_printf.c libft/ft_putchar.c libft/ft_putnbr.c libft/ft_putstr.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,12 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:45:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/09 15:17:31 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:16:02 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
-#include "libft/get_next_line.h"
 
 int	count_lines(const char *file)
 {
