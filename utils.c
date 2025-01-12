@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:40:03 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/11 13:15:22 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/12 13:51:14 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,13 @@ int	count_coins(t_game *game)
 		i++;
 	}
 	return (coins);
+}
+
+void	count_map_width_height(t_game *game, int *width, int *height)
+{
+	while (game->map[0][*width])
+		(*width)++;
+	while (game->map[*height])
+		(*height)++;
+	return ;
 }

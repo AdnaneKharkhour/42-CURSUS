@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:03:18 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/11 16:18:17 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:41:35 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@
 # ifndef TILE_SIZE
 #  define TILE_SIZE 64
 # endif
+
+typedef struct s_enemy
+{
+	int		enemy_x;
+	int		enemy_y;
+	int		enemy_dir;
+	void	*enemy_img;
+}	t_enemy;
 
 typedef struct s_game
 {
@@ -38,6 +46,10 @@ typedef struct s_game
 	void	*exit_img;
 	void	*open_exit_img;
 	void	*enemy_img;
+	void	*enemy_img_right;
+	void	*enemy_img_left;
+	t_enemy	*enemies;
+	int		num_of_enemies;
 	char	direction;
 	int		player_x;
 	int		player_y;
@@ -57,5 +69,11 @@ void	render_map(t_game *game);
 void	player_position(t_game *game);
 char	**load_map(const char *file);
 int		count_coins(t_game *game);
+void	count_map_width_height(t_game *game, int *map_width, int *map_height);
 void	put_image(t_game *game, int x, int y);
+void	init_enemy(t_game *game);
+void	enemy_movement(t_game *game);
+void	add_enemy_position(t_game *game);
+void	first_check(t_game *game, int *i, int *x);
+void	map_check(char *path);
 #endif
