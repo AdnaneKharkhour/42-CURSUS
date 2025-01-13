@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:32:58 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/12 15:32:59 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:19:02 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	check_exit(int x_mov, int y_mov, t_game *game)
 
 	if (game->map[y_mov][x_mov] == 'E')
 	{
-		coins_left = count_coins(game);
+		coins_left = coins_counter(game);
 		if (coins_left > 0)
 		{
 			render_map(game);

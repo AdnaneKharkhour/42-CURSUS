@@ -6,18 +6,19 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:03:18 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/12 18:41:35 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/13 19:12:58 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
-# include "mlx.h"
+# include "/Users/akharkho/Desktop/mlx.h"
 # include "libft/get_next_line.h"
 # include "libft/ft_printf.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # ifndef TILE_SIZE
 #  define TILE_SIZE 64
 # endif
@@ -68,7 +69,7 @@ int		check_exit(int x, int y, t_game *game);
 void	render_map(t_game *game);
 void	player_position(t_game *game);
 char	**load_map(const char *file);
-int		count_coins(t_game *game);
+int		coins_counter(t_game *game);
 void	count_map_width_height(t_game *game, int *map_width, int *map_height);
 void	put_image(t_game *game, int x, int y);
 void	init_enemy(t_game *game);
@@ -76,4 +77,8 @@ void	enemy_movement(t_game *game);
 void	add_enemy_position(t_game *game);
 void	first_check(t_game *game, int *i, int *x);
 void	map_check(char *path);
+void	check_map_component(t_game *game, int i, int j, int count_player);
+void	check_conditions(int count_coins, int count_player, int count_exit);
+void	check_map_walls(t_game *game, int i, int j);
+void	invalid_map_characters(void);
 #endif

@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:24:52 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/11 13:03:17 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:18:51 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	put_image(t_game *game, int x, int y)
 	else if (game->map[y][x] == 'C')
 		mlx_put_image_to_window(game->mlx, game->win, game->coin_img,
 			x * TILE_SIZE, y * TILE_SIZE);
-	else if (game->map[y][x] == 'E' && count_coins(game) == 0)
+	else if (game->map[y][x] == 'E' && coins_counter(game) == 0)
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->open_exit_img, x * TILE_SIZE, y * TILE_SIZE);
 	else if (game->map[y][x] == 'E')

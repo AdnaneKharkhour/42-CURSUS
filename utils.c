@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:40:03 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/12 13:51:14 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/13 17:54:26 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	display_score(t_game *game)
 	mlx_string_put(game->mlx, game->win, 70, 30, 0x00FFFFFF, moves);
 }
 
-int	count_coins(t_game *game)
+int	coins_counter(t_game *game)
 {
 	int	coins;
 	int	i;

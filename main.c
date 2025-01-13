@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:47:47 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/12 18:36:40 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:56:47 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	main(int argc, char **argv)
 		map_height = 0;
 		game.mlx = mlx_init();
 		game.map = load_map(argv[1]);
+		if(!bfs_check(&game, map_width, map_height))
+		{
+			ft_printf("Error: Map is not valid\n");
+			exit(1);
+		}
 		player_position(&game);
 		init_enemy(&game);
 		mlx_loop_hook(game.mlx, game_loop, &game);
