@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:03:18 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/13 19:12:58 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:19:14 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ typedef struct s_game
 	int		player_y;
 	int		score;
 	int		moves;
+	int		map_width;
+	int		map_height;
+	int		collectibles_count;
 }	t_game;
 void	loading_images(t_game *game);
 void	player_images(t_game *game, int img_size);
@@ -81,4 +84,5 @@ void	check_map_component(t_game *game, int i, int j, int count_player);
 void	check_conditions(int count_coins, int count_player, int count_exit);
 void	check_map_walls(t_game *game, int i, int j);
 void	invalid_map_characters(void);
+bool	bfs_check(t_game *game);
 #endif

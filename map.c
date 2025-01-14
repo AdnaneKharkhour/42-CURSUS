@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:45:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/11 16:16:02 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/14 15:58:34 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*remove_nl(char	*line)
 	int	len;
 
 	len = ft_strlen(line);
-	if (len > 0 && line[len - 1] == '\n')
+	if (line && len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
 	return (line);
 }
@@ -47,7 +47,7 @@ char	**load_map(const char *file)
 	num_lines = count_lines(file);
 	map = malloc(sizeof(char *) * (num_lines + 1));
 	if (!map)
-		return (NULL);
+		exit (EXIT_FAILURE);
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
 	while (line)
