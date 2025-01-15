@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:47:47 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/14 16:19:22 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:25:08 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,34 @@ int	game_loop(t_game *game)
 	return (0);
 }
 
+void ttyt()
+{
+	system("leaks -q so_long");
+}
+
 int	main(int argc, char **argv)
 {
+	int		width;
+	int		height;
 	t_game	game;
 
+	atexit(ttyt);
 	if (argc == 2)
 	{
+		width = 0;
+		height = 0;
 		map_check(argv[1]);
 		game.mlx = mlx_init();
 		game.map = load_map(argv[1]);
-		count_map_width_height(&game, &game.map_width, &game.map_height);
+		count_map_width_height(&game, &width, &height);
+		game.map_width = width;
+		game.map_height = height;
+		game.score = 0;
+		game.moves = 0;
+		game.player_x = 0;
+		game.player_y = 0;
+		game.direction = 'R';
+		game.num_of_enemies = 0;
 		game.collectibles_count = coins_counter(&game);
 		player_position(&game);
 		if (!bfs_check(&game))
@@ -51,5 +69,6 @@ int	main(int argc, char **argv)
 		mlx_loop(game.mlx);
 		return (0);
 	}
+	system("leaks ./so_long");
 	return (1);
 }

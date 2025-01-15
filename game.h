@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:03:18 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/14 16:19:14 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:12:54 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ typedef struct s_enemy
 	int		enemy_dir;
 	void	*enemy_img;
 }	t_enemy;
+
+typedef struct s_bfs_data
+{
+	bool	**visited;
+	int		(*queue)[2];
+	int		front;
+	int		rear;
+	int		dx[4];
+	int		dy[4];
+	int		collectibles_found;
+	int		exit_found;
+}	t_bfs_data;
 
 typedef struct s_game
 {
@@ -85,4 +97,13 @@ void	check_conditions(int count_coins, int count_player, int count_exit);
 void	check_map_walls(t_game *game, int i, int j);
 void	invalid_map_characters(void);
 bool	bfs_check(t_game *game);
+void	initialise_variables(t_bfs_data *data);
+void	initialise_visited(t_game *game, t_bfs_data *data);
+void	initialise_queue(t_game *game, t_bfs_data *data);
+bool	is_valid_move(t_game *game, int x, int y, bool **visited);
+void	explore_adjacent_cells(t_game *game, t_bfs_data *data, int x, int y);
+void	bfs_loop(t_game *game, t_bfs_data *data);
+void	free_visited(t_game *game, t_bfs_data *data);
+void	count_collectibles_and_exits(t_game *game, int x, int y,
+			t_bfs_data *data);
 #endif

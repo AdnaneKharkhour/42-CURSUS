@@ -6,12 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 12:58:30 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/12 15:20:49 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:19:46 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
-#include <stdio.h>
 
 void	player_images(t_game *game, int img_size)
 {
