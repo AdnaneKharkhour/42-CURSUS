@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:52:43 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/15 16:42:51 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:07:14 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ bool	bfs_check(t_game *game)
 	data.front = 0;
 	data.rear = 0;
 	initialise_variables(&data);
-	data.visited = malloc(game->map_height * sizeof(bool *));
+	data.visited = ft_calloc(game->map_height, sizeof(bool *));
 	if (!data.visited)
 		exit(EXIT_FAILURE);
 	initialise_visited(game, &data);

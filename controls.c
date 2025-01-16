@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:32:58 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/13 18:19:02 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:27:46 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ void	key_handle(int keycode, int *x_mov, int *y_mov, t_game *game)
 		game->direction = 'U';
 	}
 	else if (keycode == 53)
-		exit(0);
+	{
+		ft_printf("Exit game\n");
+		exit(EXIT_SUCCESS);
+	}
 }
 
 int	check_exit(int x_mov, int y_mov, t_game *game)

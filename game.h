@@ -6,15 +6,16 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:03:18 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/15 17:12:54 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:00:08 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 # include "/Users/akharkho/Desktop/mlx.h"
-# include "libft/get_next_line.h"
-# include "libft/ft_printf.h"
+# include "LIBFT/GET_NEXT_LINE/get_next_line.h"
+# include "LIBFT/FT_PRINTF/ft_printf.h"
+# include "LIBFT/libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -106,4 +107,5 @@ void	bfs_loop(t_game *game, t_bfs_data *data);
 void	free_visited(t_game *game, t_bfs_data *data);
 void	count_collectibles_and_exits(t_game *game, int x, int y,
 			t_bfs_data *data);
+void	free_map(char **map);
 #endif

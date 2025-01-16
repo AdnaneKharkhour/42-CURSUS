@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:45:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/15 16:31:07 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:21:37 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ char	*remove_nl(char	*line)
 {
 	int	len;
 
+	if (!line)
+		return (NULL);
 	len = ft_strlen(line);
 	if (line && len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
@@ -47,13 +49,15 @@ char	**load_map(const char *file)
 	num_lines = count_lines(file);
 	map = malloc(sizeof(char *) * (num_lines + 1));
 	if (!map)
+	{
+		free_map(map);
 		exit (EXIT_FAILURE);
+	}
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
 	while (line)
 	{
-		remove_nl(line);
-		map[i++] = line;
+		map[i++] = remove_nl(line);
 		line = get_next_line(fd);
 	}
 	map[i] = NULL;
@@ -82,4 +86,19 @@ void	player_position(t_game *game)
 		}
 		y++;
 	}
+}
+
+void	free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	if (!map)
+		return ;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }

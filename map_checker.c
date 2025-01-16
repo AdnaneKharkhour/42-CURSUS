@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 18:42:31 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/14 16:10:44 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:49:20 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,4 +134,5 @@ void	map_check(char *path)
 	check_rectangle(&game);
 	check_map_walls(&game, i, j);
 	check_map_component(&game, i, j, count_player);
+	free_map(game.map);
 }

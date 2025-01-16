@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:30:58 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/15 16:47:06 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:29:34 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	initialise_visited(t_game *game, t_bfs_data *data)
 	i = 0;
 	while (i < game->map_height)
 	{
-		data->visited[i] = malloc(game->map_width * sizeof(bool));
+		data->visited[i] = ft_calloc(game->map_width, sizeof(bool));
 		if (!data->visited[i])
 			exit(EXIT_FAILURE);
 		i++;

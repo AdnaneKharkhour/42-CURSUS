@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:40:03 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/15 16:56:46 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:28:32 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	display_score(t_game *game)
 	mlx_string_put(game->mlx, game->win, 70, 10, 0x00FFFFFF, score);
 	mlx_string_put(game->mlx, game->win, 10, 30, 0x00FFFFFF, "Moves: ");
 	mlx_string_put(game->mlx, game->win, 70, 30, 0x00FFFFFF, moves);
+	free(score);
+	free(moves);
 }
 
 int	coins_counter(t_game *game)
@@ -76,6 +78,8 @@ int	coins_counter(t_game *game)
 
 void	count_map_width_height(t_game *game, int *width, int *height)
 {
+	*width = 0;
+	*height = 0;
 	while (game->map[0][*width])
 		(*width)++;
 	while (game->map[*height])
