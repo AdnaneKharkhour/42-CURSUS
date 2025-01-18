@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 18:42:31 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/16 18:49:20 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:54:37 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,8 @@ void	map_check(char *path)
 	count_player = 0;
 	while (path[i] != '.')
 		i++;
-	if (path[i + 1] != 'b' || path[i + 2] != 'e' || path[i + 3] != 'r')
+	if (path[i + 1] != 'b' || path[i + 2] != 'e'
+		||path[i + 3] != 'r' || path[i + 4] != '\0')
 	{
 		ft_printf("Error: Invalid path\n");
 		exit(1);

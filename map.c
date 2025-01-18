@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:45:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/16 19:21:37 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:33:08 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,29 @@ int	count_lines(const char *file)
 	return (count);
 }
 
-char	*remove_nl(char	*line)
+void	remove_nl(char *line)
 {
-	int	len;
+	int	i;
 
-	if (!line)
-		return (NULL);
-	len = ft_strlen(line);
-	if (line && len > 0 && line[len - 1] == '\n')
-		line[len - 1] = '\0';
-	return (line);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\n')
+			line[i] = '\0';
+		i++;
+	}
+}
+
+void	affiche_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		ft_printf("%s\n", map[i]);
+		i++;
+	}
 }
 
 char	**load_map(const char *file)
@@ -55,12 +68,15 @@ char	**load_map(const char *file)
 	}
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
-	while (line)
+	while (line != NULL)
 	{
-		map[i++] = remove_nl(line);
+		remove_nl(line);
+		map[i++] = line;
 		line = get_next_line(fd);
 	}
+	free(line);
 	map[i] = NULL;
+	affiche_map(map);
 	close(fd);
 	return (map);
 }

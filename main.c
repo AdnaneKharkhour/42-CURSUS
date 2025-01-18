@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:47:47 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/16 18:58:30 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:33:26 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	atexit(ttyt);
+	// atexit(ttyt);
 	if (argc == 2)
 	{
 		map_check(argv[1]);
@@ -54,7 +54,6 @@ int	main(int argc, char **argv)
 		game.map = load_map(argv[1]);
 		initialise_struct(&game);
 		count_map_width_height(&game, &game.map_width, &game.map_height);
-		ft_printf("Collectibles: %d\n", game.collectibles_count);
 		player_position(&game);
 		if (!bfs_check(&game))
 		{
@@ -73,6 +72,6 @@ int	main(int argc, char **argv)
 		free_map(game.map);
 		return (0);
 	}
-	system("leaks ./so_long");
+	// system("leaks ./so_long");
 	return (1);
 }

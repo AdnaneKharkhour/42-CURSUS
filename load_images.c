@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 12:58:30 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/15 17:19:46 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:31:54 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	other_images(t_game *game, int img_size)
 			"textures/door.xpm", &img_size, &img_size);
 	game->open_exit_img = mlx_xpm_file_to_image(game->mlx,
 			"textures/opendoor.xpm", &img_size, &img_size);
-	game->enemy_img = mlx_xpm_file_to_image(game->mlx,
-			"textures/ghost.xpm", &img_size, &img_size);
 }
 
 void	loading_images(t_game *game)
@@ -63,7 +61,8 @@ void	loading_images(t_game *game)
 		|| !game->coin_img || !game->exit_img || !game->enemy_img 
 		|| !game->enemy_img_right || !game->enemy_img_left
 		|| !game->player_img_left || !game->player_img_up 
-		|| !game->player_img_down || !game->open_exit_img)
+		|| !game->player_img_down || !game->open_exit_img 
+		|| !game->enemy_img_left || !game->enemy_img_right)
 	{
 		ft_printf("Error: Failed to load textures\n");
 		exit(1);
