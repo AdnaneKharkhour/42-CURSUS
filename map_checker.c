@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 18:42:31 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/18 17:54:37 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:00:10 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ void	check_rectangle(t_game *game)
 	int	first_row;
 
 	first_row = 0;
+	if (!game->map[0])
+	{
+		ft_printf("Error:\nEmpty map\n");
+		exit(EXIT_FAILURE);
+	}
 	while (game->map[0][first_row])
 		first_row++;
 	i = 0;
@@ -29,7 +34,7 @@ void	check_rectangle(t_game *game)
 			j++;
 		if (j != first_row)
 		{
-			ft_printf("Error game->map isn't rectangular");
+			ft_printf("Error:\ngame->map isn't rectangular\n");
 			exit(EXIT_FAILURE);
 		}
 		i++;
@@ -47,7 +52,7 @@ void	check_map_walls(t_game *game, int i, int j)
 	{
 		if (game->map[0][j] != '1' || game->map[last_row - 1][j] != '1')
 		{
-			ft_printf("Error top or bottom missing a wall");
+			ft_printf("Error:\ntop or bottom missing a wall\n");
 			exit(EXIT_FAILURE);
 		}
 		j++;
@@ -56,7 +61,7 @@ void	check_map_walls(t_game *game, int i, int j)
 	{
 		if (game->map[i][j - 1] != '1' || game->map[i][0] != '1')
 		{
-			ft_printf("Error the right or left walls are missing");
+			ft_printf("Error:\nthe right or left walls are missing\n");
 			exit(EXIT_FAILURE);
 		}
 		i++;
@@ -67,17 +72,17 @@ void	check_conditions(int count_coins, int count_player, int count_exit)
 {
 	if (count_coins <= 0)
 	{
-		ft_printf("Error map should have at least 1 coin");
+		ft_printf("Error:\nmap should have at least 1 coin\n");
 		exit(EXIT_FAILURE);
 	}
 	if (count_player > 1 || count_player == 0)
 	{
-		ft_printf("Error map should have 1 player");
+		ft_printf("Error:\nmap should have 1 player\n");
 		exit(EXIT_FAILURE);
 	}
 	if (count_exit > 1 || count_exit == 0)
 	{
-		ft_printf("Error map should have 1 exit");
+		ft_printf("Error:\nmap should have 1 exit\n");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -127,7 +132,7 @@ void	map_check(char *path)
 	if (path[i + 1] != 'b' || path[i + 2] != 'e'
 		||path[i + 3] != 'r' || path[i + 4] != '\0')
 	{
-		ft_printf("Error: Invalid path\n");
+		ft_printf("Error:\nInvalid path\n");
 		exit(1);
 	}
 	i = 0;

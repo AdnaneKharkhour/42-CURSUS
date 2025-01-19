@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:47:47 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/18 18:33:26 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:44:23 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,30 @@ void	initialise_struct(t_game *game)
 	game->collectibles_count = coins_counter(game);
 }
 
+void	check_if_playable(t_game	*game, char **argv)
+{
+	map_check(argv[1]);
+	game->mlx = mlx_init();
+	game->map = load_map(argv[1]);
+	initialise_struct(game);
+	count_map_width_height(game, &game->map_width, &game->map_height);
+	player_position(game);
+	if (!bfs_check(game))
+	{
+		ft_printf("Error:\nMap is not valid\n");
+		free_map(game->map);
+		exit(EXIT_FAILURE);
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	// atexit(ttyt);
+	atexit(ttyt);
 	if (argc == 2)
 	{
-		map_check(argv[1]);
-		game.mlx = mlx_init();
-		game.map = load_map(argv[1]);
-		initialise_struct(&game);
-		count_map_width_height(&game, &game.map_width, &game.map_height);
-		player_position(&game);
-		if (!bfs_check(&game))
-		{
-			ft_printf("Error: Map is not valid\n");
-			free_map(game.map);
-			exit(1);
-		}
+		check_if_playable(&game, argv);
 		init_enemy(&game);
 		mlx_loop_hook(game.mlx, game_loop, &game);
 		game.win = mlx_new_window(game.mlx, game.map_width * TILE_SIZE,
@@ -72,6 +77,7 @@ int	main(int argc, char **argv)
 		free_map(game.map);
 		return (0);
 	}
-	// system("leaks ./so_long");
+	ft_printf("Error:\ntoo many arguments\n");
+	system("leaks ./so_long");
 	return (1);
 }

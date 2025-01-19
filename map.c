@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:45:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/18 18:33:08 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/19 15:42:50 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,23 @@ int	count_lines(const char *file)
 {
 	int		fd;
 	int		count;
+	char	*line;
 
 	count = 0;
 	fd = open(file, O_RDONLY);
-	while (get_next_line(fd))
+	if (fd < 0)
+	{
+		ft_printf("Error:\nopening file");
+		exit(EXIT_FAILURE);
+	}
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
 		count++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
 	close(fd);
 	return (count);
 }
@@ -34,18 +46,6 @@ void	remove_nl(char *line)
 	{
 		if (line[i] == '\n')
 			line[i] = '\0';
-		i++;
-	}
-}
-
-void	affiche_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		ft_printf("%s\n", map[i]);
 		i++;
 	}
 }
@@ -74,9 +74,7 @@ char	**load_map(const char *file)
 		map[i++] = line;
 		line = get_next_line(fd);
 	}
-	free(line);
 	map[i] = NULL;
-	affiche_map(map);
 	close(fd);
 	return (map);
 }

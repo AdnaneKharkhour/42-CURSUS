@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 12:58:30 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/18 17:31:54 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:08:19 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,13 @@ void	loading_images(t_game *game)
 	player_images(game, img_size);
 	other_images(game, img_size);
 	enemy_images(game, img_size);
-	if (!game->player_img_right || !game->wall_img || !game->floor_img 
-		|| !game->coin_img || !game->exit_img || !game->enemy_img 
-		|| !game->enemy_img_right || !game->enemy_img_left
-		|| !game->player_img_left || !game->player_img_up 
-		|| !game->player_img_down || !game->open_exit_img 
-		|| !game->enemy_img_left || !game->enemy_img_right)
+	if (!game->player_img || !game->player_img_right || !game->player_img_left
+		|| !game->player_img_up || !game->player_img_down || !game->wall_img
+		|| !game->floor_img || !game->coin_img || !game->exit_img
+		|| !game->open_exit_img || !game->enemy_img || !game->enemy_img_right
+		|| !game->enemy_img_left)
 	{
-		ft_printf("Error: Failed to load textures\n");
-		exit(1);
+		ft_printf("Error:\nFailed to load textures\n");
+		exit(EXIT_FAILURE);
 	}
 }

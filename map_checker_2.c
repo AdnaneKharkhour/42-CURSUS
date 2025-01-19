@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:30:58 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/16 17:29:34 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/19 15:59:28 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	invalid_map_characters(void)
 {
-	ft_printf("Error: Invalid character in map");
+	ft_printf("Error:\nInvalid character in map\n");
 	exit(EXIT_FAILURE);
 }
 

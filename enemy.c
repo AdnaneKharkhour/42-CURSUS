@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:02:47 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/16 18:09:18 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/19 15:39:51 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	init_enemy(t_game *game)
 	game->enemies = malloc(sizeof(t_enemy) * count);
 	if (!game->enemies)
 	{
-		ft_printf("Error: Failed to allocate memory for enemies\n");
+		ft_printf("Error:\nFailed to allocate memory for enemies\n");
 		exit(EXIT_FAILURE);
 	}
 	add_enemy_position(game);

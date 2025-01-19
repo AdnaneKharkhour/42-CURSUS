@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:52:43 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/16 18:07:14 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:03:44 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ void	bfs_loop(t_game *game, t_bfs_data *data)
 	{
 		x = data->queue[data->front][0];
 		y = data->queue[data->front++][1];
+		if (game->map[y][x] == 'E')
+		{
+			data->exit_found++;
+			continue ;
+		}
 		count_collectibles_and_exits(game, x, y, data);
 		explore_adjacent_cells(game, data, x, y);
 	}
@@ -82,7 +87,11 @@ bool	bfs_check(t_game *game)
 	initialise_visited(game, &data);
 	data.queue = malloc(game->map_height * game->map_width * sizeof(int [2]));
 	if (!data.queue)
+	{
+		free(data.visited);
+		ft_printf("Error:\nFailed to allocate memory for queue\n");
 		exit(EXIT_FAILURE);
+	}
 	initialise_queue(game, &data);
 	bfs_loop(game, &data);
 	free(data.queue);
