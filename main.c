@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:47:47 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/19 17:44:23 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/20 13:54:35 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	game_loop(t_game *game)
 	return (0);
 }
 
-void	ttyt(void)
-{
-	system("leaks -q so_long");
-}
+// void	ttyt(void)
+// {
+// 	system("leaks -q so_long");
+// }
 
 void	initialise_struct(t_game *game)
 {
@@ -42,7 +42,7 @@ void	initialise_struct(t_game *game)
 	game->collectibles_count = coins_counter(game);
 }
 
-void	check_if_playable(t_game	*game, char **argv)
+void	check_if_playable(t_game *game, char **argv)
 {
 	map_check(argv[1]);
 	game->mlx = mlx_init();
@@ -62,7 +62,6 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	atexit(ttyt);
 	if (argc == 2)
 	{
 		check_if_playable(&game, argv);
@@ -75,9 +74,8 @@ int	main(int argc, char **argv)
 		mlx_key_hook(game.win, key_hook, &game);
 		mlx_loop(game.mlx);
 		free_map(game.map);
-		return (0);
+		return (EXIT_SUCCESS);
 	}
-	ft_printf("Error:\ntoo many arguments\n");
-	system("leaks ./so_long");
-	return (1);
+	ft_printf("Error:\narguments error\n");
+	return (EXIT_FAILURE);
 }

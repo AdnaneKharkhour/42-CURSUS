@@ -9,7 +9,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 MLX =  /Users/akharkho/Desktop/libmlx.a -framework OpenGL -framework AppKit
 
