@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.h                                             :+:      :+:    :+:   */
+/*   game_bonus.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:03:18 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/21 13:17:04 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:48:56 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H
-# define GAME_H
+#ifndef GAME_BONUS_H
+# define GAME_BONUS_H
 # include "/Users/akharkho/Desktop/mlx.h"
-# include "LIBFT/GET_NEXT_LINE/get_next_line.h"
-# include "LIBFT/FT_PRINTF/ft_printf.h"
-# include "LIBFT/libft/libft.h"
+# include "../LIBFT/GET_NEXT_LINE/get_next_line.h"
+# include "../LIBFT/FT_PRINTF/ft_printf.h"
+# include "../LIBFT/libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -23,6 +23,14 @@
 # ifndef TILE_SIZE
 #  define TILE_SIZE 64
 # endif
+
+typedef struct s_enemy
+{
+	int		enemy_x;
+	int		enemy_y;
+	int		enemy_dir;
+	void	*enemy_img;
+}	t_enemy;
 
 typedef struct s_bfs_data
 {
@@ -42,11 +50,21 @@ typedef struct s_game
 	void	*win;
 	char	**map;
 	void	*player_img;
+	void	*player_img_right;
+	void	*player_img_left;
+	void	*player_img_up;
+	void	*player_img_down;
 	void	*wall_img;
 	void	*floor_img;
 	void	*coin_img;
 	void	*exit_img;
 	void	*open_exit_img;
+	void	*enemy_img;
+	void	*enemy_img_right;
+	void	*enemy_img_left;
+	t_enemy	*enemies;
+	int		num_of_enemies;
+	char	direction;
 	int		player_x;
 	int		player_y;
 	int		score;
@@ -56,12 +74,18 @@ typedef struct s_game
 	int		collectibles_count;
 }	t_game;
 //controls.c
-void	key_handle(int keycode, int *x_mov, int *y_mov);
+void	key_handle(int keycode, int *x_mov, int *y_mov, t_game *game);
 int		check_exit(int x_mov, int y_mov, t_game *game);
 void	update_game(t_game *game, int x_mov, int y_mov);
 int		key_hook(int keycode, t_game *game);
+//enemy.c
+void	add_enemy_position(t_game *game);
+void	init_enemy(t_game *game);
+void	first_check(t_game *game, int *i, int *x);
+void	enemy_movement(t_game *game);
 //load_images.c
 void	player_images(t_game *game, int img_size);
+void	enemy_images(t_game *game, int img_size);
 void	other_images(t_game *game, int img_size);
 void	loading_images(t_game *game);
 //main.c
@@ -99,6 +123,8 @@ void	free_map(char **map);
 void	put_image(t_game *game, int x, int y);
 void	render_map(t_game *game);
 //utils.c
+char	*ft_itoa(int n);
+void	display_score(t_game *game);
 int		coins_counter(t_game *game);
 void	count_map_width_height(t_game *game, int *width, int *height);
 #endif

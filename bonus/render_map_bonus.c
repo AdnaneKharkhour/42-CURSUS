@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_map.c                                       :+:      :+:    :+:   */
+/*   render_map_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:24:52 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/21 12:35:24 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:51:34 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "game_bonus.h"
 
 void	put_image(t_game *game, int x, int y)
 {
@@ -45,8 +45,12 @@ void	render_map(t_game *game)
 			mlx_put_image_to_window(game->mlx, game->win, game->floor_img,
 				x * TILE_SIZE, y * TILE_SIZE);
 			put_image(game, x, y);
+			if (game->map[y][x] == 'M')
+				mlx_put_image_to_window(game->mlx, game->win, game->enemy_img,
+					x * TILE_SIZE, y * TILE_SIZE);
 			x++;
 		}
 		y++;
 	}
+	display_score(game);
 }

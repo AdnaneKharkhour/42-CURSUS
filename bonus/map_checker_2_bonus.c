@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker_2.c                                    :+:      :+:    :+:   */
+/*   map_checker_2_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:30:58 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/21 12:40:28 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:51:24 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "game_bonus.h"
 
 void	invalid_map_characters(void)
 {
@@ -21,7 +21,7 @@ void	invalid_map_characters(void)
 bool	is_valid_move(t_game *game, int x, int y, bool **visited)
 {
 	return (x >= 0 && x < game->map_width && y >= 0 && y < game->map_height
-		&& game->map[y][x] != '1' && !visited[y][x]);
+		&& game->map[y][x] != '1' && game->map[y][x] != 'M' && !visited[y][x]);
 }
 
 void	initialise_variables(t_bfs_data *data)

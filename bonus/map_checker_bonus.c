@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker.c                                      :+:      :+:    :+:   */
+/*   map_checker_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 18:42:31 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/21 12:41:10 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:51:30 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "game_bonus.h"
 
 void	check_rectangle(t_game *game)
 {
@@ -108,7 +108,7 @@ void	check_map_component(t_game *game, int i, int j,
 				count_player++;
 			else if (game->map[i][j] != '1' && game->map[i][j] != '0' 
 				&& game->map[i][j] != 'C' && game->map[i][j] != 'E'
-				&& game->map[i][j] != 'P')
+				&& game->map[i][j] != 'P' && game->map[i][j] != 'M')
 				invalid_map_characters();
 			j++;
 		}
