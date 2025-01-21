@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:03:18 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/21 13:17:04 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:22:54 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	key_handle(int keycode, int *x_mov, int *y_mov);
 int		check_exit(int x_mov, int y_mov, t_game *game);
 void	update_game(t_game *game, int x_mov, int y_mov);
 int		key_hook(int keycode, t_game *game);
+int		close_window(t_game *game);
 //load_images.c
 void	player_images(t_game *game, int img_size);
 void	other_images(t_game *game, int img_size);

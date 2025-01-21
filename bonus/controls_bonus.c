@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:32:58 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/21 12:52:05 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:30:49 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ void	key_handle(int keycode, int *x_mov, int *y_mov, t_game *game)
 		ft_printf("Exit game\n");
 		exit(EXIT_SUCCESS);
 	}
+}
+
+int	close_window(t_game *game)
+{
+	ft_printf("Game Closed");
+	free_map(game->map);
+	exit(EXIT_FAILURE);
+	return (0);
 }
 
 int	check_exit(int x_mov, int y_mov, t_game *game)

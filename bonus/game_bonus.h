@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:03:18 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/21 12:48:56 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:29:17 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	key_handle(int keycode, int *x_mov, int *y_mov, t_game *game);
 int		check_exit(int x_mov, int y_mov, t_game *game);
 void	update_game(t_game *game, int x_mov, int y_mov);
 int		key_hook(int keycode, t_game *game);
+int		close_window(t_game *game);
 //enemy.c
 void	add_enemy_position(t_game *game);
 void	init_enemy(t_game *game);
