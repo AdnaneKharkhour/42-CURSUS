@@ -1,0 +1,23 @@
+NAME = push_swap
+NAME_BONUS = checker
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+
+SRC = push_swap.c LIBFT/ft_atoi.c LIBFT/ft_isdigit.c LIBFT/ft_isalpha.c LIBFT/ft_strlen.c
+
+OBJ = $(SRC:.c=.o)
+
+all : $(NAME)
+
+$(NAME) : $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+
+clean :
+	rm -f $(OBJ)
+
+fclean : clean
+	rm -f $(NAME)
+
+re : fclean all
+
+.PHONY : all clean fclean re
