@@ -6,13 +6,13 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:03:18 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/21 16:22:54 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:45:24 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
-# include "/Users/akharkho/Desktop/mlx.h"
+# include "mlx.h"
 # include "LIBFT/GET_NEXT_LINE/get_next_line.h"
 # include "LIBFT/FT_PRINTF/ft_printf.h"
 # include "LIBFT/libft/libft.h"

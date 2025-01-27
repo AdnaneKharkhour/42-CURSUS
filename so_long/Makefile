@@ -20,7 +20,7 @@ NAME_BONUS = so_long_bonus
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-MLX = /Users/akharkho/Desktop/libmlx.a -framework OpenGL -framework AppKit
+MLX = libmlx.a -framework OpenGL -framework AppKit
 
 
 %.o: %.c $(HEADERS)
