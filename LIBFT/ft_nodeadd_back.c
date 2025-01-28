@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_nodeadd_back.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 18:02:05 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/28 18:07:21 by akharkho         ###   ########.fr       */
+/*   Created: 2024/10/31 14:05:10 by akharkho          #+#    #+#             */
+/*   Updated: 2025/01/28 15:26:19 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include "LIBFT/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
+#include "libft.h"
 
-int		is_space(char c);
-void	check_spaces(char *str);
-int		check_doubles(int argc, char **argv);
-void	check_args(int argc, char **argv);
-int		check_argument(char **argv);
+void	ft_nodeadd_back(t_stack **lst, t_stack *new)
+{
+	t_stack	*last;
 
-
-#endif
+	if (!lst || !new)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	last = *lst;
+	while (last->next)
+		last = last->next;
+	last->next = new;
+}

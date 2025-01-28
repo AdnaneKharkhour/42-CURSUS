@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_newnode.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 18:02:05 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/28 18:07:21 by akharkho         ###   ########.fr       */
+/*   Created: 2024/10/30 17:26:30 by akharkho          #+#    #+#             */
+/*   Updated: 2025/01/28 15:27:14 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include "LIBFT/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
+#include "libft.h"
 
-int		is_space(char c);
-void	check_spaces(char *str);
-int		check_doubles(int argc, char **argv);
-void	check_args(int argc, char **argv);
-int		check_argument(char **argv);
+t_stack	*ft_newnode(int value, int index)
+{
+	t_stack	*node;
 
-
-#endif
+	node = (t_stack *)malloc(sizeof(t_stack));
+	if (!node)
+		return (NULL);
+	node->value = value;
+	node->index = index;
+	node->next = NULL;
+	return (node);
+}

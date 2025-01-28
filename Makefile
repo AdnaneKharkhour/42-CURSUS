@@ -3,7 +3,7 @@ NAME_BONUS = checker
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = push_swap.c LIBFT/ft_atoi.c LIBFT/ft_isdigit.c LIBFT/ft_isalpha.c LIBFT/ft_strlen.c
+SRC = push_swap.c LIBFT/ft_atoi.c LIBFT/ft_isdigit.c LIBFT/ft_isalpha.c LIBFT/ft_strlen.c LIBFT/ft_split.c LIBFT/ft_nodeadd_back.c LIBFT/ft_newnode.c
 
 OBJ = $(SRC:.c=.o)
 
