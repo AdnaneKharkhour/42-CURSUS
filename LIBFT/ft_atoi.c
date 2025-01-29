@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:38:35 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/09 12:15:33 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:19:50 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	space_sign(const char **s, int *sign)
 	}
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	long	rs;
 	int		s;
@@ -34,13 +34,6 @@ int	ft_atoi(const char *str)
 	rs = 0;
 	while (ft_isdigit(*str))
 	{
-		if (rs > (LONG_MAX - *str - '\0') / 10)
-		{
-			if (s == 1)
-				return (-1);
-			else
-				return (0);
-		}
 		rs = rs * 10 + (*str - '0');
 		str++;
 	}

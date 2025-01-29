@@ -3,91 +3,96 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:49:17 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/28 18:09:27 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:26:35 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-int is_space(char c)
-{
-	return (c == ' ' || (c >= 9 && c <= 13));
-}
-
-void	check_spaces(char *str)
+void	free_split(char **str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (is_space(str[i]) && is_space(str[i + 1]))
-		{
-			printf("Error\n too many spaces");
-			exit(EXIT_FAILURE);
-		}
+		free(str[i]);
 		i++;
 	}
+	free(str);
 }
 
-int	check_doubles(int argc, char **argv)
+int	check_doubles(t_stack *stack, int n)
 {
-	int i;
-	int j;
+	t_stack	*temp;
 
-	i = 0;
-	while (i < argc)
+	temp = stack;
+	while (temp)
 	{
-		j = i + 1;
-		while (j < argc)
-		{
-			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
-				return (1);
-			j++;
-		}
-		i++;
+		if (temp->value == n)
+			return (1);
+		temp = temp->next;
 	}
 	return (0);
 }
 
-void	check_args(int argc, char **argv)
+int	check_number(char *str)
 {
-	int i;
-	long n;
-	char **str;
+	int	i;
 
 	i = 0;
-	if (argc == 2)
-		str = ft_split(argv[1], ' ');
-	else
-		str = argv;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (!str[i])
+		return (0);
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	check_args(int argc, char **argv)
+{
+	int		i;
+	int		j;
+	long	n;
+	char	**str;
+
+	i = 1;
 	while (i < argc)
 	{
-		n = ft_atoi(str[i]);
-		if (!ft_isdigit(str[i][0]) && str[i][0] != '-' && str[i][0] != '+')
+		str = ft_split(argv[i], ' ');
+		if (!str)
 		{
-			printf("Error\n not a number");
+			printf("Error\nMemory allocation failed\n");
 			exit(EXIT_FAILURE);
 		}
-		if(check_doubles(argc, str))
+		j = 0;
+		while (str[j])
 		{
-			printf("Error\n double number");
-			exit(EXIT_FAILURE);
+			n = ft_atoi(str[j]);
+			if (!check_number(str[j]))
+			{
+				printf("Error\nInvalid input:\n");
+				free_split(str);
+				exit(EXIT_FAILURE);
+			}
+			if (n > INT_MAX || n < INT_MIN)
+			{
+				printf("Error\nNumber is too large:\n");
+				free_split(str);
+				exit(EXIT_FAILURE);
+			}
+			j++;
 		}
-		if (ft_isalpha(str[i][0]))
-		{
-			printf("Error\n not a number");
-			exit(EXIT_FAILURE);
-		}
-		if (n > INT_MAX || n < INT_MIN)
-		{
-			printf("Error\n number out of range");
-			exit(EXIT_FAILURE);
-		}
+		free_split(str);
 		i++;
 	}
 }
@@ -104,41 +109,64 @@ void affich_stack(t_stack *stack)
 	}
 }
 
-void	add_args_to_stack(t_stack *stack, int count, char **str)
+void	add_args_to_stack(t_stack **stack, int count, char **str)
 {
-	int i;
-	int n;
+	int		i;
+	long	n;
+	t_stack	*new_node;
 
 	i = 0;
 	while (i < count)
 	{
 		n = ft_atoi(str[i]);
-		ft_nodeadd_back(&stack, ft_newnode(n, i));
+		if (check_doubles(*stack, n))
+		{
+			printf("Error\nDuplicate number: %ld\n", n);
+			exit(EXIT_FAILURE);
+		}
+		new_node = ft_newnode(n, i);
+		if (!new_node)
+		{
+			printf("Error\nallocation failed\n");
+			exit(EXIT_FAILURE);
+		}
+		ft_nodeadd_back(stack, new_node);
 		i++;
 	}
 }
+
 
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a = NULL;
 	// t_stack	*stack_b = NULL;
 	int count;
+	int	i;
 	char **str;
 
 	if (argc < 2)
 		printf("Error\n not enough arguments");
-	if (argc == 2)
-	{
-		str = ft_split(argv[1], ' ');
-		count = 0;
-		while (str[count])
-			count++;
-		add_args_to_stack(stack_a, count, str);
-	}
 	else
 	{
-		count = argc - 1;
-		add_args_to_stack(stack_a, count, argv + 1);
+		check_args(argc, argv);
+		i = 1;
+		while (i < argc)
+		{
+			if (argv[i][0] == '\0')
+			{
+				printf("Error\nEmpty argument\n");
+				exit(EXIT_FAILURE);
+			}
+			str = ft_split(argv[i], ' ');
+			if (!str)
+				exit(EXIT_FAILURE);
+			count = 0;
+			while (str[count])
+				count++;
+			add_args_to_stack(&stack_a, count, str);
+			free_split(str);
+			i++;
+		}
 	}
 	affich_stack(stack_a);
 	return (0);

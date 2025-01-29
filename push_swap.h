@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:02:05 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/28 18:07:21 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:01:50 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-int		is_space(char c);
-void	check_spaces(char *str);
-int		check_doubles(int argc, char **argv);
+int		check_doubles(t_stack *stack, int n);
 void	check_args(int argc, char **argv);
 int		check_argument(char **argv);
 
