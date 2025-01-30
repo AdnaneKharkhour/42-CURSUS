@@ -6,41 +6,99 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 14:50:14 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/28 18:06:46 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:34:17 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int check_argument(char **argv)
+int	check_doubles(t_stack *stack, int n)
 {
-	int i;
-	int j;
-	int flag;
+	t_stack	*temp;
+
+	temp = stack;
+	while (temp)
+	{
+		if (temp->value == n)
+			return (1);
+		temp = temp->next;
+	}
+	return (0);
+}
+
+int	check_number(char *str)
+{
+	int	i;
 
 	i = 0;
-	flag = 0;
-	while (argv[i])
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (!str[i])
+		return (0);
+	while (str[i])
 	{
-		j = 0;
-		if (is_space(argv[i][j]))
-			flag = 1;
-		if (is_space(argv[i][j]) && is_space(argv[i][j + 1]))
-		{
-			printf("Error\n too many spaces");
-			exit(EXIT_FAILURE);
-		}
-		else if ((argv[i][j] == '-' || argv[i][j] == '+') && !ft_isdigit(argv[i][j + 1]))
-		{
-			printf("Error\n double sign");
-			exit(EXIT_FAILURE);
-		}
-		else if (!ft_isdigit(argv[i][j]) && argv[i][j] != '-' && argv[i][j] != '+')
-		{
-			printf("Error\n not a digit");
-			exit(EXIT_FAILURE);
-		}
+		if (!ft_isdigit(str[i]))
+			return (0);
 		i++;
 	}
-	return (flag);
+	return (1);
+}
+
+void	check_conditions(char **str)
+{
+	int		j;
+	long	n;
+
+	j = 0;
+	while (str[j])
+	{
+		n = ft_atoi(str[j]);
+		if (!check_number(str[j]))
+		{
+			printf("Error\nInvalid input:\n");
+			free_split(str);
+			exit(EXIT_FAILURE);
+		}
+		if (n > INT_MAX || n < INT_MIN)
+		{
+			printf("Error\nNumber is too large:\n");
+			free_split(str);
+			exit(EXIT_FAILURE);
+		}
+		j++;
+	}
+}
+
+void	check_args(int argc, char **argv)
+{
+	int		i;
+	char	**str;
+
+	i = 1;
+	while (i < argc)
+	{
+		str = ft_split(argv[i], ' ');
+		if (!str)
+		{
+			printf("Error\nMemory allocation failed\n");
+			exit(EXIT_FAILURE);
+		}
+		check_conditions(str);
+		free_split(str);
+		i++;
+	}
+}
+
+int	check_sorted(t_stack *stack)
+{
+	t_stack	*tmp;
+
+	tmp = stack;
+	while (tmp && tmp->next)
+	{
+		if (tmp->value > tmp->next->value)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }

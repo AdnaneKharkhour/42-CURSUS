@@ -3,99 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:49:17 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/29 11:26:35 by kali             ###   ########.fr       */
+/*   Updated: 2025/01/30 13:29:59 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
-
-void	free_split(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-}
-
-int	check_doubles(t_stack *stack, int n)
-{
-	t_stack	*temp;
-
-	temp = stack;
-	while (temp)
-	{
-		if (temp->value == n)
-			return (1);
-		temp = temp->next;
-	}
-	return (0);
-}
-
-int	check_number(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	if (!str[i])
-		return (0);
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	check_args(int argc, char **argv)
-{
-	int		i;
-	int		j;
-	long	n;
-	char	**str;
-
-	i = 1;
-	while (i < argc)
-	{
-		str = ft_split(argv[i], ' ');
-		if (!str)
-		{
-			printf("Error\nMemory allocation failed\n");
-			exit(EXIT_FAILURE);
-		}
-		j = 0;
-		while (str[j])
-		{
-			n = ft_atoi(str[j]);
-			if (!check_number(str[j]))
-			{
-				printf("Error\nInvalid input:\n");
-				free_split(str);
-				exit(EXIT_FAILURE);
-			}
-			if (n > INT_MAX || n < INT_MIN)
-			{
-				printf("Error\nNumber is too large:\n");
-				free_split(str);
-				exit(EXIT_FAILURE);
-			}
-			j++;
-		}
-		free_split(str);
-		i++;
-	}
-}
 
 void affich_stack(t_stack *stack)
 {
@@ -108,6 +24,8 @@ void affich_stack(t_stack *stack)
 		tmp = tmp->next;
 	}
 }
+
+
 
 void	add_args_to_stack(t_stack **stack, int count, char **str)
 {
@@ -168,6 +86,8 @@ int	main(int argc, char **argv)
 			i++;
 		}
 	}
+	if (check_sorted(stack_a))
+		exit(EXIT_SUCCESS);
 	affich_stack(stack_a);
 	return (0);
 }
