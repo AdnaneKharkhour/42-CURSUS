@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:49:17 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/30 13:29:59 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:32:07 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	add_args_to_stack(t_stack **stack, int count, char **str)
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a = NULL;
-	// t_stack	*stack_b = NULL;
+	t_stack	*stack_b = NULL;
 	int count;
 	int	i;
 	char **str;
@@ -89,5 +89,6 @@ int	main(int argc, char **argv)
 	if (check_sorted(stack_a))
 		exit(EXIT_SUCCESS);
 	affich_stack(stack_a);
+	filter_stack(&stack_a, &stack_b);
 	return (0);
 }

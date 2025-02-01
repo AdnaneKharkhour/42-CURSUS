@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:02:05 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/30 14:32:00 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:17:31 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+
+typedef struct range
+{
+	int		min;
+	int		max;
+}	t_range;
+
 
 //check_args.c
 int		check_doubles(t_stack *stack, int n);
