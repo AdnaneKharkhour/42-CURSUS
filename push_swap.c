@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:49:17 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/31 19:32:07 by kali             ###   ########.fr       */
+/*   Updated: 2025/02/01 13:35:23 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void affich_stack(t_stack *stack)
+void	affich_stack(t_stack *stack)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	tmp = stack;
 	while (tmp)
@@ -53,42 +53,51 @@ void	add_args_to_stack(t_stack **stack, int count, char **str)
 	}
 }
 
+void	handle_args(int argc, char **argv, t_stack **stack_a)
+{
+	int		count;
+	int		i;
+	char	**str;
+
+	check_args(argc, argv);
+	i = 1;
+	while (i < argc)
+	{
+		if (argv[i][0] == '\0')
+		{
+			printf("Error\nEmpty argument\n");
+			exit(EXIT_FAILURE);
+		}
+		str = ft_split(argv[i], ' ');
+		if (!str)
+			exit(EXIT_FAILURE);
+		count = 0;
+		while (str[count])
+			count++;
+		add_args_to_stack(stack_a, count, str);
+		free_split(str);
+		i++;
+	}
+}
 
 int	main(int argc, char **argv)
 {
-	t_stack	*stack_a = NULL;
-	t_stack	*stack_b = NULL;
-	int count;
-	int	i;
-	char **str;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 
 	if (argc < 2)
 		printf("Error\n not enough arguments");
 	else
 	{
-		check_args(argc, argv);
-		i = 1;
-		while (i < argc)
-		{
-			if (argv[i][0] == '\0')
-			{
-				printf("Error\nEmpty argument\n");
-				exit(EXIT_FAILURE);
-			}
-			str = ft_split(argv[i], ' ');
-			if (!str)
-				exit(EXIT_FAILURE);
-			count = 0;
-			while (str[count])
-				count++;
-			add_args_to_stack(&stack_a, count, str);
-			free_split(str);
-			i++;
-		}
+		stack_a = NULL;
+		stack_b = NULL;
+		handle_args(argc, argv, &stack_a);
+		if (check_sorted(stack_a))
+			exit(EXIT_SUCCESS);
+		// affich_stack(stack_a);
+		sort_index(&stack_a);
+		handle_sort(&stack_a, &stack_b);
+		// affich_stack(stack_a);
+		return (0);
 	}
-	if (check_sorted(stack_a))
-		exit(EXIT_SUCCESS);
-	affich_stack(stack_a);
-	filter_stack(&stack_a, &stack_b);
-	return (0);
 }

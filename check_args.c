@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 14:50:14 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/30 13:34:17 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/01 12:42:29 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	check_conditions(char **str)
 		n = ft_atoi(str[j]);
 		if (!check_number(str[j]))
 		{
-			printf("Error\nInvalid input:\n");
+			printf("Error\nInvalid input not digit:\n");
 			free_split(str);
 			exit(EXIT_FAILURE);
 		}

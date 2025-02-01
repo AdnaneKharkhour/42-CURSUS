@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:35:57 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/31 18:25:02 by kali             ###   ########.fr       */
+/*   Updated: 2025/02/01 18:56:36 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	swap(t_stack **stack, char *str)
 	tmp->next = (*stack)->next;
 	(*stack)->next = tmp;
 	if (str)
-		peintf("%s\n", str);
+		printf("%s\n", str);
 }
 
 void	push(t_stack **stack_a, t_stack **stack_b, char *str)
@@ -40,41 +40,6 @@ void	push(t_stack **stack_a, t_stack **stack_b, char *str)
 		printf("%s\n", str);
 }
 
-void	rotate(t_stack **stack, char *str)
-{
-	t_stack	*tmp;
-	t_stack	*last;
-
-	if (!*stack || !stack || !(*stack)->next)
-		return ;
-	tmp = *stack;
-	*stack = (*stack)->next;
-	last = tmp;
-	while (last->next)
-		last = last->next;
-	last->next = tmp;
-	tmp->next = NULL;
-	if (str)
-		printf("%s\n", str);
-}
-
-void	reverse_rotate(t_stack **stack, char *str)
-{
-	t_stack	*tmp;
-	t_stack	*last;
-
-	if (!*stack || !stack || !(*stack)->next)
-		return ;
-	tmp = *stack;
-	last = tmp;
-	while (last->next->next)
-		last = last->next;
-	*stack = last->next;
-	last->next = NULL;
-	(*stack)->next = tmp;
-	if (str)
-		printf("%s\n", str);
-}
 
 void	ss(t_stack **stack_a, t_stack **stack_b)
 {
@@ -83,16 +48,75 @@ void	ss(t_stack **stack_a, t_stack **stack_b)
 	printf("ss\n");
 }
 
-void	rr(t_stack **stack_a, t_stack **stack_b)
+
+void	sort_three(t_stack **stack)
 {
-	rotate(stack_a, NULL);
-	rotate(stack_b ,NULL);
-	printf("rr\n");
+	int	first;
+	int	second;
+	int	third;
+
+	first = (*stack)->value;
+	second = (*stack)->next->value;
+	third = (*stack)->next->next->value;
+	if (first > second && first < third)
+		swap(stack, "sa");
+	else if (first > third && third > second)
+		rotate(stack, "ra");
+	else if (first > second && second > third)
+	{
+		swap(stack, "sa");
+		reverse_rotate(stack, "rra");
+	}
+	else if (first < second && first > third)
+		reverse_rotate(stack, "rra");
+	else if (first < second && first < third && second > third)
+	{
+		rotate(stack, "ra");
+		swap(stack, "sa");
+		reverse_rotate(stack, "rra");
+	}
 }
 
-void	rrr(t_stack **stack_a, t_stack **stack_b)
+void	sort_four(t_stack **stack_a, t_stack **stack_b)
 {
-	reverse_rotate(stack_a, NULL);
-	reverse_rotate(stack_b, NULL);
-	printf ("rrr\n");
+	int	size;
+	int	min;
+
+	min = (ft_minnode(*stack_a))->index;
+	size = ft_nodesize(*stack_a) / 2;
+	if (min < size)
+	{
+		while ((*stack_a)->index != min)
+			rotate (stack_a, "ra");
+	}
+	else
+	{
+		while ((*stack_a)->index != min)
+			reverse_rotate(stack_a, "rra");
+	}
+	push(stack_b, stack_a, "pb");
+	sort_three(stack_a);
+	push(stack_a, stack_b, "pa");
+}
+
+void	sort_five(t_stack **stack_a, t_stack **stack_b)
+{
+	int	size;
+	int	min;
+
+	min = (ft_minnode(*stack_a))->index;
+	size = ft_nodesize(*stack_a) / 2;
+	if (min < size)
+	{
+		while ((*stack_a)->index != min)
+			rotate(stack_a, "ra");
+	}
+	else
+	{
+		while ((*stack_a)->index != min)
+			reverse_rotate(stack_a, "rra");
+	}
+	push(stack_b, stack_a, "pb");
+	sort_four(stack_a, stack_b);
+	push(stack_a, stack_b, "pa");
 }
