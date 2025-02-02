@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 14:50:14 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/01 12:42:29 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:52:08 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int	check_doubles(t_stack *stack, int n)
 {

@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:56:37 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/01 19:09:23 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:52:15 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	rotate(t_stack **stack, char *str)
 {

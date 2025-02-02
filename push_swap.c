@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:49:17 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/01 13:35:23 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/02 19:31:59 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	affich_stack(t_stack *stack)
 		tmp = tmp->next;
 	}
 }
-
-
 
 void	add_args_to_stack(t_stack **stack, int count, char **str)
 {
@@ -94,10 +92,11 @@ int	main(int argc, char **argv)
 		handle_args(argc, argv, &stack_a);
 		if (check_sorted(stack_a))
 			exit(EXIT_SUCCESS);
-		// affich_stack(stack_a);
 		sort_index(&stack_a);
 		handle_sort(&stack_a, &stack_b);
-		// affich_stack(stack_a);
+		free_stack(&stack_a);
+		// system("leaks push_swap");
 		return (0);
 	}
+	return (0);
 }
