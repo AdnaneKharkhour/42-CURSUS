@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_less_than_five.c                              :+:      :+:    :+:   */
+/*   sort_less_than_five_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:35:57 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/03 17:15:30 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:37:23 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "checker_bonus.h"
 
 void	sort_three(t_stack **stack)
 {

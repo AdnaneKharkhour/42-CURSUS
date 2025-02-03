@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:49:17 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/03 18:39:32 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:45:54 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 void	affich_stack(t_stack *stack)
 {
@@ -80,26 +80,24 @@ void	handle_args(int argc, char **argv, t_stack **stack_a)
 	}
 }
 
-
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
 	if (argc < 2)
-		exit_error("No arguments");
+		exit(EXIT_SUCCESS);
 	else
 	{
 		stack_a = NULL;
 		stack_b = NULL;
 		handle_args(argc, argv, &stack_a);
-		if (check_sorted(stack_a))
-			exit(EXIT_SUCCESS);
-		sort_index(&stack_a);
-		handle_sort(&stack_a, &stack_b);
-		free_stack(&stack_a);
-		// system("leaks push_swap");
-		return (0);
+		check_moves(&stack_a, &stack_b);
+		if (check_sorted(stack_a) && !stack_b)
+			ft_printf("OK\n");
+		else
+			ft_printf("KO\n");
+		// system("leaks checker");
 	}
 	return (0);
 }

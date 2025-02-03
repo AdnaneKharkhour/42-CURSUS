@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:28:31 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/03 18:42:45 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:42:38 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "checker_bonus.h"
 
 void	free_split(char **str)
 {
@@ -75,7 +75,6 @@ void	free_stack(t_stack **stack)
 		free(tmp);
 	}
 }
-
 void	exit_error(char *str)
 {
 	write(2, "Error\n", 6);
