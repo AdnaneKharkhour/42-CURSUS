@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:45:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/23 14:46:20 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:17:40 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ char	**load_map(const char *file)
 	map = malloc(sizeof(char *) * (num_lines + 1));
 	if (!map)
 	{
-		free_map(map);
 		exit (EXIT_FAILURE);
 	}
 	fd = open(file, O_RDONLY);
