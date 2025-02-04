@@ -6,13 +6,13 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:03:18 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/27 17:46:22 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:44:58 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_BONUS_H
 # define GAME_BONUS_H
-# include "mlx.h"
+# include "../mlx.h"
 # include "../LIBFT/GET_NEXT_LINE/get_next_line.h"
 # include "../LIBFT/FT_PRINTF/ft_printf.h"
 # include "../LIBFT/libft/libft.h"
