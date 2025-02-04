@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:56:37 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/03 18:43:24 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:40:04 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "../include/checker_bonus.h"
 
 void	rotate(t_stack **stack, char *str)
 {

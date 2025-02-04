@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:28:31 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/03 18:42:45 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:32:28 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../include/push_swap.h"
 
 void	free_split(char **str)
 {
@@ -76,9 +76,8 @@ void	free_stack(t_stack **stack)
 	}
 }
 
-void	exit_error(char *str)
+void	exit_error(void)
 {
 	write(2, "Error\n", 6);
-	write(2, str, ft_strlen(str));
 	exit(EXIT_FAILURE);
 }

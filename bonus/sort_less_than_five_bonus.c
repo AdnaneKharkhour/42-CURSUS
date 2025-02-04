@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:35:57 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/03 15:37:23 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:40:09 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "../include/checker_bonus.h"
 
 void	sort_three(t_stack **stack)
 {

@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 12:55:18 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/02 18:52:26 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:32:13 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../include/push_swap.h"
 
 t_stack	*ft_maxnode(t_stack *stack)
 {

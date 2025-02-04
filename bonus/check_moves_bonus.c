@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:49:54 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/03 18:44:25 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:39:51 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "../include/checker_bonus.h"
 
 void	check_moves_conditions(t_stack **stack_a, t_stack **stack_b, char *line)
 {
@@ -37,7 +37,7 @@ void	check_moves_conditions(t_stack **stack_a, t_stack **stack_b, char *line)
 	else if (!ft_strncmp(line, "rrr\n", 4))
 		rrr(stack_a, stack_b);
 	else
-		exit_error(NULL);
+		exit_error();
 }
 
 void	check_moves(t_stack **stack_a, t_stack **stack_b)

@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:36:33 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/03 18:40:56 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:31:43 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../include/push_swap.h"
 
 void	swap(t_stack **stack, char *str)
 {

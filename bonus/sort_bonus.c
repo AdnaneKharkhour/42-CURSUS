@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 12:55:18 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/03 15:37:21 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:40:06 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "../include/checker_bonus.h"
 
 t_stack	*ft_maxnode(t_stack *stack)
 {

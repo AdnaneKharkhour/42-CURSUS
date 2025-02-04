@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 12:01:14 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/26 20:27:57 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:36:49 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 int	ft_putchar(char c)
 {

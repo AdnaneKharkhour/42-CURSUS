@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:28:31 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/03 18:42:38 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:40:13 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "../include/checker_bonus.h"
 
 void	free_split(char **str)
 {
@@ -75,9 +75,9 @@ void	free_stack(t_stack **stack)
 		free(tmp);
 	}
 }
-void	exit_error(char *str)
+
+void	exit_error(void)
 {
 	write(2, "Error\n", 6);
-	write(2, str, ft_strlen(str));
 	exit(EXIT_FAILURE);
 }

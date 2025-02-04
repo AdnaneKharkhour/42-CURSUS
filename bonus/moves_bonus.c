@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:36:33 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/03 18:43:46 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:39:55 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "../include/checker_bonus.h"
 
 void	swap(t_stack **stack, char *str)
 {

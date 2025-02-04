@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 19:41:43 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/28 17:31:56 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:36:41 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 void	check_format(const char *format, va_list args, int *count)
 {

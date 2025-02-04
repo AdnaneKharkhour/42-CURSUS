@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 14:50:14 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/03 18:46:35 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:38:51 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "../include/checker_bonus.h"
 
 int	check_doubles(t_stack *stack, int n)
 {
@@ -56,12 +56,12 @@ void	check_conditions(char **str)
 		if (!check_number(str[j]))
 		{
 			free_split(str);
-			exit_error("Invalid input not digit");
+			exit_error();
 		}
 		if (n > INT_MAX || n < INT_MIN)
 		{
 			free_split(str);
-			exit_error("Error\nNumber out of range");
+			exit_error();
 		}
 		j++;
 	}
@@ -77,7 +77,7 @@ void	check_args(int argc, char **argv)
 	{
 		str = ft_split(argv[i], ' ');
 		if (!str)
-			exit_error("allocation failed");
+			exit_error();
 		check_conditions(str);
 		free_split(str);
 		i++;

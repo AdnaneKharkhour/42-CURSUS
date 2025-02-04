@@ -6,14 +6,14 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:02:05 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/03 18:37:35 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:29:14 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# include "LIBFT/libft.h"
-# include "FT_PRINTF/ft_printf.h"
+# include "libft.h"
+# include "ft_printf.h"
 
 typedef struct range
 {
@@ -32,10 +32,12 @@ void	free_split(char **str);
 int		calculate_size(t_stack *stack);
 void	sort_index(t_stack **stack);
 void	free_stack(t_stack **stack);
-void	exit_error(char *str);
+void	exit_error(void);
 //push_swap.c
 void	affich_stack(t_stack *stack);
 void	add_args_to_stack(t_stack **stack, int count, char **str);
+void	handle_args(int argc, char **argv, t_stack **stack_a);
+void	check_empty_or_all_space(char **argv, int i, t_stack **stack_a);
 //sort.c
 t_stack	*ft_maxnode(t_stack *stack);
 int		max_node_position(t_stack *stack, int max_index);

@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:05:10 by akharkho          #+#    #+#             */
-/*   Updated: 2025/01/28 15:26:19 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:35:19 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 void	ft_nodeadd_back(t_stack **lst, t_stack *new)
 {
