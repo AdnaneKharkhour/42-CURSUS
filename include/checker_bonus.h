@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:33:56 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:29:30 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:40:48 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,12 @@ void	free_split(char **str);
 int		calculate_size(t_stack *stack);
 void	sort_index(t_stack **stack);
 void	free_stack(t_stack **stack);
+void	exit_error(void);
 //checker.c
 void	affich_stack(t_stack *stack);
 void	add_args_to_stack(t_stack **stack, int count, char **str);
 void	check_empty_or_all_space(char **argv, int i, t_stack **stack_a);
 void	handle_args(int argc, char **argv, t_stack **stack_a);
-//sort_bonus.c
-t_stack	*ft_maxnode(t_stack *stack);
-int		max_node_position(t_stack *stack, int max_index);
-void	ft_range(t_stack **stack_a, t_stack **stack_b);
-void	filter_stack(t_stack **stack_a, t_stack **stack_b);
-t_stack	*ft_minnode(t_stack *stack);
-//sort_less_than_five_bonus.c
-void	sort_three(t_stack **stack);
-void	sort_four(t_stack **stack_a, t_stack **stack_b);
-void	sort_five(t_stack **stack_a, t_stack **stack_b);
-void	handle_sort(t_stack **stack_a, t_stack **stack_b);
 //moves_bonus.c
 void	swap(t_stack **stack, char *str);
 void	push(t_stack **stack_a, t_stack **stack_b, char *str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:49:17 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:31:26 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:34:51 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ void	affich_stack(t_stack *stack)
 		ft_printf("%d\n", tmp->value);
 		tmp = tmp->next;
 	}
+}
+
+void	exit_error(void)
+{
+	write(2, "Error\n", 6);
+	exit(EXIT_FAILURE);
 }
 
 void	add_args_to_stack(t_stack **stack, int count, char **str)

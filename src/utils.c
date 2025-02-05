@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:28:31 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:32:28 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:34:21 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,15 @@ void	free_stack(t_stack **stack)
 	}
 }
 
-void	exit_error(void)
+int	get_max_range(t_stack *stack)
 {
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
+	int		size;
+
+	size = calculate_size(stack);
+	if (size <= 100)
+		return (15);
+	else if (size <= 500)
+		return (35);
+	else
+		return (50);
 }

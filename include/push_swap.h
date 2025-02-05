@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:02:05 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:29:14 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:34:40 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ void	free_split(char **str);
 int		calculate_size(t_stack *stack);
 void	sort_index(t_stack **stack);
 void	free_stack(t_stack **stack);
-void	exit_error(void);
+int		get_max_range(t_stack *stack);
 //push_swap.c
 void	affich_stack(t_stack *stack);
+void	exit_error(void);
 void	add_args_to_stack(t_stack **stack, int count, char **str);
 void	handle_args(int argc, char **argv, t_stack **stack_a);
 void	check_empty_or_all_space(char **argv, int i, t_stack **stack_a);

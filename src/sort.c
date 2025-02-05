@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 12:55:18 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:32:13 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:12:56 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	filter_stack(t_stack **stack_a, t_stack **stack_b)
 	t_range	range;
 
 	range.min = 0;
-	range.max = calculate_size(*stack_a) / 20 + 10;
+	range.max = get_max_range(*stack_a);
 	while (*stack_a)
 	{
 		if ((*stack_a)->index >= range.min && (*stack_a)->index <= range.max)
