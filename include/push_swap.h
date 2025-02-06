@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:02:05 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/05 15:34:40 by kali             ###   ########.fr       */
+/*   Updated: 2025/02/06 10:28:31 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	sort_index(t_stack **stack);
 void	free_stack(t_stack **stack);
 int		get_max_range(t_stack *stack);
 //push_swap.c
-void	affich_stack(t_stack *stack);
 void	exit_error(void);
 void	add_args_to_stack(t_stack **stack, int count, char **str);
 void	handle_args(int argc, char **argv, t_stack **stack_a);

@@ -6,12 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:56:57 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:35:12 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:21:47 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
-
 
 int	ft_isdigit(int n)
 {

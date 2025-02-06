@@ -6,23 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:49:17 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:38:42 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:29:25 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/checker_bonus.h"
-
-void	affich_stack(t_stack *stack)
-{
-	t_stack	*tmp;
-
-	tmp = stack;
-	while (tmp)
-	{
-		ft_printf("%d\n", tmp->value);
-		tmp = tmp->next;
-	}
-}
 
 void	add_args_to_stack(t_stack **stack, int count, char **str)
 {

@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:35:57 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:32:09 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:55:13 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,12 @@ void	handle_sort(t_stack **stack_a, t_stack **stack_b)
 	int	size;
 
 	size = calculate_size(*stack_a);
-	if (size == 3)
+	if (size == 2)
+	{
+		if ((*stack_a)->value > (*stack_a)->next->value)
+			swap(stack_a, "sa");
+	}
+	else if (size == 3)
 		sort_three(stack_a);
 	else if (size == 4)
 		sort_four(stack_a, stack_b);

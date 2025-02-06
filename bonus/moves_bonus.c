@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:36:33 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:39:55 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:12:04 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,4 @@ void	ss(t_stack **stack_a, t_stack **stack_b)
 {
 	swap(stack_a, NULL);
 	swap(stack_b, NULL);
-	ft_printf("ss\n");
 }

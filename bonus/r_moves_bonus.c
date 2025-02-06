@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:56:37 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:40:04 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:11:45 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,10 @@ void	rr(t_stack **stack_a, t_stack **stack_b)
 {
 	rotate(stack_a, NULL);
 	rotate(stack_b, NULL);
-	ft_printf("rr\n");
 }
 
 void	rrr(t_stack **stack_a, t_stack **stack_b)
 {
 	reverse_rotate(stack_a, NULL);
 	reverse_rotate(stack_b, NULL);
-	ft_printf ("rrr\n");
 }
