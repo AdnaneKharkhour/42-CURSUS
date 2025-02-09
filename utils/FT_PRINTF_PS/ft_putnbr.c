@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 19:47:11 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:36:52 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/09 13:44:32 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "../../include/ft_printf.h"
 
 int	ft_putnbr(int n)
 {

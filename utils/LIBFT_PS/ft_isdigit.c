@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 12:01:14 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:36:49 by akharkho         ###   ########.fr       */
+/*   Created: 2024/10/21 18:56:57 by akharkho          #+#    #+#             */
+/*   Updated: 2025/02/08 18:33:37 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "../../include/libft.h"
 
-int	ft_putchar(char c)
+int	ft_isdigit(int n)
 {
-	return (write(1, &c, 1));
+	return (n >= '0' && n <= '9');
 }

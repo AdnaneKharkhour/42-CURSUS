@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:38:35 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/08 15:03:49 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/08 18:33:20 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../../include/libft.h"
 
 static void	space_sign(const char **s, int *sign)
 {

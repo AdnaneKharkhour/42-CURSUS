@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nodeadd_back.c                                  :+:      :+:    :+:   */
+/*   ft_newnode.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 14:05:10 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:35:19 by akharkho         ###   ########.fr       */
+/*   Created: 2024/10/30 17:26:30 by akharkho          #+#    #+#             */
+/*   Updated: 2025/02/08 18:33:41 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../../include/libft.h"
 
-void	ft_nodeadd_back(t_stack **lst, t_stack *new)
+t_stack	*ft_newnode(int value, int index)
 {
-	t_stack	*last;
+	t_stack	*node;
 
-	if (!lst || !new)
-		return ;
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	last = *lst;
-	while (last->next)
-		last = last->next;
-	last->next = new;
+	node = (t_stack *)malloc(sizeof(t_stack));
+	if (!node)
+		return (NULL);
+	node->value = value;
+	node->index = index;
+	node->next = NULL;
+	return (node);
 }

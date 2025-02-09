@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 11:59:12 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:36:59 by akharkho         ###   ########.fr       */
+/*   Created: 2024/10/24 13:10:46 by akharkho          #+#    #+#             */
+/*   Updated: 2025/02/08 18:33:52 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "../../include/libft.h"
 
-int	ft_putstr(char *str)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	count;
+	unsigned char	*str1;
+	unsigned char	*str2;
+	size_t			i;
 
-	count = 0;
-	if (str == NULL)
-		return (ft_putstr("(null)"));
-	while (*str)
+	if (n == 0)
+		return (0);
+	i = 0;
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while (i < n - 1 && (str1[i] != '\0'))
 	{
-		count += ft_putchar(*str);
-		str++;
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+		i++;
 	}
-	return (count);
+	return (str1[i] - str2[i]);
 }

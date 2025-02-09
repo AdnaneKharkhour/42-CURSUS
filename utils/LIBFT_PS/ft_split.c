@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:17:58 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/04 17:35:30 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/08 18:33:47 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../../include/libft.h"
 
 static int	check_sep(char c, char sep)
 {
