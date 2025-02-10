@@ -1,0 +1,139 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   infile                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 16:17:58 by akharkho          #+#    #+#             */
+/*   Updated: 2025/02/10 17:30:30 by akharkho         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static int	check_sep(char c, char sep)
+{
+	return (c == sep);
+}
+
+static int	count_words(char const *str, char sep)
+{
+	int	c;
+
+	c = 0;
+	while (*str != '\0')
+	{
+		while (check_sep(*str, sep) && *str != '\0')
+			str++;
+		if (*str != '\0')
+			c++;
+		while (!check_sep(*str, sep) && *str != '\0')
+			str++;
+	}
+	return (c);
+}
+
+void	handle_quotes(const char **str, int *is_quote, char *quote)
+{
+	if ((**str == '\'' || **str == '"') && *is_quote == 0)
+	{
+		*is_quote = 1;
+		*quote = **str;
+	}
+	else if (*is_quote == 1 && **str == *quote)
+		*is_quote = 0;
+}
+
+int	get_word_length(const char *str, char sep)
+{
+	int		i;
+	int		is_quote;
+	char	quote;
+
+	i = 0;
+	is_quote = 0;
+	while (str[i] && (!check_sep(str[i], sep) || is_quote))
+	{
+		handle_quotes(&str, &is_quote, &quote);
+		i++;
+	}
+	return (i);
+}
+
+static char	*ft_word_allocator(const char *str, char sep)
+{
+	int		i;
+	int		j;
+	int		is_quote;
+	char	qoute;
+	char	*word;
+
+	i = 0;
+	is_quote = 0;
+	while (str[i] && (!check_sep(str[i], sep) || is_quote))
+	{
+		if (str[i] == '\'' || str[i] == '"')
+		{
+			if (!is_quote)
+			{
+				is_quote = 1;
+				qoute = str[i];
+			}
+			else if (is_quote && str[i] == qoute)
+				is_quote = 0;
+		}
+		i++;
+	}
+	word = malloc(sizeof(char) * (i + 1));
+	if (!word)
+		return (NULL);
+	j = 0;
+	while (j < i)
+	{
+		word[j] = str[j];
+		j++;
+	}
+	word[i] = '\0';
+	return (word);
+}
+
+static char	**free_string(char **string, int i)
+{
+	while (i >= 0)
+	{
+		free(string[i]);
+		i--;
+	}
+	free(string);
+	return (NULL);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**string;
+	int		i;
+
+	if (!s)
+		return (NULL);
+	string = malloc(sizeof(char *) * (count_words(s, c) + 1));
+	if (!string)
+		return (NULL);
+	i = 0;
+	while (*s)
+	{
+		while (check_sep(*s, c) && *s)
+			s++;
+		if (*s)
+		{
+			string[i] = ft_word_allocator(s, c);
+			if (!string[i])
+				return (free_string(string, i));
+			i++;
+		}
+		while (!check_sep(*s, c) && *s)
+			s++;
+	}
+	string[i] = NULL;
+	return (string);
+}
