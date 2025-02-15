@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 12:44:50 by akharkho          #+#    #+#             */
-/*   Updated: 2024/10/31 12:53:21 by akharkho         ###   ########.fr       */
+/*   Created: 2024/10/26 16:55:40 by akharkho          #+#    #+#             */
+/*   Updated: 2025/02/15 18:30:02 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_bonus.h"
 
-int	ft_lstsize(t_list *lst)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	c;
+	char	*str;
 
-	c = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		c++;
-	}
-	return (c);
+	if (!s1 || !s2)
+		return (NULL);
+	str = (char *)malloc(sizeof (char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (NULL);
+	ft_memcpy(str, s1, ft_strlen(s1));
+	ft_memcpy(str + ft_strlen(s1), s2, ft_strlen(s2) + 1);
+	return (str);
 }

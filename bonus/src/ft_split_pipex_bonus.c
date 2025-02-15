@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_pipex_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 16:17:58 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/09 12:11:47 by akharkho         ###   ########.fr       */
+/*   Created: 2025/02/11 14:04:01 by akharkho          #+#    #+#             */
+/*   Updated: 2025/02/15 15:04:35 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/pipex_bonus.h"
 
 static int	check_sep(char c, char sep)
 {
@@ -38,46 +38,38 @@ static char	*ft_word_allocator(const char *str, char sep)
 {
 	int		i;
 	int		j;
+	int		len;
+	int		in_qoute;
 	char	*word;
 
-	i = 0;
-	while (!check_sep(str[i], sep) && str[i])
-		i++;
-	word = malloc(sizeof(char) * (i + 1));
+	len = 0;
+	in_qoute = 0;
+	while (str[len] && (!check_sep(str[len], sep) || in_qoute))
+	{
+		ft_quotes(&str[len], &in_qoute);
+		len++;
+	}
+	word = malloc(sizeof(char) * (len + 1));
 	if (!word)
 		return (NULL);
-	j = 0;
-	while (j < i)
-	{
-		word[j] = str[j];
-		j++;
-	}
-	word[i] = '\0';
-	return (word);
-}
-
-static char	**free_string(char **string, int i)
-{
-	while (i >= 0)
-	{
-		free(string[i]);
-		i--;
-	}
-	free(string);
-	return (NULL);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**string;
-	int		i;
-
-	if (!s)
-		return (NULL);
-	string = malloc(sizeof(char *) * (count_words(s, c) + 1));
-	if (!string)
-		return (NULL);
 	i = 0;
+	j = 0;
+	while (i < len)
+	{
+		if (str[i] != '\'')
+			word[j++] = str[i];
+		i++;
+	}
+	return (word[i] = '\0', word);
+}
+
+char	**split_string(const char *s, char c, char **string)
+{
+	int	i;
+	int	in_quote;
+
+	i = 0;
+	in_quote = 0;
 	while (*s)
 	{
 		while (check_sep(*s, c) && *s)
@@ -89,9 +81,24 @@ char	**ft_split(char const *s, char c)
 				return (free_string(string, i));
 			i++;
 		}
-		while (!check_sep(*s, c) && *s)
+		while (*s && (!check_sep(*s, c) || in_quote))
+		{
+			ft_quotes(s, &in_quote);
 			s++;
+		}
 	}
 	string[i] = NULL;
 	return (string);
+}
+
+char	**ft_split_pipex(char const *s, char c)
+{
+	char	**string;
+
+	if (!s)
+		return (NULL);
+	string = malloc(sizeof(char *) * (count_words(s, c) + 1));
+	if (!string)
+		return (NULL);
+	return (split_string(s, c, string));
 }

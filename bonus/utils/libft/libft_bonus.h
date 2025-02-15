@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   libft_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 16:05:48 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/06 11:14:25 by akharkho         ###   ########.fr       */
+/*   Created: 2024/10/28 17:11:04 by akharkho          #+#    #+#             */
+/*   Updated: 2025/02/15 18:09:06 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LIBFT_BONUS_H
+# define LIBFT_BONUS_H
 
-void	ft_putchar_fd(char c, int fd)
-{
-	if (fd < 0)
-		return ;
-	write(fd, &c, 1);
-}
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
+
+void	*ft_memcpy(void *dst, const	void *src, size_t n);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlen(const	char *str);
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+
+#endif

@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 10:55:25 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/12 11:40:10 by akharkho         ###   ########.fr       */
+/*   Created: 2024/10/22 21:05:24 by akharkho          #+#    #+#             */
+/*   Updated: 2025/02/15 18:30:06 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_bonus.h"
 
-int	ft_tolower(int c)
+void	*ft_memcpy(void *dst, const	void *src, size_t n)
 {
-	if (c >= 'A' && c <= 'Z')
-		c += 32;
-	return (c);
+	char		*destination;
+	const char	*source;
+
+	if (dst == src)
+		return (dst);
+	destination = (char *)dst;
+	source = (const char *)src;
+	while (n > 0)
+	{
+		*destination = *source;
+		destination++;
+		source++;
+		n--;
+	}
+	return (dst);
 }

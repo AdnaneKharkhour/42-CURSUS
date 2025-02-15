@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 17:07:50 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/15 18:20:57 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/15 18:29:33 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 # include "../utils/libft/libft.h"
 # include <fcntl.h>
 # include <sys/wait.h>
@@ -19,24 +19,32 @@
 
 typedef struct s_pipex_data
 {
-	int	infile;
-	int	outfile;
+	int		infile;
+	int		outfile;
+	char	**env;
 }t_data;
 
-//ft_split_pipex.c
+//ft_split_pipex_bonus.c
 void	ft_quotes(const char *str, int *in_quote);
 char	**free_string(char **string, int i);
 char	**ft_split_pipex(char const *s, char c);
-//pipex_utils.c
+//pipex_utils_bonus.c
 char	**get_path(char **env);
 void	exec_cmd_from_path(char **path, char *cmd, char **argv, char **env);
 void	exec_cmd(char *cmd, char **argv, char **env);
-void	create_pipes_and_forks(t_data *data, char **argv, char **env);
-//utils.c
+void	create_pipes_and_forks(int argc, t_data *data, char **argv);
+//utils_bonus.c
 void	free_split(char **str);
-//main.c
-void	handle_child_process(t_data *data, int *fd, char *cmd, char **env);
+void	close_fd(int fd1, int fd2, int fd3, int fd4);
+void	exit_error(const char *str);
+//process_bonus.c
+void	check_permission(char **cmd);
+void	check_if_script(char **cmd_args, t_data *data, char **sh);
+void	handle_middle_child_process(t_data *data,
+			int *fd1, int *fd2, char *cmd);
 void	handle_second_child_process(t_data *data,
-			int *fd, char *cmd, char **env);
+			int *fd, char *cmd);
+void	handle_child_process(t_data *data, int *fd, char *cmd);
+//main_bonus.c
 
 #endif

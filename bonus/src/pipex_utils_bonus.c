@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:56:39 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/13 18:35:09 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/15 18:56:08 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../../includes/pipex_bonus.h"
 
 char	**get_path(char **env)
 {
@@ -58,12 +58,6 @@ void	exec_cmd_from_path(char **path, char *cmd, char **argv, char **env)
 	}
 }
 
-void	exit_error(const char *str)
-{
-	perror(str);
-	exit(EXIT_FAILURE);
-}
-
 void	exec_cmd(char *cmd, char **argv, char **env)
 {
 	char	**path;
@@ -80,29 +74,51 @@ void	exec_cmd(char *cmd, char **argv, char **env)
 	exit(EXIT_FAILURE);
 }
 
-void	create_pipes_and_forks(t_data *data, char **argv, char **env)
+void	handle_cmds(t_data *data, int **fd, int total_cmds, char **argv)
 {
-	int	fd[2];
-	int	pid1;
-	int	pid2;
+	int		i;
+	int		pid;
 
-	if (pipe(fd) == -1)
+	i = 0;
+	while (i < total_cmds)
 	{
-		perror("pipex: Pipe creation failed");
-		exit(EXIT_FAILURE);
+		pid = fork();
+		if (pid == -1)
+			exit_error("fork");
+		if (pid == 0)
+		{
+			if (i == 0)
+				handle_child_process(data, fd[i], argv[i + 2]);
+			else if (i == total_cmds - 1)
+				handle_second_child_process(data, fd[i - 1],
+					argv[i + 2]);
+			else
+				handle_middle_child_process(data,
+					fd[i - 1], fd[i], argv[i + 2]);
+		}
+		i++;
 	}
-	pid1 = fork();
-	if (pid1 == -1)
-		exit_error("fork");
-	if (pid1 == 0)
-		handle_child_process(data, fd, argv[2], env);
-	pid2 = fork();
-	if (pid2 == -1)
-		exit_error("fork");
-	if (pid2 == 0)
-		handle_second_child_process(data, fd, argv[3], env);
-	close(fd[0]);
-	close(fd[1]);
-	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
+}
+
+void	create_pipes_and_forks(int argc, t_data *data, char **argv)
+{
+	int	**fd;
+	int	total_cmds;
+	int	i;
+
+	i = 0;
+	total_cmds = argc - 3;
+	fd = (int **)malloc(sizeof(int *) * total_cmds);
+	if (!fd)
+		exit_error("malloc");
+	while (i < total_cmds)
+	{
+		fd[i] = (int *)malloc(sizeof(int) * 2);
+		if (!fd[i])
+			exit_error("malloc");
+		if (pipe(fd[i]) == -1)
+			exit_error("pipe");
+		i++;
+	}
+	handle_cmds(data, fd, total_cmds, argv);
 }

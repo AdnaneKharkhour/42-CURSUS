@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_strlen_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 19:45:20 by akharkho          #+#    #+#             */
-/*   Updated: 2024/11/12 11:41:38 by akharkho         ###   ########.fr       */
+/*   Created: 2024/10/21 19:41:41 by akharkho          #+#    #+#             */
+/*   Updated: 2025/02/15 18:29:46 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_bonus.h"
 
-int	ft_isascii(int c)
+size_t	ft_strlen(const	char *str)
 {
-	return (c >= 0 && c <= 127);
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
