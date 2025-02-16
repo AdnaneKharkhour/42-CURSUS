@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 17:07:50 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/15 18:29:33 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/16 17:16:17 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void	create_pipes_and_forks(int argc, t_data *data, char **argv);
 //utils_bonus.c
 void	free_split(char **str);
 void	close_fd(int fd1, int fd2, int fd3, int fd4);
+void	exit_error_and_free(int **fd, int i, const char *error);
 void	exit_error(const char *str);
+void	close_all_fd(int **fd, int total_cmds);
+void	print_open_fds(void);
 //process_bonus.c
 void	check_permission(char **cmd);
 void	check_if_script(char **cmd_args, t_data *data, char **sh);

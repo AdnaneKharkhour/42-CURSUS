@@ -2,7 +2,7 @@ NAME = pipex
 NAME_BONUS = pipex_bonus
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
 
 SRC = src/main.c src/ft_split_pipex.c src/ft_split_pipex_utils.c src/pipex_utils.c src/utils.c utils/libft/ft_strjoin.c utils/libft/ft_strncmp.c\
 	utils/libft/ft_strlen.c utils/libft/ft_memcpy.c

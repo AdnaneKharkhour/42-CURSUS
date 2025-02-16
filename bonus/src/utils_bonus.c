@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:55:36 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/15 18:04:57 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/16 19:19:35 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,52 @@ void	close_fd(int fd1, int fd2, int fd3, int fd4)
 	close(fd4);
 }
 
+void	exit_error_and_free(int **fd, int i, const char *error)
+{
+	if (fd)
+	{
+		while (i >= 0)
+		{
+			close(fd[i][0]);
+			close(fd[i][1]);
+			free(fd[i]);
+			i--;
+		}
+		free(fd);
+	}
+	exit_error(error);
+}
+
 void	exit_error(const char *str)
 {
 	perror(str);
 	exit(EXIT_FAILURE);
+}
+
+void	close_all_fd(int **fd, int pipes_num)
+{
+	int	i;
+
+	i = 0;
+	while (i < pipes_num)
+	{
+		if (fd[i] != NULL)
+		{
+			close(fd[i][0]);
+			close(fd[i][1]);
+			free(fd[i]);
+			i++;
+		}
+	}
+	free(fd);
+}
+
+void print_open_fds(void)
+{
+    int fd;
+    for (fd = 0; fd < 20; fd++)
+    {
+        if (fcntl(fd, F_GETFD) != -1)
+            dprintf(2, "FD %d is still open\n", fd);
+    }
 }

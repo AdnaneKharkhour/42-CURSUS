@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:56:39 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/15 18:56:08 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/16 19:27:51 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	handle_cmds(t_data *data, int **fd, int total_cmds, char **argv)
 			else
 				handle_middle_child_process(data,
 					fd[i - 1], fd[i], argv[i + 2]);
+			exit(EXIT_SUCCESS);
 		}
 		i++;
 	}
@@ -108,17 +109,22 @@ void	create_pipes_and_forks(int argc, t_data *data, char **argv)
 
 	i = 0;
 	total_cmds = argc - 3;
-	fd = (int **)malloc(sizeof(int *) * total_cmds);
+	fd = malloc(sizeof(int *) * (total_cmds - 1));
 	if (!fd)
-		exit_error("malloc");
-	while (i < total_cmds)
+		exit_error("fd malloc");
+	while (i < total_cmds - 1)
 	{
-		fd[i] = (int *)malloc(sizeof(int) * 2);
+		fd[i] = malloc(sizeof(int) * 2);
 		if (!fd[i])
-			exit_error("malloc");
+			exit_error_and_free(fd, i, "fd malloc");
 		if (pipe(fd[i]) == -1)
-			exit_error("pipe");
+			exit_error_and_free(fd, i, "pipe");
 		i++;
 	}
 	handle_cmds(data, fd, total_cmds, argv);
+	close_all_fd(fd, (total_cmds - 1));
+	close(data->infile);
+	close(data->outfile);
+	while (--total_cmds >= 0)
+		wait(NULL);
 }
