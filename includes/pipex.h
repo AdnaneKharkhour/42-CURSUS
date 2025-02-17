@@ -6,13 +6,13 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 17:07:50 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/15 18:20:57 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:43:31 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
-# include "../utils/libft/libft.h"
+# include "../utils/libft_pipex/libft.h"
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <stdio.h>

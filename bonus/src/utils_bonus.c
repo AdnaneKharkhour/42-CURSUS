@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:55:36 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/16 19:19:35 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:59:18 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@ void	free_split(char **str)
 		i++;
 	}
 	free(str);
-}
-
-void	close_fd(int fd1, int fd2, int fd3, int fd4)
-{
-	close(fd1);
-	close(fd2);
-	close(fd3);
-	close(fd4);
 }
 
 void	exit_error_and_free(int **fd, int i, const char *error)
@@ -71,14 +63,4 @@ void	close_all_fd(int **fd, int pipes_num)
 		}
 	}
 	free(fd);
-}
-
-void print_open_fds(void)
-{
-    int fd;
-    for (fd = 0; fd < 20; fd++)
-    {
-        if (fcntl(fd, F_GETFD) != -1)
-            dprintf(2, "FD %d is still open\n", fd);
-    }
 }

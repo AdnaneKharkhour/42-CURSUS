@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:56:39 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/16 19:27:51 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/17 19:17:44 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,13 @@ void	handle_cmds(t_data *data, int **fd, int total_cmds, char **argv)
 		if (pid == 0)
 		{
 			if (i == 0)
-				handle_child_process(data, fd[i], argv[i + 2]);
+				handle_child_process(data, fd, argv[i + 2], i);
 			else if (i == total_cmds - 1)
-				handle_second_child_process(data, fd[i - 1],
-					argv[i + 2]);
+				handle_second_child_process(data, fd,
+					argv[i + 2], i);
 			else
 				handle_middle_child_process(data,
-					fd[i - 1], fd[i], argv[i + 2]);
+					fd, argv[i + 2], i);
 			exit(EXIT_SUCCESS);
 		}
 		i++;
@@ -109,10 +109,16 @@ void	create_pipes_and_forks(int argc, t_data *data, char **argv)
 
 	i = 0;
 	total_cmds = argc - 3;
-	fd = malloc(sizeof(int *) * (total_cmds - 1));
+	if (data->here_doc == 1)
+	{
+		total_cmds = argc - 4;
+		argv += 3;
+	}
+	data->pipes_num = total_cmds;
+	fd = malloc(sizeof(int *) * data->pipes_num);
 	if (!fd)
 		exit_error("fd malloc");
-	while (i < total_cmds - 1)
+	while (i < total_cmds)
 	{
 		fd[i] = malloc(sizeof(int) * 2);
 		if (!fd[i])
@@ -122,7 +128,7 @@ void	create_pipes_and_forks(int argc, t_data *data, char **argv)
 		i++;
 	}
 	handle_cmds(data, fd, total_cmds, argv);
-	close_all_fd(fd, (total_cmds - 1));
+	close_all_fd(fd, data->pipes_num);
 	close(data->infile);
 	close(data->outfile);
 	while (--total_cmds >= 0)
