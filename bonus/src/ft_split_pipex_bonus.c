@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:04:01 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/15 15:04:35 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:39:55 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/pipex_bonus.h"
+#include "../includes/pipex_bonus.h"
 
 static int	check_sep(char c, char sep)
 {

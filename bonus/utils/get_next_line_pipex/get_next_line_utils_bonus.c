@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "../../includes/get_next_line_bonus.h"
 
 int	ft_strchr(const char *s, int c)
 {

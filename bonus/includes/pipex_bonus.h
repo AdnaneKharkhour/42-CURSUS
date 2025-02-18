@@ -6,14 +6,14 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 17:07:50 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/17 18:41:31 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:42:02 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
-# include "../bonus/utils/get_next_line_pipex/get_next_line_bonus.h"
-# include "../bonus/utils/libft_pipex/libft_bonus.h"
+# include "get_next_line_bonus.h"
+# include "libft_bonus.h"
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <stdio.h>

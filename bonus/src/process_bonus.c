@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:48:50 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/17 18:00:02 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:40:13 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/pipex_bonus.h"
+#include "../includes/pipex_bonus.h"
 
 void	check_permission(char **cmd)
 {

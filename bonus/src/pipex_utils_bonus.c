@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:56:39 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/17 19:17:44 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:40:09 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/pipex_bonus.h"
+#include "../includes/pipex_bonus.h"
 
 char	**get_path(char **env)
 {
@@ -112,13 +112,13 @@ void	create_pipes_and_forks(int argc, t_data *data, char **argv)
 	if (data->here_doc == 1)
 	{
 		total_cmds = argc - 4;
-		argv += 3;
+		argv += 1;
 	}
-	data->pipes_num = total_cmds;
+	data->pipes_num = total_cmds - 1;
 	fd = malloc(sizeof(int *) * data->pipes_num);
 	if (!fd)
 		exit_error("fd malloc");
-	while (i < total_cmds)
+	while (i < data->pipes_num)
 	{
 		fd[i] = malloc(sizeof(int) * 2);
 		if (!fd[i])

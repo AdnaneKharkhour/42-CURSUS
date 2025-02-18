@@ -1,5 +1,4 @@
 NAME = pipex
-NAME_BONUS = pipex_bonus
 CC = cc
 
 CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
@@ -12,34 +11,33 @@ SRC_BONUS = bonus/src/main_bonus.c bonus/src/ft_split_pipex_bonus.c bonus/src/ft
 		bonus/utils/libft_pipex/ft_strlen_bonus.c bonus/utils/libft_pipex/ft_memcpy_bonus.c bonus/utils/libft_pipex/ft_strncmp_bonus.c bonus/utils/libft_pipex/ft_strjoin_bonus.c
 
 HEADERS = includes/pipex.h utils/libft_pipex/libft.h
-HEADERS_BONUS = includes/pipex_bonus.h bonus/utils/libft_pipex/libft_bonus.h
+HEADERS_BONUS = bonus/includes/pipex_bonus.h bonus/includes/libft_bonus.h bonus/includes/get_next_line_bonus.h
 
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
 all: $(NAME)
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(HEADERS)
+	${if ${wildcard .file},@rm -f  .file $(OBJ_BONUS),}
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
-$(NAME_BONUS) : $(OBJ_BONUS)
-	$(CC) $(CFLAGS) -o $(NAME_BONUS) $(OBJ_BONUS)
+bonus: .file
 
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
-%.o: %.c $(HEADERS_BONUS)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-bonus: $(NAME_BONUS)
+.file: $(OBJ_BONUS) $(HEADERS_BONUS)
+	${if ${wildcard .file},,@rm -f $(OBJ)}
+	@touch .file
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_BONUS)
 
 clean:
 	rm -f $(OBJ)
 	rm -f $(OBJ_BONUS)
+	rm -f .file
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f $(NAME_BONUS)
+	rm -f .file
 
 re: fclean all
 
-.PHONY: all clean fclean re .bonus
+.PHONY: all clean fclean re .file bonus

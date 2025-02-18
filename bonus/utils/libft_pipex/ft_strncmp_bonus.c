@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 13:10:46 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/15 18:29:57 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:44:25 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_bonus.h"
+#include "../../includes/libft_bonus.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

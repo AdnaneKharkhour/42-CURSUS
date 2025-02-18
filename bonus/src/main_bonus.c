@@ -6,26 +6,15 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:00:26 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/17 18:56:47 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:40:05 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/pipex_bonus.h"
+#include "../includes/pipex_bonus.h"
 
 void	ll(void)
 {
 	system("leaks pipex_bonus");
-}
-
-void	remove_nl(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line && line[i] != '\n')
-		i++;
-	if (line[i] == '\n')
-		line[i] = '\0';
 }
 
 static void	handle_here_doc(char *limiter, t_data *data)
@@ -70,7 +59,7 @@ int	main(int argc, char **argv, char **env)
 		handle_here_doc(argv[2], &data);
 		data.outfile = open(argv[argc - 1],
 				O_WRONLY | O_CREAT | O_APPEND, 0664);
-		create_pipes_and_forks(argc - 1, &data, argv + 1);
+		create_pipes_and_forks(argc, &data, argv);
 	}
 	else
 	{
