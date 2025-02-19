@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:55:36 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/18 15:40:17 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:44:41 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,26 @@ void	close_all_fd(int **fd, int pipes_num)
 		}
 	}
 	free(fd);
+}
+
+char	**get_path(char **env)
+{
+	int		i;
+	char	**path;
+
+	i = 0;
+	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
+		i++;
+	if (!env[i])
+	{
+		perror("PATH");
+		exit(EXIT_FAILURE);
+	}
+	path = ft_split_pipex(env[i] + 5, ':');
+	if (!path)
+	{
+		perror("split");
+		exit(EXIT_FAILURE);
+	}
+	return (path);
 }

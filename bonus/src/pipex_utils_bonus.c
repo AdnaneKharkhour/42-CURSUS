@@ -6,33 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:56:39 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/18 15:40:09 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:45:02 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
-
-char	**get_path(char **env)
-{
-	int		i;
-	char	**path;
-
-	i = 0;
-	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
-		i++;
-	if (!env[i])
-	{
-		perror("PATH");
-		exit(EXIT_FAILURE);
-	}
-	path = ft_split_pipex(env[i] + 5, ':');
-	if (!path)
-	{
-		perror("split");
-		exit(EXIT_FAILURE);
-	}
-	return (path);
-}
 
 void	exec_cmd_from_path(char **path, char *cmd, char **argv, char **env)
 {
@@ -101,13 +79,27 @@ void	handle_cmds(t_data *data, int **fd, int total_cmds, char **argv)
 	}
 }
 
+static void	create_pipes(t_data *data, int **fd)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->pipes_num)
+	{
+		fd[i] = malloc(sizeof(int) * 2);
+		if (!fd[i])
+			exit_error_and_free(fd, i, "fd malloc");
+		if (pipe(fd[i]) == -1)
+			exit_error_and_free(fd, i, "pipe");
+		i++;
+	}
+}
+
 void	create_pipes_and_forks(int argc, t_data *data, char **argv)
 {
 	int	**fd;
 	int	total_cmds;
-	int	i;
 
-	i = 0;
 	total_cmds = argc - 3;
 	if (data->here_doc == 1)
 	{
@@ -118,15 +110,7 @@ void	create_pipes_and_forks(int argc, t_data *data, char **argv)
 	fd = malloc(sizeof(int *) * data->pipes_num);
 	if (!fd)
 		exit_error("fd malloc");
-	while (i < data->pipes_num)
-	{
-		fd[i] = malloc(sizeof(int) * 2);
-		if (!fd[i])
-			exit_error_and_free(fd, i, "fd malloc");
-		if (pipe(fd[i]) == -1)
-			exit_error_and_free(fd, i, "pipe");
-		i++;
-	}
+	create_pipes(data, fd);
 	handle_cmds(data, fd, total_cmds, argv);
 	close_all_fd(fd, data->pipes_num);
 	close(data->infile);

@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:00:26 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/13 16:34:51 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:47:38 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,10 @@ int	main(int argc, char **argv, char **env)
 	data.outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data.infile == -1 || data.outfile == -1)
 	{
+		if (data.outfile)
+			close(data.outfile);
+		if (data.infile)
+			close(data.infile);
 		perror("pipex");
 		exit(EXIT_FAILURE);
 	}

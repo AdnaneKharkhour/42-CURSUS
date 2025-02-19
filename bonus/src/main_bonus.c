@@ -6,16 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:00:26 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/18 15:40:05 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:47:07 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
-
-void	ll(void)
-{
-	system("leaks pipex_bonus");
-}
 
 static void	handle_here_doc(char *limiter, t_data *data)
 {
@@ -40,14 +35,29 @@ static void	handle_here_doc(char *limiter, t_data *data)
 	data->infile = fd[0];
 }
 
+static void	handle_normal_cmd(t_data *data, char **argv, int argc)
+{
+	data->here_doc = 0;
+	data->infile = open(argv[1], O_RDONLY);
+	data->outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (data->infile == -1 || data->outfile == -1)
+	{
+		if (data->outfile)
+			close(data->outfile);
+		if (data->infile)
+			close(data->infile);
+		perror("pipex");
+		exit(EXIT_FAILURE);
+	}
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
 
-	// atexit(ll);
 	if (argc < 5)
 	{
-		write(2, "ERROR:\nthere should be 4 args\n", 30);
+		write(2, "ERROR:\n ./pipex infile cmd1 cmd2 outfile\n", 30);
 		exit(EXIT_FAILURE);
 	}
 	data.env = env;
@@ -63,14 +73,7 @@ int	main(int argc, char **argv, char **env)
 	}
 	else
 	{
-		data.here_doc = 0;
-		data.infile = open(argv[1], O_RDONLY);
-		data.outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (data.infile == -1 || data.outfile == -1)
-		{
-			perror("pipex");
-			exit(EXIT_FAILURE);
-		}
+		handle_normal_cmd(&data, argv, argc);
 		create_pipes_and_forks(argc, &data, argv);
 	}
 	return (0);
