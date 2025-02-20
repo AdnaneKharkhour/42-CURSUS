@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:00:26 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/19 16:47:38 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:38:28 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@ void	check_permission(char **cmd)
 	if (access(cmd[0], X_OK) == -1)
 	{
 		perror("pipex");
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	check_cmd(char *cmd)
+{
+	int		j;
+
+	j = 0;
+	while (cmd[j] == ' ')
+		j++;
+	if (!cmd || cmd[j] == '\0')
+	{
+		write(2, "pipex: permission denied\n", 26);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -32,6 +46,7 @@ void	handle_child_process(t_data *data, int *fd, char *cmd, char **env)
 	close(data->infile);
 	close(fd[0]);
 	close(data->outfile);
+	check_cmd(cmd);
 	cmd_args = ft_split_pipex(cmd, ' ');
 	if (cmd_args[0][0] == '.' && cmd_args[0][1] == '/')
 	{
@@ -60,6 +75,7 @@ void	handle_second_child_process(t_data *data,
 	close(data->outfile);
 	close(fd[1]);
 	close(data->infile);
+	check_cmd(cmd);
 	cmd_args = ft_split_pipex(cmd, ' ');
 	if (cmd_args[0][0] == '.' && cmd_args[0][1] == '/')
 	{

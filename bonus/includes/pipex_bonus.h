@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 17:07:50 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/19 13:50:27 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:57:03 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,15 @@ void	exit_error(const char *str);
 void	close_all_fd(int **fd, int total_cmds);
 char	**get_path(char **env);
 //process_bonus.c
-void	check_permission(char **cmd);
-void	check_if_script(char **cmd_args, t_data *data, char **sh);
 void	handle_middle_child_process(t_data *data,
 			int **fd, char *cmd, int i);
 void	handle_second_child_process(t_data *data,
 			int **fd, char *cmd, int i);
 void	handle_child_process(t_data *data, int **fd, char *cmd, int i);
+//check_args_bonus.c
+void	check_permission(char **cmd);
+void	check_if_script(char **cmd_args, t_data *data, char **sh);
+void	check_cmd_split(t_data *data, char *cmd);
 //main_bonus.c
 
 #endif
