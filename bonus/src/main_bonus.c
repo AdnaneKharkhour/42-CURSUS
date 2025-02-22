@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:00:26 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/20 17:39:36 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:06:19 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,8 @@ static void	handle_here_doc(char *limiter, t_data *data)
 	data->infile = fd[0];
 }
 
-static void	handle_normal_cmd(t_data *data, char **argv, int argc)
+static void	handle_fd(t_data *data)
 {
-	data->here_doc = 0;
-	data->infile = open(argv[1], O_RDONLY);
-	data->outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->infile == -1 || data->outfile == -1)
 	{
 		if (data->outfile)
@@ -56,31 +53,38 @@ static void	handle_normal_cmd(t_data *data, char **argv, int argc)
 	}
 }
 
+static void	handle_arguments(int argc, char **argv, t_data *data)
+{
+	if (!ft_strncmp(argv[1], "here_doc", 8))
+	{
+		data->here_doc = 1;
+		if (argc < 6)
+			exit_error("./pipex here_doc LIMITER cmd1 cmd2 ... cmdn outfile");
+		handle_here_doc(argv[2], data);
+		data->outfile = open(argv[argc - 1], O_WRONLY
+				| O_CREAT | O_APPEND, 0664);
+	}
+	else
+	{
+		data->here_doc = 0;
+		data->infile = open(argv[1], O_RDONLY);
+		data->outfile = open(argv[argc - 1], O_WRONLY
+				| O_CREAT | O_TRUNC, 0644);
+	}
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
 
-	// atexit(ll);
 	if (argc < 5)
 	{
 		write(2, "ERROR:\n ./pipex infile cmd1 cmd2 outfile\n", 30);
 		exit(EXIT_FAILURE);
 	}
 	data.env = env;
-	if (!ft_strncmp(argv[1], "here_doc", 8))
-	{
-		data.here_doc = 1;
-		if (argc < 6)
-			exit_error("./pipex here_doc LIMITER cmd1 cmd2 ... cmdn outfile");
-		handle_here_doc(argv[2], &data);
-		data.outfile = open(argv[argc - 1],
-				O_WRONLY | O_CREAT | O_APPEND, 0664);
-		create_pipes_and_forks(argc, &data, argv);
-	}
-	else
-	{
-		handle_normal_cmd(&data, argv, argc);
-		create_pipes_and_forks(argc, &data, argv);
-	}
+	handle_arguments(argc, argv, &data);
+	create_pipes_and_forks(argc, &data, argv);
+	handle_fd(&data);
 	return (0);
 }

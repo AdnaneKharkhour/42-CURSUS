@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:55:48 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/20 15:56:06 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/22 19:29:34 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,9 @@ void	check_permission(char **cmd)
 	}
 }
 
-void	check_if_script(char **cmd_args, t_data *data, char **sh)
-{
-	if (cmd_args[0][0] == '.' && cmd_args[0][1] == '/')
-	{
-		check_permission(cmd_args);
-		sh[0] = "/bin/sh";
-		sh[1] = cmd_args[0];
-		sh[2] = NULL;
-		exec_cmd(sh[0], sh, data->env);
-	}
-	else
-		exec_cmd(cmd_args[0], cmd_args, data->env);
-}
-
 void	check_cmd_split(t_data *data, char *cmd)
 {
 	char	**cmd_args;
-	char	*sh[3];
 	int		j;
 
 	j = 0;
@@ -52,7 +37,7 @@ void	check_cmd_split(t_data *data, char *cmd)
 	cmd_args = ft_split_pipex(cmd, ' ');
 	if (!cmd_args)
 		perror("split");
-	check_if_script(cmd_args, data, sh);
+	exec_cmd(cmd_args[0], cmd_args, data->env);
 	free_split(cmd_args);
 	perror("execve");
 	exit(EXIT_FAILURE);

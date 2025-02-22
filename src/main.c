@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:00:26 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/20 16:38:28 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:19:36 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,14 @@ void	check_cmd(char *cmd)
 void	handle_child_process(t_data *data, int *fd, char *cmd, char **env)
 {
 	char	**cmd_args;
-	char	*sh[3];
 
+	if (data->infile == -1)
+	{
+		close(fd[1]);
+		close(data->infile);
+		close(fd[0]);
+		close(data->outfile);
+	}
 	dup2(data->infile, STDIN_FILENO);
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
@@ -48,16 +54,7 @@ void	handle_child_process(t_data *data, int *fd, char *cmd, char **env)
 	close(data->outfile);
 	check_cmd(cmd);
 	cmd_args = ft_split_pipex(cmd, ' ');
-	if (cmd_args[0][0] == '.' && cmd_args[0][1] == '/')
-	{
-		check_permission(cmd_args);
-		sh[0] = "/bin/sh";
-		sh[1] = cmd_args[0];
-		sh[2] = NULL;
-		exec_cmd(sh[0], sh, env);
-	}
-	else
-		exec_cmd(cmd_args[0], cmd_args, env);
+	exec_cmd(cmd_args[0], cmd_args, env);
 	free_split(cmd_args);
 	perror("execve");
 	exit(EXIT_FAILURE);
@@ -67,7 +64,6 @@ void	handle_second_child_process(t_data *data,
 		int *fd, char *cmd, char **env)
 {
 	char	**cmd_args;
-	char	*sh[3];
 
 	dup2(fd[0], STDIN_FILENO);
 	dup2(data->outfile, STDOUT_FILENO);
@@ -77,17 +73,7 @@ void	handle_second_child_process(t_data *data,
 	close(data->infile);
 	check_cmd(cmd);
 	cmd_args = ft_split_pipex(cmd, ' ');
-	if (cmd_args[0][0] == '.' && cmd_args[0][1] == '/')
-	{
-		check_permission(cmd_args);
-		sh[0] = "/bin/sh";
-		sh[1] = cmd_args[0];
-		sh[2] = NULL;
-		exec_cmd(sh[0], sh, env);
-		perror("execve");
-	}
-	else
-		exec_cmd(cmd_args[0], cmd_args, env);
+	exec_cmd(cmd_args[0], cmd_args, env);
 	free_split(cmd_args);
 	perror("execve");
 	exit(EXIT_FAILURE);
@@ -104,6 +90,7 @@ int	main(int argc, char **argv, char **env)
 	}
 	data.infile = open(argv[1], O_RDONLY);
 	data.outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	create_pipes_and_forks(&data, argv, env);
 	if (data.infile == -1 || data.outfile == -1)
 	{
 		if (data.outfile)
@@ -113,7 +100,6 @@ int	main(int argc, char **argv, char **env)
 		perror("pipex");
 		exit(EXIT_FAILURE);
 	}
-	create_pipes_and_forks(&data, argv, env);
 	close(data.infile);
 	close(data.outfile);
 	return (0);

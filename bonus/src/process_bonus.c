@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:48:50 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/20 15:55:44 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/22 19:32:01 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ void	handle_second_child_process(t_data *data,
 
 void	handle_child_process(t_data *data, int **fd, char *cmd, int i)
 {
+	if (data->infile < 0)
+	{
+		close_all_fd(fd, data->pipes_num);
+		close(data->infile);
+		close(data->outfile);
+		perror("pipex");
+		exit(EXIT_FAILURE);
+	}
 	dup2(data->infile, STDIN_FILENO);
 	dup2(fd[i][1], STDOUT_FILENO);
 	close_all_fd(fd, data->pipes_num);
