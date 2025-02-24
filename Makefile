@@ -19,26 +19,32 @@ OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
 all: $(NAME)
 
-$(NAME) : $(OBJ) $(HEADERS)
-	${if ${wildcard .file},@rm -f  .file $(OBJ_BONUS),}
+$(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	@rm -f .bonus
+	@rm -f $(OBJ_BONUS)
 
-bonus: .file
+$(OBJ): %.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-.file: $(OBJ_BONUS) $(HEADERS_BONUS)
-	${if ${wildcard .file},,@rm -f $(OBJ)}
-	@touch .file
+bonus: $(OBJ_BONUS) .bonus
+	
+.bonus:
+	@touch .bonus
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_BONUS)
+	@rm -f $(OBJ)
+
+$(OBJ_BONUS): %.o: %.c $(HEADERS_BONUS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
 	rm -f $(OBJ_BONUS)
-	rm -f .file
+	rm -f .bonus
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f .file
 
 re: fclean all
 
-.PHONY: all clean fclean re .file bonus
+.PHONY: all clean fclean re bonus
