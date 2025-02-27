@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:00:26 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/24 12:39:56 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:24:07 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ static void	handle_fd(t_data *data)
 		if (data->infile)
 			close(data->infile);
 		perror("pipex");
-		exit(EXIT_FAILURE);
+		if (data->outfile == -1)
+			exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS);
 	}
 }
 

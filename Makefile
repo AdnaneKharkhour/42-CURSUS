@@ -29,7 +29,7 @@ $(OBJ): %.o: %.c $(HEADERS)
 
 bonus: $(OBJ_BONUS) .bonus
 	
-.bonus:
+.bonus: $(OBJ_BONUS)
 	@touch .bonus
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_BONUS)
 	@rm -f $(OBJ)

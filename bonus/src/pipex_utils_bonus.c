@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:56:39 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/22 14:10:32 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:04:37 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	handle_cmds(t_data *data, int **fd, int total_cmds, char **argv)
 			else
 				handle_middle_child_process(data,
 					fd, argv[i + 2], i);
-			exit(EXIT_SUCCESS);
 		}
 		i++;
 	}
