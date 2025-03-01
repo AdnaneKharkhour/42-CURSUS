@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:56:39 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/27 14:04:37 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/01 18:14:42 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,20 @@ void	exec_cmd(char *cmd, char **argv, char **env)
 	free_split(path);
 	free_split(argv);
 	write(2, "pipex: command not found:", 25);
-	exit(EXIT_FAILURE);
+	exit(127);
 }
 
 void	handle_cmds(t_data *data, int **fd, int total_cmds, char **argv)
 {
 	int		i;
-	int		pid;
 
 	i = 0;
 	while (i < total_cmds)
 	{
-		pid = fork();
-		if (pid == -1)
+		data->pid = fork();
+		if (data->pid == -1)
 			exit_error("fork");
-		if (pid == 0)
+		if (data->pid == 0)
 		{
 			if (i == 0)
 				handle_child_process(data, fd, argv[i + 2], i);
@@ -95,10 +94,11 @@ static void	create_pipes(t_data *data, int **fd)
 	}
 }
 
-void	create_pipes_and_forks(int argc, t_data *data, char **argv)
+int	create_pipes_and_forks(int argc, t_data *data, char **argv)
 {
 	int	**fd;
 	int	total_cmds;
+	int	status;
 
 	total_cmds = argc - 3;
 	if (data->here_doc == 1)
@@ -113,8 +113,10 @@ void	create_pipes_and_forks(int argc, t_data *data, char **argv)
 	create_pipes(data, fd);
 	handle_cmds(data, fd, total_cmds, argv);
 	close_all_fd(fd, data->pipes_num);
-	close(data->infile);
-	close(data->outfile);
+	waitpid(data->pid, &status, 0);
 	while (--total_cmds >= 0)
 		wait(NULL);
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	return (1);
 }

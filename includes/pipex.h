@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 17:07:50 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/24 13:51:53 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/01 18:42:44 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 
 typedef struct s_pipex_data
 {
-	int	infile;
-	int	outfile;
+	int		infile;
+	int		outfile;
+	char	**argv;
 }t_data;
 
 //ft_split_pipex.c
@@ -31,9 +32,10 @@ char	**ft_split_pipex(char const *s, char c);
 char	**get_path(char **env);
 void	exec_cmd_from_path(char **path, char *cmd, char **argv, char **env);
 void	exec_cmd(char *cmd, char **argv, char **env);
-void	create_pipes_and_forks(t_data *data, char **argv, char **env);
+int		create_pipes_and_forks(t_data *data, char **argv, char **env);
 //utils.c
 void	free_split(char **str);
+int		helper(int *fd, int *pid2);
 //main.c
 void	handle_child_process(t_data *data, int *fd, char *cmd, char **env);
 void	handle_second_child_process(t_data *data,

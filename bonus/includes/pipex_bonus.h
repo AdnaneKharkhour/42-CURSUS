@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 17:07:50 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/20 15:57:03 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/01 18:13:08 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ typedef struct s_pipex_data
 {
 	int		infile;
 	int		outfile;
+	int		pid;
 	int		pipes_num;
 	int		here_doc;
+	int		argc;
+	char	**argv;
 	char	**env;
 }t_data;
 
@@ -37,7 +40,7 @@ char	**free_string(char **string, int i);
 void	exec_cmd_from_path(char **path, char *cmd, char **argv, char **env);
 void	exec_cmd(char *cmd, char **argv, char **env);
 void	handle_cmds(t_data *data, int **fd, int total_cmds, char **argv);
-void	create_pipes_and_forks(int argc, t_data *data, char **argv);
+int		create_pipes_and_forks(int argc, t_data *data, char **argv);
 //utils_bonus.c
 void	free_split(char **str);
 void	exit_error_and_free(int **fd, int i, const char *error);
@@ -52,7 +55,6 @@ void	handle_second_child_process(t_data *data,
 void	handle_child_process(t_data *data, int **fd, char *cmd, int i);
 //check_args_bonus.c
 void	check_permission(char **cmd);
-void	check_if_script(char **cmd_args, t_data *data, char **sh);
 void	check_cmd_split(t_data *data, char *cmd);
 //main_bonus.c
 

@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:56:39 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/22 18:20:31 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/01 18:42:19 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ void	exec_cmd(char *cmd, char **argv, char **env)
 	free_split(path);
 	free_split(argv);
 	write(2, "pipex: command not found:", 25);
-	exit(EXIT_FAILURE);
+	exit(127);
 }
 
-void	create_pipes_and_forks(t_data *data, char **argv, char **env)
+int	create_pipes_and_forks(t_data *data, char **argv, char **env)
 {
 	int	fd[2];
 	int	pid1;
@@ -102,8 +102,5 @@ void	create_pipes_and_forks(t_data *data, char **argv, char **env)
 		exit_error("fork");
 	if (pid2 == 0)
 		handle_second_child_process(data, fd, argv[3], env);
-	close(fd[0]);
-	close(fd[1]);
-	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
+	return (helper(fd, &pid2));
 }

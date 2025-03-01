@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:00:26 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/27 16:24:07 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/01 18:12:39 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,6 @@ static void	handle_here_doc(char *limiter, t_data *data)
 	data->infile = fd[0];
 }
 
-static void	handle_fd(t_data *data)
-{
-	if (data->infile == -1 || data->outfile == -1)
-	{
-		if (data->outfile)
-			close(data->outfile);
-		if (data->infile)
-			close(data->infile);
-		perror("pipex");
-		if (data->outfile == -1)
-			exit(EXIT_FAILURE);
-		exit(EXIT_SUCCESS);
-	}
-}
-
 static void	handle_arguments(int argc, char **argv, t_data *data)
 {
 	if (!ft_strncmp(argv[1], "here_doc", 8))
@@ -63,16 +48,9 @@ static void	handle_arguments(int argc, char **argv, t_data *data)
 		if (argc < 6)
 			exit_error("./pipex here_doc LIMITER cmd1 cmd2 ... cmdn outfile");
 		handle_here_doc(argv[2], data);
-		data->outfile = open(argv[argc - 1], O_WRONLY
-				| O_CREAT | O_APPEND, 0664);
 	}
 	else
-	{
 		data->here_doc = 0;
-		data->infile = open(argv[1], O_RDONLY);
-		data->outfile = open(argv[argc - 1], O_WRONLY
-				| O_CREAT | O_TRUNC, 0644);
-	}
 }
 
 int	main(int argc, char **argv, char **env)
@@ -85,8 +63,8 @@ int	main(int argc, char **argv, char **env)
 		exit(EXIT_FAILURE);
 	}
 	data.env = env;
+	data.argc = argc;
+	data.argv = argv;
 	handle_arguments(argc, argv, &data);
-	create_pipes_and_forks(argc, &data, argv);
-	handle_fd(&data);
-	return (0);
+	return (create_pipes_and_forks(argc, &data, argv));
 }
