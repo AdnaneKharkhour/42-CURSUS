@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:55:36 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/01 18:43:00 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:47:41 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ void	free_split(char **str)
 	while (str[i])
 	{
 		free(str[i]);
+		str[i] = NULL;
 		i++;
 	}
 	free(str);
+	str = NULL;
 }
 
 int	helper(int *fd, int *pid2)

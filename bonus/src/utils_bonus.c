@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:55:36 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/20 15:13:30 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:49:34 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ void	exit_error_and_free(int **fd, int i, const char *error)
 			close(fd[i][0]);
 			close(fd[i][1]);
 			free(fd[i]);
+			fd[i] = NULL;
 			i--;
 		}
 		free(fd);
+		fd = NULL;
 	}
 	exit_error(error);
 }
