@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:55:48 by akharkho          #+#    #+#             */
-/*   Updated: 2025/02/22 19:29:34 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:09:40 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	check_cmd_split(t_data *data, char *cmd)
 	if (!cmd || cmd[j] == '\0')
 	{
 		write(2, "pipex: permission denied\n", 26);
+		close(0);
+		close(1);
 		exit(EXIT_FAILURE);
 	}
 	cmd_args = ft_split_pipex(cmd, ' ');

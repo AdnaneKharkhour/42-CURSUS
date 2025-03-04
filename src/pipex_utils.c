@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:56:39 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/01 18:42:19 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:00:58 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	**get_path(char **env)
 	if (!env[i])
 	{
 		perror("PATH");
+		close(1);
+		close(0);
 		exit(EXIT_FAILURE);
 	}
 	path = ft_split_pipex(env[i] + 5, ':');
@@ -77,7 +79,9 @@ void	exec_cmd(char *cmd, char **argv, char **env)
 	exec_cmd_from_path(path, cmd, argv, env);
 	free_split(path);
 	free_split(argv);
-	write(2, "pipex: command not found:", 25);
+	write(2, "pipex: command not found\n", 25);
+	close(0);
+	close(1);
 	exit(127);
 }
 

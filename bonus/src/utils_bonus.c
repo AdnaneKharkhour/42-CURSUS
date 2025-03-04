@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:55:36 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/03 14:49:34 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:08:38 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char	**get_path(char **env)
 	if (!env[i])
 	{
 		perror("PATH");
+		close(1);
+		close(0);
 		exit(EXIT_FAILURE);
 	}
 	path = ft_split_pipex(env[i] + 5, ':');

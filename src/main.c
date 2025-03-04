@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:00:26 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/03 16:10:32 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:10:43 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	check_cmd(char *cmd)
 	if (!cmd || cmd[j] == '\0')
 	{
 		write(2, "pipex: permission denied\n", 26);
+		close(0);
+		close(1);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -43,13 +45,15 @@ void	handle_child_process(t_data *data, int *fd, char *cmd, char **env)
 	if (data->infile == -1)
 	{
 		perror("pipex");
+		close(fd[1]);
+		close(fd[0]);
 		exit(1);
 	}
 	dup2(data->infile, STDIN_FILENO);
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
-	close(data->infile);
 	close(fd[0]);
+	close(data->infile);
 	check_cmd(cmd);
 	cmd_args = ft_split_pipex(cmd, ' ');
 	exec_cmd(cmd_args[0], cmd_args, env);
@@ -67,13 +71,15 @@ void	handle_second_child_process(t_data *data,
 	if (data->outfile == -1)
 	{
 		perror("pipex");
+		close(fd[0]);
+		close(fd[1]);
 		exit(1);
 	}
 	dup2(fd[0], STDIN_FILENO);
 	dup2(data->outfile, STDOUT_FILENO);
 	close(fd[0]);
-	close(data->outfile);
 	close(fd[1]);
+	close(data->outfile);
 	check_cmd(cmd);
 	cmd_args = ft_split_pipex(cmd, ' ');
 	exec_cmd(cmd_args[0], cmd_args, env);
