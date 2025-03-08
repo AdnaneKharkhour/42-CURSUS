@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:48:50 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/04 16:07:00 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/08 16:50:38 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	handle_middle_child_process(t_data *data,
 	dup2(fd[i - 1][0], STDIN_FILENO);
 	dup2(fd[i][1], STDOUT_FILENO);
 	close_all_fd(fd, data->pipes_num);
-	close(data->infile);
-	close(data->outfile);
 	check_cmd_split(data, cmd);
 }
 

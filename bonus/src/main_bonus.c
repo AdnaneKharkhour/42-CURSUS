@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:00:26 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/04 16:11:21 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/08 13:43:12 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,10 @@ static void	handle_arguments(int argc, char **argv, t_data *data)
 		data->here_doc = 0;
 }
 
-
-void	ll()
-{
-	while(1)
-	{
-		
-	}
-}
 int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
-	atexit(ll);
+
 	if (argc < 5)
 	{
 		write(2, "ERROR:\n ./pipex infile cmd1 cmd2 outfile\n", 30);
