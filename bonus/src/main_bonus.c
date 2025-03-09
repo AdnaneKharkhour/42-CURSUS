@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:00:26 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/08 13:43:12 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/09 07:04:23 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	handle_here_doc(char *limiter, t_data *data)
 	line = get_next_line(0);
 	while (line)
 	{
-		if (!ft_strncmp(line, limiter, ft_strlen(limiter)))
+		if (!ft_strncmp(line, limiter, ft_strlen(limiter)) 
+			&& (ft_strlen(line) - 1) == ft_strlen(limiter))
 			break ;
 		write(fd[1], line, ft_strlen(line));
 		free(line);
