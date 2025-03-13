@@ -42,6 +42,7 @@ Here are some of the core projects:
 | [**get_next_line**](https://github.com/AdnaneKharkhour/42-CURSUS/tree/main/get_next_line) | Reads a line from a file descriptor efficiently. |
 | [**so_long**](https://github.com/AdnaneKharkhour/42-CURSUS/tree/main/so_long) | A simple 2D game built using MiniLibX. |
 | [**push_swap**](https://github.com/AdnaneKharkhour/42-CURSUS/tree/main/push_swap) | Sorting numbers using a limited set of operations. |
+| [**Pipex**](https://github.com/AdnaneKharkhour/42-CURSUS/tree/main/pipex) | Replicates shell pipelines (`|`) to execute commands with pipes. |
 | **Cub3D** | A 3D graphics project inspired by Wolfenstein 3D. |
 | **Minishell** | A custom Unix shell built in C. |
 
