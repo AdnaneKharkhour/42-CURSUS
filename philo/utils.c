@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/16 12:27:16 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:26:04 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,35 +17,7 @@ long	get_current_time(void)
 	t_time	current_time;
 
 	gettimeofday(&current_time, NULL);
-	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
-}
-
-void	*monitor(void *arg)
-{
-	t_philo	*philo;
-	int		i;
-
-	philo = (t_philo *)arg;
-	while (1)
-	{
-		i = 0;
-		while (i < philo->data->num_of_philos)
-		{
-			if (philo[i].last_time_eaten)
-			{
-				if (get_current_time() - 
-					philo[i].last_time_eaten > philo->data->time_to_die)
-				{
-					printf("Philo %d died\n", philo[i].id);
-					philo->data->philo_died = 1;
-					return (NULL);
-				}
-			}
-			i++;
-		}
-		usleep(1000);
-	}
-	return (NULL);
+	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
 }
 
 int	create_and_join_threads(t_data data, t_philo *philo)

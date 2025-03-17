@@ -1,0 +1,21 @@
+Philo 1 is thinking
+Philo 2 is thinking
+Philo 1 picked left fork
+Philo 1 picked right fork
+Philo 1 is eating
+Philo 3 is thinking
+Philo 4 is thinking
+Philo 5 is thinking
+Philo 1 died
+Philo 2 picked left fork
+Philo 2 picked right fork
+Philo 2 is eating
+Philo 3 picked left fork
+Philo 3 picked right fork
+Philo 3 is eating
+Philo 4 picked left fork
+Philo 4 picked right fork
+Philo 4 is eating
+Philo 5 picked left fork
+Philo 5 picked right fork
+Philo 5 is eating
