@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:43:01 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/17 09:45:12 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:52:10 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		ft_isdigit(int n);
 int		ft_atoi(const char *str);
 void	*routine(void *arg);
 long	get_current_time(void);
+void	ft_usleep(long int time, t_data *data);
 int		free_exit(t_data *data, t_philo *philo);
 int		create_and_join_threads(t_data data, t_philo *philo);
 void	init_philo(t_data *data, t_philo *philo);

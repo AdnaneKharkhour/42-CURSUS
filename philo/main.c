@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:49:53 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/17 11:05:04 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:18:16 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,19 @@ void	*routine(void *arg)
 	while (1)
 	{
 		if (philo->data->num_of_philos == 1)
-			usleep(philo->data->time_to_die * 1100);
-		if (philo->data->philo_died)
-			return (NULL);
-		think(philo->id);
+		{
+			printf("Philo %d picked right fork\n", philo->id);
+			usleep(philo->data->time_to_die * 1000);
+		}
 		if (philo->data->philo_died)
 			return (NULL);
 		eat(philo);
-		if (philo->data->philo_died 
-			|| philo->num_times_eaten == philo->data->max_num_to_eat)
+		if (philo->data->philo_died)
 			return (NULL);
 		philo_sleeping(philo);
+		if (philo->data->philo_died)
+			return (NULL);
+		think(philo->id);
 		if (philo->data->philo_died)
 			return (NULL);
 	}
