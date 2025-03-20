@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/18 15:51:55 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:37:59 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,26 @@ void	ft_usleep(long int time, t_data *data)
 	long int	start;
 
 	start = 0;
-	start = get_current_time();
-	while (get_current_time() - start < time)
+	start = get_current_time(data->start);
+	while (get_current_time(data->start) - start < time)
 	{
 		if (data->philo_died)
-			break;
+			break ;
 		usleep(100);
 	}
 }
 
-long	get_current_time(void)
+long	get_current_time(size_t start)
 {
-	t_time	current_time;
+	return (get_time () - start);
+}
 
-	gettimeofday(&current_time, NULL);
-	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
+long	get_time(void)
+{
+	t_time	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 int	create_and_join_threads(t_data data, t_philo *philo)

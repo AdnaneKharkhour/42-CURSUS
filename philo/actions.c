@@ -6,15 +6,15 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:29 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/18 15:52:45 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:35:51 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	think(int id)
+void	think(t_philo *philo)
 {
-	printf("Philo %d is thinking\n", id);
+	printf("%zd Philo %d is thinking\n", get_current_time(philo->data->start), philo->id);
 }
 
 void	eat(t_philo *philo)
@@ -23,22 +23,22 @@ void	eat(t_philo *philo)
 		return ;
 	if (philo->id % 2 == 0)
 	{
-		pthread_mutex_lock(philo->right_fork);
-		printf("Philo %d picked right fork\n", philo->id);
-		pthread_mutex_lock(philo->left_fork);
-		printf("Philo %d picked left fork\n", philo->id);
+		pthread_mutex_lock (philo->right_fork);
+		printf ("%zd Philo %d picked right fork\n", get_current_time (philo->data->start), philo->id);
+		pthread_mutex_lock (philo->left_fork);
+		printf ("%zd Philo %d picked left fork\n", get_current_time (philo -> data -> start), philo->id);
 	}
 	else
 	{
-		pthread_mutex_lock(philo->left_fork);
-		printf("Philo %d picked left fork\n", philo->id);
-		pthread_mutex_lock(philo->right_fork);
-		printf("Philo %d picked right fork\n", philo->id);
+		pthread_mutex_lock (philo->left_fork);
+		printf ("%zd Philo %d picked left fork\n", get_current_time (philo->data->start), philo->id);
+		pthread_mutex_lock (philo->right_fork);
+		printf ("%zd Philo %d picked right fork\n", get_current_time (philo->data->start), philo->id);
 	}
 	pthread_mutex_lock(&philo->data->organizer);
-	printf("Philo %d is eating\n", philo->id);
-	philo->last_time_eaten = get_current_time();
-	philo->num_times_eaten++;
+	printf("%zd Philo %d is eating\n", get_current_time (philo->data->start), philo->id);
+	philo->last_time_eaten = get_current_time (philo->data->start);
+	philo->num_times_eaten ++ ;
 	pthread_mutex_unlock(&philo->data->organizer);
 	ft_usleep(philo->data->time_to_eat * 1000, philo->data);
 	pthread_mutex_unlock(philo->left_fork);

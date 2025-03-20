@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:43:01 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/18 15:52:10 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:37:53 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_data
 	int				time_to_die;
 	int				max_num_to_eat;
 	int				philo_died;
+	size_t			start;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	organizer;
 	pthread_t		monitor_thread;
@@ -49,13 +50,14 @@ typedef struct s_philo
 int		ft_isdigit(int n);
 int		ft_atoi(const char *str);
 void	*routine(void *arg);
-long	get_current_time(void);
+long	get_current_time(size_t start);
+long	get_time(void);
 void	ft_usleep(long int time, t_data *data);
 int		free_exit(t_data *data, t_philo *philo);
 int		create_and_join_threads(t_data data, t_philo *philo);
 void	init_philo(t_data *data, t_philo *philo);
 // actions.c
-void	think(int id);
+void	think(t_philo *philo);
 void	eat(t_philo *philo);
 void	philo_sleeping(t_philo *philo);
 //monitoring.c

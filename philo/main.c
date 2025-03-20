@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:49:53 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/18 15:18:16 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:26:56 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_philo(t_data *data, t_philo *philo)
 	while (i < data->num_of_philos)
 	{
 		philo[i].id = i + 1;
-		philo[i].last_time_eaten = get_current_time();
+		philo[i].last_time_eaten = get_current_time(data->start);
 		philo[i].num_times_eaten = 0;
 		philo[i].data = data;
 		philo[i].left_fork = &data->forks[i];
@@ -56,7 +56,7 @@ void	*routine(void *arg)
 		philo_sleeping(philo);
 		if (philo->data->philo_died)
 			return (NULL);
-		think(philo->id);
+		think(philo);
 		if (philo->data->philo_died)
 			return (NULL);
 	}
@@ -80,6 +80,7 @@ int	main(int argc, char **argv)
 	data.time_to_sleep = ft_atoi(argv[4]);
 	data.max_num_to_eat = -1;
 	data.philo_died = 0;
+	data.start = get_time();
 	if (argc == 6)
 	{
 		data.max_num_to_eat = ft_atoi(argv[5]);
