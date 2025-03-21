@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 08:51:41 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/20 17:01:19 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/21 09:45:58 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ static int	check_dead_or_finished(t_philo *philo, int *all_finished, int i)
 	if (philo[i].last_time_eaten)
 	{
 		if (get_time() - 
-			philo[i].last_time_eaten > philo->data->time_to_die + 1)
+			philo[i].last_time_eaten >= philo->data->time_to_die)
 		{
-			printf("Philo %d died\n", philo[i].id);
+			// printf("%zu Philo %d died\n", get_time() - philo->data->start, philo[i].id);
+			printf("\033[0;31m%zd %d died \033[0m\n", get_time()
+				- philo[i].data->start, philo[i].id);
 			philo->data->philo_died = 1;
 			pthread_mutex_unlock(&philo->data->organizer);
 			return (1);
@@ -58,7 +60,7 @@ void	*monitor(void *arg)
 			pthread_mutex_unlock(&philo->data->organizer);
 			return (NULL);
 		}
-		ft_usleep(1000, philo->data);
+		usleep(1000);
 	}
 	return (NULL);
 }

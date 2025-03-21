@@ -6,29 +6,23 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/20 17:37:59 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/21 10:33:16 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_usleep(long int time, t_data *data)
+void	ft_usleep(long time, t_data *data)
 {
-	long int	start;
+	long	start;
 
-	start = 0;
-	start = get_current_time(data->start);
-	while (get_current_time(data->start) - start < time)
+	start = get_time();
+	while (get_time() - start < time)
 	{
 		if (data->philo_died)
 			break ;
 		usleep(100);
 	}
-}
-
-long	get_current_time(size_t start)
-{
-	return (get_time () - start);
 }
 
 long	get_time(void)

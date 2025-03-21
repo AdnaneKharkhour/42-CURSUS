@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:49:53 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/20 17:26:56 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/21 10:40:53 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_philo(t_data *data, t_philo *philo)
 	while (i < data->num_of_philos)
 	{
 		philo[i].id = i + 1;
-		philo[i].last_time_eaten = get_current_time(data->start);
+		philo[i].last_time_eaten = get_time();
 		philo[i].num_times_eaten = 0;
 		philo[i].data = data;
 		philo[i].left_fork = &data->forks[i];
@@ -41,24 +41,21 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	while (1)
+	if (philo->data->num_of_philos == 1)
 	{
-		if (philo->data->num_of_philos == 1)
-		{
-			printf("Philo %d picked right fork\n", philo->id);
-			usleep(philo->data->time_to_die * 1000);
-		}
-		if (philo->data->philo_died)
-			return (NULL);
+		pthread_mutex_lock(philo->left_fork);
+		printf("Philo %d picked right fork\n", philo->id);
+		usleep(philo->data->time_to_die);
+		pthread_mutex_unlock(philo->left_fork);
+		return (NULL);
+	}
+	if (philo->id % 2 == 0)
+		usleep(10);
+	while (!philo->data->philo_died)
+	{
 		eat(philo);
-		if (philo->data->philo_died)
-			return (NULL);
 		philo_sleeping(philo);
-		if (philo->data->philo_died)
-			return (NULL);
 		think(philo);
-		if (philo->data->philo_died)
-			return (NULL);
 	}
 	return (NULL);
 }
@@ -86,14 +83,14 @@ int	main(int argc, char **argv)
 		data.max_num_to_eat = ft_atoi(argv[5]);
 		if (data.max_num_to_eat < 0)
 		{
-			printf("Error:\n there s a negative value in args");
+			printf("Error:\n invalid value in args");
 			return (1);
 		}
 	}
 	if (data.num_of_philos < 0 || data.time_to_die < 0 || data.time_to_eat < 0 
 		|| data.time_to_sleep < 0)
 	{
-		printf("Error:\n there s a negative value in args");
+		printf("Error:\n invalid value in args");
 		return (1);
 	}
 	philo = malloc(data.num_of_philos * sizeof(t_philo));

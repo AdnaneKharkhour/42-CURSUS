@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:43:01 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/20 17:37:53 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/21 10:53:00 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,16 @@ typedef struct timeval	t_time;
 typedef struct s_data
 {
 	int				num_of_philos;
-	int				time_to_sleep;
-	int				time_to_eat;
-	int				time_to_die;
+	time_t			time_to_sleep;
+	time_t			time_to_eat;
+	time_t			time_to_die;
+	time_t			start;
 	int				max_num_to_eat;
 	int				philo_died;
-	size_t			start;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	organizer;
+	pthread_mutex_t	msg;
+	pthread_mutex_t	eat;
 	pthread_t		monitor_thread;
 }	t_data;
 
@@ -40,7 +42,7 @@ typedef struct s_philo
 {
 	int				id;
 	int				num_times_eaten;
-	long			last_time_eaten;
+	time_t			last_time_eaten;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_t		thread;
@@ -50,7 +52,6 @@ typedef struct s_philo
 int		ft_isdigit(int n);
 int		ft_atoi(const char *str);
 void	*routine(void *arg);
-long	get_current_time(size_t start);
 long	get_time(void);
 void	ft_usleep(long int time, t_data *data);
 int		free_exit(t_data *data, t_philo *philo);
