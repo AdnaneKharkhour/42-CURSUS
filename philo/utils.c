@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/21 10:33:16 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/22 10:25:58 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,14 @@ int	free_exit(t_data *data, t_philo *philo)
 	if (data->forks)
 	{
 		while (i < data->num_of_philos)
+		{
+			pthread_detach(philo[i].thread);
 			pthread_mutex_destroy(&data->forks[i++]);
+		}
 		free(data->forks);
 	}
 	pthread_mutex_destroy(&data->organizer);
+	pthread_mutex_destroy(&data->msg);
+	pthread_mutex_destroy(&data->eat);
 	return (1);
 }

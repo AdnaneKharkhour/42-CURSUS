@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 08:51:41 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/21 09:45:58 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/22 14:35:54 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,22 @@
 
 static int	check_dead_or_finished(t_philo *philo, int *all_finished, int i)
 {
-	pthread_mutex_lock(&philo->data->organizer);
+	pthread_mutex_lock(&philo->data->eat);
 	if (philo[i].last_time_eaten)
 	{
 		if (get_time() - 
 			philo[i].last_time_eaten >= philo->data->time_to_die)
 		{
-			// printf("%zu Philo %d died\n", get_time() - philo->data->start, philo[i].id);
-			printf("\033[0;31m%zd %d died \033[0m\n", get_time()
-				- philo[i].data->start, philo[i].id);
+			pthread_mutex_lock(&philo->data->organizer);
 			philo->data->philo_died = 1;
 			pthread_mutex_unlock(&philo->data->organizer);
+			pthread_mutex_unlock(&philo->data->eat);
+			printf("\033[0;31m%zd %d died \033[0m\n", get_time()
+				- philo[i].data->start, philo[i].id);
 			return (1);
 		}
 	}
-	pthread_mutex_unlock(&philo->data->organizer);
+	pthread_mutex_unlock(&philo->data->eat);
 	if (philo->data->max_num_to_eat != -1 
 		&& philo[i].num_times_eaten < philo->data->max_num_to_eat)
 		*all_finished = 0;
@@ -56,8 +57,8 @@ void	*monitor(void *arg)
 		{
 			pthread_mutex_lock(&philo->data->organizer);
 			philo->data->philo_died = 1;
-			printf("finished eating");
 			pthread_mutex_unlock(&philo->data->organizer);
+			printf("finished eating");
 			return (NULL);
 		}
 		usleep(1000);

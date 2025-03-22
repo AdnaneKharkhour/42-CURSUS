@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:49:53 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/21 10:40:53 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/22 12:53:24 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	init_philo(t_data *data, t_philo *philo)
 	while (i < data->num_of_philos)
 		pthread_mutex_init(&data->forks[i++], NULL);
 	pthread_mutex_init(&data->organizer, NULL);
+	pthread_mutex_init(&data->msg, NULL);
+	pthread_mutex_init(&data->eat, NULL);
 	i = 0;
 	while (i < data->num_of_philos)
 	{
@@ -34,6 +36,18 @@ void	init_philo(t_data *data, t_philo *philo)
 		philo[i].right_fork = &data->forks[(i + 1) % data->num_of_philos];
 		i++;
 	}
+}
+
+int	get_flag_value(int died, t_data *data)
+{
+	pthread_mutex_lock(&data->organizer);
+	if (died)
+	{
+		pthread_mutex_unlock(&data->organizer);
+		return (0);
+	}
+	pthread_mutex_unlock(&data->organizer);
+	return (1);
 }
 
 void	*routine(void *arg)
@@ -51,8 +65,15 @@ void	*routine(void *arg)
 	}
 	if (philo->id % 2 == 0)
 		usleep(10);
-	while (!philo->data->philo_died)
+	while (get_flag_value(philo->data->philo_died, philo->data))
 	{
+		// pthread_mutex_lock(&philo->data->organizer);
+		// if (philo->data->philo_died)
+		// {
+		// 	pthread_mutex_unlock(&philo->data->organizer);
+		// 	break ;
+		// }
+		// pthread_mutex_unlock(&philo->data->organizer);
 		eat(philo);
 		philo_sleeping(philo);
 		think(philo);

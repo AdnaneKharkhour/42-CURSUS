@@ -8,19 +8,24 @@ SRC = utils/ft_atoi.c utils/ft_isdigit.c utils.c actions.c monitoring.c main.c
 
 OBJ = $(SRC:.c=.o)
 
-all : $(NAME)
+green = \033[0;32m
+red = \033[0;31m
 
+all : $(NAME)
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	@echo "$(green) building"
 
 $(OBJ) : %.o: %.c philo.h
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	rm -rf $(OBJ)
+	@rm -rf $(OBJ)
+	@echo "$(red) cleanning"
 
 fclean : clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
+	@echo "$(red) removing executable"
 
 re : fclean all
 
