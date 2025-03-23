@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:49:53 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/22 12:53:24 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/23 07:49:05 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,20 @@ void	init_philo(t_data *data, t_philo *philo)
 
 int	get_flag_value(int died, t_data *data)
 {
+	int	rs;
+
+	rs = 0;
 	pthread_mutex_lock(&data->organizer);
 	if (died)
 	{
+		data->philo_died = 1;
 		pthread_mutex_unlock(&data->organizer);
 		return (0);
 	}
+	else
+		rs = data->philo_died;
 	pthread_mutex_unlock(&data->organizer);
-	return (1);
+	return (rs);
 }
 
 void	*routine(void *arg)
@@ -65,15 +71,8 @@ void	*routine(void *arg)
 	}
 	if (philo->id % 2 == 0)
 		usleep(10);
-	while (get_flag_value(philo->data->philo_died, philo->data))
+	while (!get_flag_value(0, philo->data))
 	{
-		// pthread_mutex_lock(&philo->data->organizer);
-		// if (philo->data->philo_died)
-		// {
-		// 	pthread_mutex_unlock(&philo->data->organizer);
-		// 	break ;
-		// }
-		// pthread_mutex_unlock(&philo->data->organizer);
 		eat(philo);
 		philo_sleeping(philo);
 		think(philo);

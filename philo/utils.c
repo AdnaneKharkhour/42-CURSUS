@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/22 10:25:58 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/23 07:16:43 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_usleep(long time, t_data *data)
 	start = get_time();
 	while (get_time() - start < time)
 	{
-		if (data->philo_died)
+		if (get_flag_value(0, data))
 			break ;
 		usleep(100);
 	}
