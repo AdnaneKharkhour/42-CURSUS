@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 08:51:41 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/23 08:05:33 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/24 12:15:49 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,16 @@ static int	check_dead_or_finished(t_philo *philo, int *all_finished, int i)
 	int		eat_num;
 
 	last_eat(&philo[i], 0, &time, &eat_num);
-	// if (last_eat(&philo[i], 0))
-	// {
-		if (get_time() - 
-			time >= philo->data->time_to_die)
-		{
-			get_flag_value(1, philo->data);
-			printf("\033[0;31m%zd %d died \033[0m\n", get_time()
-				- philo[i].data->start, philo[i].id);
-			return (1);
-		}
-	// }
+	if (get_time() - 
+		time >= philo->data->time_to_die)
+	{
+		death_flag(1, philo->data);
+		pthread_mutex_lock(&philo->data->msg);
+		printf("\033[0;31m%zd %d died \033[0m\n", get_time()
+			- philo[i].data->start, philo[i].id);
+		pthread_mutex_unlock(&philo->data->msg);
+		return (1);
+	}
 	if (philo->data->max_num_to_eat != -1 
 		&& eat_num < philo->data->max_num_to_eat)
 		*all_finished = 0;
@@ -57,7 +56,6 @@ void	*monitor(void *arg)
 			pthread_mutex_lock(&philo->data->organizer);
 			philo->data->philo_died = 1;
 			pthread_mutex_unlock(&philo->data->organizer);
-			printf("finished eating");
 			return (NULL);
 		}
 		usleep(1000);

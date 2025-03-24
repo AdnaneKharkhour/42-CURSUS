@@ -6,11 +6,29 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/23 07:16:43 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/24 10:30:47 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	death_flag(int died, t_data *data)
+{
+	int	rs;
+
+	rs = 0;
+	pthread_mutex_lock(&data->organizer);
+	if (died)
+	{
+		data->philo_died = 1;
+		pthread_mutex_unlock(&data->organizer);
+		return (0);
+	}
+	else
+		rs = data->philo_died;
+	pthread_mutex_unlock(&data->organizer);
+	return (rs);
+}
 
 void	ft_usleep(long time, t_data *data)
 {
@@ -19,7 +37,7 @@ void	ft_usleep(long time, t_data *data)
 	start = get_time();
 	while (get_time() - start < time)
 	{
-		if (get_flag_value(0, data))
+		if (death_flag(0, data))
 			break ;
 		usleep(100);
 	}
@@ -33,33 +51,20 @@ long	get_time(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-int	create_and_join_threads(t_data data, t_philo *philo)
+void	last_eat(t_philo *philo, int flag, time_t *time, int *num_eat)
 {
-	int	i;
-
-	i = 0;
-	pthread_create(&data.monitor_thread, NULL, monitor, philo);
-	while (i < data.num_of_philos)
+	pthread_mutex_lock(&philo->data->eat);
+	if (flag == 1)
 	{
-		if (pthread_create(&philo[i].thread, NULL, routine, &philo[i]) != 0)
-		{
-			printf("failed creating thread for philo %d\n", (i + 1));
-			return (1);
-		}
-		i++;
+		philo->last_time_eaten = get_time();
+		philo->num_times_eaten++;
 	}
-	i = 0;
-	while (i < data.num_of_philos)
+	else
 	{
-		if (pthread_join(philo[i].thread, NULL) != 0)
-		{
-			printf("failed joining thread for philo %d\n", (i + 1));
-			return (1);
-		}
-		i++;
+		*time = philo->last_time_eaten;
+		*num_eat = philo->num_times_eaten;
 	}
-	pthread_join(data.monitor_thread, NULL);
-	return (0);
+	pthread_mutex_unlock(&philo->data->eat);
 }
 
 int	free_exit(t_data *data, t_philo *philo)

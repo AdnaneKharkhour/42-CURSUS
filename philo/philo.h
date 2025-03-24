@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:43:01 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/23 08:05:59 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/24 10:37:30 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,26 @@ typedef struct s_philo
 	t_data			*data;
 }	t_philo;
 
+// utils dir
 int		ft_isdigit(int n);
 int		ft_atoi(const char *str);
-void	*routine(void *arg);
-long	get_time(void);
-void	ft_usleep(long time, t_data *data);
-int		free_exit(t_data *data, t_philo *philo);
-int		create_and_join_threads(t_data data, t_philo *philo);
+// init_struct.c
 void	init_philo(t_data *data, t_philo *philo);
+void	init_data(char **argv, int argc, t_data *data);
+int		create_and_join_threads(t_data data, t_philo *philo);
+int		check_args(t_data *data, int argc);
 // actions.c
-int		get_flag_value(int died, t_data *data);
+void	print_msg(char *msg, t_philo *philo);
 void	think(t_philo *philo);
 void	eat(t_philo *philo);
 void	philo_sleeping(t_philo *philo);
-void	last_eat(t_philo *philo, int flag, time_t *time, int *num_eat);
-//monitoring.c
+void	*routine(void *arg);
+// monitoring.c
 void	*monitor(void *arg);
+// utils.c
+int		death_flag(int died, t_data *data);
+void	ft_usleep(long time, t_data *data);
+long	get_time(void);
+void	last_eat(t_philo *philo, int flag, time_t *time, int *num_eat);
+int		free_exit(t_data *data, t_philo *philo);
 #endif
