@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/25 14:55:13 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/27 15:31:14 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 int	death_flag(int died, t_data *data)
 {
 	int	rs;
 
 	rs = 0;
-	pthread_mutex_lock(&data->organizer);
+	sem_wait(data->organizer);
 	if (died)
 	{
 		data->philo_died = 1;
-		pthread_mutex_unlock(&data->organizer);
+		sem_post(data->organizer);
 		return (0);
 	}
 	else
 		rs = data->philo_died;
-	pthread_mutex_unlock(&data->organizer);
+	sem_post(data->organizer);
 	return (rs);
 }
 
@@ -53,7 +53,7 @@ long	get_time(void)
 
 void	last_eat(t_philo *philo, int flag, time_t *time, int *num_eat)
 {
-	pthread_mutex_lock(&philo->data->eat);
+	sem_wait(philo->data->eat);
 	if (flag == 1)
 	{
 		philo->last_time_eaten = get_time();
@@ -64,7 +64,7 @@ void	last_eat(t_philo *philo, int flag, time_t *time, int *num_eat)
 		*time = philo->last_time_eaten;
 		*num_eat = philo->num_times_eaten;
 	}
-	pthread_mutex_unlock(&philo->data->eat);
+	sem_post(philo->data->eat);
 }
 
 int	free_exit(t_data *data, t_philo *philo)
@@ -76,15 +76,6 @@ int	free_exit(t_data *data, t_philo *philo)
 		free(philo);
 	if (data->forks)
 	{
-		while (i < data->num_of_philos)
-		{
-			pthread_detach(philo[i].thread);
-			pthread_mutex_destroy(&data->forks[i++]);
-		}
-		free(data->forks);
 	}
-	pthread_mutex_destroy(&data->organizer);
-	pthread_mutex_destroy(&data->msg);
-	pthread_mutex_destroy(&data->eat);
 	return (1);
 }
