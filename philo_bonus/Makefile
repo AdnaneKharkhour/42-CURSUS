@@ -2,28 +2,25 @@ NAME = philo_bonus
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread -g
 
-SRC = 
+SRC = utils_bonus/ft_atoi_bonus.c utils_bonus/ft_isdigit_bonus.c utils_bonus.c init_struct_bonus.c actions_bonus.c monitoring_bonus.c main_bonus.c
 
-OBJ_BONUS = $(SRC:.c=.o)
+OBJ = $(SRC:.c=.o)
 
 green = \033[0;32m
 red = \033[0;31m
 
-all: bonus
-
-bonus : $(NAME) 
-
-$(NAME) : $(OBJ_BONUS)
+all : $(NAME)
+$(NAME) : $(OBJ)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 	@echo "$(green) building"
 
-$(OBJ_BONUS) : %.o: %.c
+$(OBJ) : %.o: %.c philo_bonus.h
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	@rm -rf $(OBJ_BONUS)
+	@rm -rf $(OBJ)
 	@echo "$(red) cleanning"
 
 fclean : clean

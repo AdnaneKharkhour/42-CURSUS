@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:43:01 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/27 15:54:17 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/30 16:39:09 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <limits.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <pthread.h>
+# include <signal.h>
 # include <semaphore.h>
 # include <sys/time.h>
 
@@ -42,6 +44,7 @@ typedef struct s_data
 typedef struct s_philo
 {
 	int				id;
+	int				pid;
 	int				num_times_eaten;
 	time_t			last_time_eaten;
 	t_data			*data;
@@ -62,7 +65,7 @@ void	eat(t_philo *philo);
 void	philo_sleeping(t_philo *philo);
 void	routine(t_philo *philo);
 // monitoring.c
-void	monitor(t_data *data, t_philo *philo);
+void	*monitor(void *arg);
 // utils.c
 int		death_flag(int died, t_data *data);
 void	ft_usleep(long time, t_data *data);

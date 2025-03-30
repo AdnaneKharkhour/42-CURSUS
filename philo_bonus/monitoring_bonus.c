@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 08:51:41 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/27 16:51:25 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/30 13:42:04 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 static int	check_dead_or_finished(t_philo *philo, int *all_finished, int i)
 {
@@ -22,10 +22,9 @@ static int	check_dead_or_finished(t_philo *philo, int *all_finished, int i)
 		time >= philo->data->time_to_die)
 	{
 		death_flag(1, philo->data);
-		pthread_mutex_lock(&philo->data->msg);
+		sem_wait(philo->data->msg);
 		printf("\033[0;31m%zd %d died \033[0m\n", get_time()
 			- philo[i].data->start, philo[i].id);
-		pthread_mutex_unlock(&philo->data->msg);
 		return (1);
 	}
 	if (philo->data->max_num_to_eat != -1 
@@ -53,9 +52,9 @@ void	*monitor(void *arg)
 		}
 		if (all_finished && philo->data->max_num_to_eat != -1)
 		{
-			pthread_mutex_lock(&philo->data->organizer);
+			sem_wait(philo->data->organizer);
 			philo->data->philo_died = 1;
-			pthread_mutex_unlock(&philo->data->organizer);
+			sem_post(philo->data->organizer);
 			return (NULL);
 		}
 		usleep(500);

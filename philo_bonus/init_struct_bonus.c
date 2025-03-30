@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 08:54:22 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/27 15:35:05 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/30 16:39:02 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	init_philo(t_data *data, t_philo *philo)
 		if (data->pids[i] == 0)
 		{
 			philo[i].id = i + 1;
+			philo[i].pid = data->pids[i];
 			philo[i].last_time_eaten = get_time();
 			philo[i].num_times_eaten = 0;
 			philo[i].data = data;
