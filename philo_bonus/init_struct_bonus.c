@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 08:54:22 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/30 16:39:02 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/30 17:46:30 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	init_philo(t_data *data, t_philo *philo)
 {
 	int	i;
+	int	status;
 
 	i = 0;
 	sem_unlink("/forks");
@@ -30,28 +31,53 @@ void	init_philo(t_data *data, t_philo *philo)
 		printf("Error:\n failed semopen");
 		exit(EXIT_FAILURE);
 	}
-	data->pids = malloc(sizeof(int) * data->num_of_philos);
-	if (!data->pids)
+	i = 0;
+	while (i < data->num_of_philos)
 	{
-		printf("Error:\n failed to allocate for pids");
-		exit(EXIT_FAILURE);
+		philo[i].pid = fork();
+		if (philo[i].pid == 0)
+		{
+			philo[i].id = i + 1;
+			philo[i].data = data;
+			philo[i].num_times_eaten = 0;
+			philo[i].last_time_eaten = get_time();
+			routine(&philo[i]);
+			exit(0);
+		}
+		else if (philo[i].pid < 0)
+		{
+			write(2, "Error: failed to fork\n", 23);
+			exit(EXIT_FAILURE);
+		}
+		i++;
 	}
 	i = 0;
 	while (i < data->num_of_philos)
 	{
-		data->pids[i] = fork();
-		if (data->pids[i] == 0)
+		if (waitpid(-1, &status, 0) > 0)
 		{
-			philo[i].id = i + 1;
-			philo[i].pid = data->pids[i];
-			philo[i].last_time_eaten = get_time();
-			philo[i].num_times_eaten = 0;
-			philo[i].data = data;
-			routine(philo);
-			exit(EXIT_SUCCESS);
+			if (WIFEXITED(status) == 1)
+			{
+				i = 0;
+				while (i < data->num_of_philos)
+				{
+					kill(philo[i].pid, SIGKILL);
+					i++;
+				}
+				break ;
+			}
+			else
+				i++;
 		}
-		i++;
 	}
+	sem_close(data->forks);
+    sem_close(data->organizer);
+    sem_close(data->msg);
+    sem_close(data->eat);
+    sem_unlink("/forks");
+    sem_unlink("/organizer");
+    sem_unlink("/msg");
+    sem_unlink("/eat");
 }
 
 void	init_data(char **argv, int argc, t_data *data)

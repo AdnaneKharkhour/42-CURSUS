@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:43:01 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/30 16:39:09 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/03/30 16:58:24 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <pthread.h>
 # include <signal.h>
 # include <semaphore.h>
+# include <sys/wait.h>
 # include <sys/time.h>
 
 typedef struct timeval	t_time;
@@ -30,7 +31,6 @@ typedef struct s_data
 	int			num_of_philos;
 	int			max_num_to_eat;
 	int			philo_died;
-	int			*pids;
 	time_t		time_to_sleep;
 	time_t		time_to_eat;
 	time_t		time_to_die;

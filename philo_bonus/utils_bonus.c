@@ -66,16 +66,3 @@ void	last_eat(t_philo *philo, int flag, time_t *time, int *num_eat)
 	}
 	sem_post(philo->data->eat);
 }
-
-int	free_exit(t_data *data, t_philo *philo)
-{
-	int	i;
-
-	i = 0;
-	if (philo)
-		free(philo);
-	if (data->forks)
-	{
-	}
-	return (1);
-}
