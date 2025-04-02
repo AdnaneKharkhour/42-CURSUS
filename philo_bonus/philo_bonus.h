@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:43:01 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/30 16:58:24 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/02 19:40:52 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_philo
 
 // utils dir
 int		ft_isdigit(int n);
-int		ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 // init_struct.c
 void	init_philo(t_data *data, t_philo *philo);
 void	init_data(char **argv, int argc, t_data *data);
@@ -71,5 +71,5 @@ int		death_flag(int died, t_data *data);
 void	ft_usleep(long time, t_data *data);
 long	get_time(void);
 void	last_eat(t_philo *philo, int flag, time_t *time, int *num_eat);
-int		free_exit(t_data *data, t_philo *philo);
+void	clean(t_data *data);
 #endif

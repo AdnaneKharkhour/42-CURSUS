@@ -6,18 +6,41 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 08:54:22 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/30 17:46:30 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/02 19:38:10 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	init_philo(t_data *data, t_philo *philo)
+void	wait_pids(t_data *data, t_philo	*philo)
 {
 	int	i;
 	int	status;
 
 	i = 0;
+	while (i < data->num_of_philos)
+	{
+		if (waitpid(-1, &status, 0) > 0)
+		{
+			if (WIFEXITED(status) == 1)
+			{
+				i = 0;
+				while (i < data->num_of_philos)
+				{
+					kill(philo[i].pid, SIGKILL);
+					i++;
+				}
+				break ;
+			}
+			else
+				i++;
+		}
+	}
+	clean(data);
+}
+
+void	creat_semaphores(t_data *data)
+{
 	sem_unlink("/forks");
 	sem_unlink("/organizer");
 	sem_unlink("/msg");
@@ -31,6 +54,13 @@ void	init_philo(t_data *data, t_philo *philo)
 		printf("Error:\n failed semopen");
 		exit(EXIT_FAILURE);
 	}
+}
+
+void	init_philo(t_data *data, t_philo *philo)
+{
+	int	i;
+
+	creat_semaphores(data);
 	i = 0;
 	while (i < data->num_of_philos)
 	{
@@ -51,39 +81,14 @@ void	init_philo(t_data *data, t_philo *philo)
 		}
 		i++;
 	}
-	i = 0;
-	while (i < data->num_of_philos)
-	{
-		if (waitpid(-1, &status, 0) > 0)
-		{
-			if (WIFEXITED(status) == 1)
-			{
-				i = 0;
-				while (i < data->num_of_philos)
-				{
-					kill(philo[i].pid, SIGKILL);
-					i++;
-				}
-				break ;
-			}
-			else
-				i++;
-		}
-	}
-	sem_close(data->forks);
-    sem_close(data->organizer);
-    sem_close(data->msg);
-    sem_close(data->eat);
-    sem_unlink("/forks");
-    sem_unlink("/organizer");
-    sem_unlink("/msg");
-    sem_unlink("/eat");
+	wait_pids(data, philo);
 }
 
 void	init_data(char **argv, int argc, t_data *data)
 {
 	data->num_of_philos = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
+	printf("%ld\n", data->time_to_die);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
 	data->max_num_to_eat = -1;

@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:49:53 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/30 13:43:06 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:09:50 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int	main(int argc, char **argv)
 	if (!philo)
 		return (1);
 	init_philo(&data, philo);
+	free(philo);
 	return (0);
 }

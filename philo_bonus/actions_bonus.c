@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:29 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/30 18:21:11 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:55:13 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void	print_msg(char *msg, t_philo *philo)
 {
 	sem_wait(philo->data->msg);
-	if (!death_flag(0, philo->data))
-		printf("%zd %d %s\n", get_time() - philo->data->start, philo->id, msg);
+	printf("%zd %d %s\n", get_time() - philo->data->start, philo->id, msg);
 	sem_post(philo->data->msg);
 }
 
@@ -27,19 +26,14 @@ void	think(t_philo *philo)
 
 void	eat(t_philo *philo)
 {
-	if (philo->num_times_eaten == philo->data->max_num_to_eat)
-		exit(EXIT_SUCCESS);
-	if (philo->id % 2 == 0)
-		usleep(philo->data->time_to_eat);
 	sem_wait (philo->data->forks);
 	print_msg("has taken a fork", philo);
 	sem_wait (philo->data->forks);
 	print_msg("has taken a fork", philo);
-	
 	print_msg("is eating", philo);
 	last_eat(philo, 1, 0, 0);
 	ft_usleep(philo->data->time_to_eat, philo->data);
-	
+	last_eat(philo, 2, 0, 0);
 	sem_post(philo->data->forks);
 	sem_post(philo->data->forks);
 }
@@ -63,12 +57,13 @@ void	routine(t_philo *philo)
 		sem_post(philo->data->forks);
 		exit(0);
 	}
-	// if (philo->id % 2 == 0)
-	// 	usleep(10);
-	while (!death_flag(0, philo->data))
+	while (1)
 	{
-		eat(philo);
-		philo_sleeping(philo);
-		think(philo);
+		if (philo->num_times_eaten != philo->data->max_num_to_eat)
+		{
+			eat(philo);
+			philo_sleeping(philo);
+			think(philo);
+		}
 	}
 }
