@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/25 14:55:13 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:35:29 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,9 @@ void	last_eat(t_philo *philo, int flag, time_t *time, int *num_eat)
 {
 	pthread_mutex_lock(&philo->data->eat);
 	if (flag == 1)
-	{
 		philo->last_time_eaten = get_time();
+	else if (flag == 2)
 		philo->num_times_eaten++;
-	}
 	else
 	{
 		*time = philo->last_time_eaten;
