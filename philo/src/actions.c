@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:29 by akharkho          #+#    #+#             */
-/*   Updated: 2025/04/02 15:35:51 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:13:33 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 void	print_msg(char *msg, t_philo *philo)
 {
@@ -31,7 +31,7 @@ void	eat(t_philo *philo)
 	if (philo->num_times_eaten == philo->data->max_num_to_eat)
 		return ;
 	if (philo->id % 2 == 0)
-		usleep(philo->data->time_to_sleep);
+		usleep(philo->data->time_to_eat);
 	pthread_mutex_lock (philo->left_fork);
 	print_msg("has taken a fork", philo);
 	pthread_mutex_lock (philo->right_fork);

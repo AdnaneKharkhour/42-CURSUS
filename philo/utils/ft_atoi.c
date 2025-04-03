@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:38:35 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/24 12:25:03 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:14:09 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int	ft_atoi(const char *str)
 	rs = 0;
 	while (ft_isdigit(*str))
 	{
-		if (rs > (LONG_MAX - *str - '\0') / 10)
-			return (-1);
 		rs = rs * 10 + (*str - '0');
+		if ((rs * s) > INT_MAX || (rs * s) < INT_MIN)
+			return (-1);
 		str++;
 	}
 	if (*str)
 		return (-1337);
-	return (rs * s);
+	return ((int)(rs * s));
 }

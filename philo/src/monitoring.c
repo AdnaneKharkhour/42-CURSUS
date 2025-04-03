@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 08:51:41 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/25 21:39:24 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:13:46 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 static int	check_dead_or_finished(t_philo *philo, int *all_finished, int i)
 {
