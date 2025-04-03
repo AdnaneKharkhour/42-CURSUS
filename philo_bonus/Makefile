@@ -2,9 +2,10 @@ NAME = philo_bonus
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread -g
+CFLAGS = -Wall -Wextra -Werror
 
-SRC = utils_bonus/ft_atoi_bonus.c utils_bonus/ft_isdigit_bonus.c utils_bonus.c init_struct_bonus.c actions_bonus.c monitoring_bonus.c main_bonus.c
+SRC = utils_bonus/ft_atoi_bonus.c utils_bonus/ft_isdigit_bonus.c src_bonus/utils_bonus.c src_bonus/init_struct_bonus.c \
+	 src_bonus/actions_bonus.c src_bonus/monitoring_bonus.c src_bonus/main_bonus.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -21,7 +22,7 @@ $(OBJ) : %.o: %.c philo_bonus.h
 
 clean :
 	@rm -rf $(OBJ)
-	@echo "$(red) cleanning"
+	@echo "$(red) cleaning"
 
 fclean : clean
 	@rm -rf $(NAME)

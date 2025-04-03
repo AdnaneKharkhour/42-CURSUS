@@ -6,34 +6,36 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 08:54:22 by akharkho          #+#    #+#             */
-/*   Updated: 2025/04/02 19:38:10 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:04:24 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#include "../philo_bonus.h"
 
 void	wait_pids(t_data *data, t_philo	*philo)
 {
 	int	i;
 	int	status;
+	int	dead;
 
-	i = 0;
-	while (i < data->num_of_philos)
+	dead = 0;
+	while (!dead && data->all_finished < data->num_of_philos)
 	{
 		if (waitpid(-1, &status, 0) > 0)
 		{
-			if (WIFEXITED(status) == 1)
+			if (WIFEXITED(status) && WEXITSTATUS(status) == 1)
 			{
+				dead = 1;
 				i = 0;
 				while (i < data->num_of_philos)
-				{
-					kill(philo[i].pid, SIGKILL);
-					i++;
-				}
-				break ;
+					kill(philo[i++].pid, SIGKILL);
 			}
-			else
-				i++;
+			else if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
+			{
+				death_flag(2, data);
+				if (data->all_finished == data->num_of_philos)
+					break ;
+			}
 		}
 	}
 	clean(data);
@@ -64,19 +66,20 @@ void	init_philo(t_data *data, t_philo *philo)
 	i = 0;
 	while (i < data->num_of_philos)
 	{
+		philo[i].id = i + 1;
+		philo[i].data = data;
+		philo[i].num_times_eaten = 0;
+		philo[i].last_time_eaten = get_time();
 		philo[i].pid = fork();
 		if (philo[i].pid == 0)
 		{
-			philo[i].id = i + 1;
-			philo[i].data = data;
-			philo[i].num_times_eaten = 0;
-			philo[i].last_time_eaten = get_time();
 			routine(&philo[i]);
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
 		else if (philo[i].pid < 0)
 		{
 			write(2, "Error: failed to fork\n", 23);
+			clean(data);
 			exit(EXIT_FAILURE);
 		}
 		i++;
@@ -88,11 +91,11 @@ void	init_data(char **argv, int argc, t_data *data)
 {
 	data->num_of_philos = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
-	printf("%ld\n", data->time_to_die);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
 	data->max_num_to_eat = -1;
 	data->philo_died = 0;
+	data->all_finished = 0;
 	data->start = get_time();
 	if (argc == 6)
 	{

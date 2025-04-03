@@ -6,11 +6,11 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:29 by akharkho          #+#    #+#             */
-/*   Updated: 2025/04/02 15:55:13 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:31:03 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#include "../philo_bonus.h"
 
 void	print_msg(char *msg, t_philo *philo)
 {
@@ -32,7 +32,7 @@ void	eat(t_philo *philo)
 	print_msg("has taken a fork", philo);
 	print_msg("is eating", philo);
 	last_eat(philo, 1, 0, 0);
-	ft_usleep(philo->data->time_to_eat, philo->data);
+	ft_usleep(philo->data->time_to_eat);
 	last_eat(philo, 2, 0, 0);
 	sem_post(philo->data->forks);
 	sem_post(philo->data->forks);
@@ -41,7 +41,7 @@ void	eat(t_philo *philo)
 void	philo_sleeping(t_philo *philo)
 {
 	print_msg("is sleeping", philo);
-	ft_usleep(philo->data->time_to_sleep, philo->data);
+	ft_usleep(philo->data->time_to_sleep);
 }
 
 void	routine(t_philo *philo)
@@ -49,6 +49,7 @@ void	routine(t_philo *philo)
 	pthread_t	monitor_thread;
 
 	pthread_create(&monitor_thread, NULL, monitor, philo);
+	pthread_detach(monitor_thread);
 	if (philo->data->num_of_philos == 1)
 	{
 		sem_wait(philo->data->forks);

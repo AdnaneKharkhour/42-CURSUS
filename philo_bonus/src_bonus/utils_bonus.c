@@ -6,21 +6,27 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:32 by akharkho          #+#    #+#             */
-/*   Updated: 2025/04/02 15:50:32 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:33:17 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#include "../philo_bonus.h"
 
-int	death_flag(int died, t_data *data)
+int	death_flag(int flag, t_data *data)
 {
 	int	rs;
 
 	rs = 0;
 	sem_wait(data->organizer);
-	if (died)
+	if (flag == 1)
 	{
 		data->philo_died = 1;
+		sem_post(data->organizer);
+		return (0);
+	}
+	else if (flag == 2)
+	{
+		data->all_finished++;
 		sem_post(data->organizer);
 		return (0);
 	}
@@ -30,17 +36,13 @@ int	death_flag(int died, t_data *data)
 	return (rs);
 }
 
-void	ft_usleep(long time, t_data *data)
+void	ft_usleep(long time)
 {
 	long	start;
 
 	start = get_time();
 	while (get_time() - start < time)
-	{
-		if (death_flag(0, data))
-			break ;
 		usleep(100);
-	}
 }
 
 long	get_time(void)
