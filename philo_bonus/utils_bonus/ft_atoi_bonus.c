@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:38:35 by akharkho          #+#    #+#             */
-/*   Updated: 2025/04/03 13:56:27 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/05 16:33:09 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	space_sign(const char **s, int *sign)
 	}
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	long	rs;
 	int		s;
@@ -34,12 +34,12 @@ int	ft_atoi(const char *str)
 	rs = 0;
 	while (ft_isdigit(*str))
 	{
-		rs = rs * 10 + (*str - '0');
-		if ((rs * s) > INT_MAX || (rs * s) < INT_MIN)
+		if (rs > (LONG_MAX - *str - '\0') / 10)
 			return (-1);
+		rs = rs * 10 + (*str - '0');
 		str++;
 	}
 	if (*str)
 		return (-1337);
-	return ((int)(rs * s));
+	return (rs * s);
 }

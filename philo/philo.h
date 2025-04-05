@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:43:01 by akharkho          #+#    #+#             */
-/*   Updated: 2025/03/24 10:37:30 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/05 16:36:06 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ typedef struct timeval	t_time;
 
 typedef struct s_data
 {
-	int				num_of_philos;
+	long			num_of_philos;
 	time_t			time_to_sleep;
 	time_t			time_to_eat;
 	time_t			time_to_die;
 	time_t			start;
-	int				max_num_to_eat;
+	long			max_num_to_eat;
 	int				philo_died;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	organizer;
@@ -51,7 +51,7 @@ typedef struct s_philo
 
 // utils dir
 int		ft_isdigit(int n);
-int		ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 // init_struct.c
 void	init_philo(t_data *data, t_philo *philo);
 void	init_data(char **argv, int argc, t_data *data);

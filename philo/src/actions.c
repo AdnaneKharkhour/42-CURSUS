@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:29 by akharkho          #+#    #+#             */
-/*   Updated: 2025/04/03 15:13:33 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/05 17:06:22 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ void	*routine(void *arg)
 		pthread_mutex_unlock(philo->left_fork);
 		return (NULL);
 	}
-	if (philo->id % 2 == 0)
-		usleep(10);
 	while (!death_flag(0, philo->data))
 	{
 		eat(philo);

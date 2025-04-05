@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:43:01 by akharkho          #+#    #+#             */
-/*   Updated: 2025/04/03 18:27:52 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/05 16:34:57 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ typedef struct timeval	t_time;
 
 typedef struct s_data
 {
-	int			num_of_philos;
-	int			max_num_to_eat;
-	int			all_finished;
+	long		num_of_philos;
+	long		max_num_to_eat;
 	int			philo_died;
 	time_t		time_to_sleep;
 	time_t		time_to_eat;
@@ -53,7 +52,7 @@ typedef struct s_philo
 
 // utils dir
 int		ft_isdigit(int n);
-int		ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 // init_struct.c
 void	init_philo(t_data *data, t_philo *philo);
 void	init_data(char **argv, int argc, t_data *data);
@@ -69,7 +68,7 @@ void	routine(t_philo *philo);
 void	*monitor(void *arg);
 // utils.c
 int		death_flag(int died, t_data *data);
-void	ft_usleep(long time);
+void	ft_usleep(long time, t_data *data);
 long	get_time(void);
 void	last_eat(t_philo *philo, int flag, time_t *time, int *num_eat);
 void	clean(t_data *data);
