@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:29 by akharkho          #+#    #+#             */
-/*   Updated: 2025/04/05 17:06:22 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:51:21 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,6 @@ void	think(t_philo *philo)
 
 void	eat(t_philo *philo)
 {
-	if (philo->num_times_eaten == philo->data->max_num_to_eat)
-		return ;
-	if (philo->id % 2 == 0)
-		usleep(philo->data->time_to_eat);
 	pthread_mutex_lock (philo->left_fork);
 	print_msg("has taken a fork", philo);
 	pthread_mutex_lock (philo->right_fork);
@@ -59,12 +55,16 @@ void	*routine(void *arg)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		print_msg("has taken a fork", philo);
-		usleep(philo->data->time_to_die);
+		usleep(philo->data->time_to_die * 1000);
 		pthread_mutex_unlock(philo->left_fork);
 		return (NULL);
 	}
+	if (philo->id % 2 == 0)
+		ft_usleep(philo->data->time_to_eat, philo->data);
 	while (!death_flag(0, philo->data))
 	{
+		if (philo->num_times_eaten == philo->data->max_num_to_eat)
+			return (NULL);
 		eat(philo);
 		philo_sleeping(philo);
 		think(philo);

@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 08:54:22 by akharkho          #+#    #+#             */
-/*   Updated: 2025/04/05 16:56:30 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/06 14:08:55 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	init_data(char **argv, int argc, t_data *data)
 
 int	check_args(t_data *data, int argc)
 {
-	if (data->num_of_philos < 0 || data->time_to_die < 0
+	if (data->num_of_philos <= 0 || data->time_to_die < 0
 		|| data->time_to_eat < 0 || data->time_to_sleep < 0)
 	{
 		printf("Error:\n invalid value in args");

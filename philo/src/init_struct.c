@@ -6,25 +6,26 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 08:54:22 by akharkho          #+#    #+#             */
-/*   Updated: 2025/04/05 16:56:59 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:00:57 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	init_philo(t_data *data, t_philo *philo)
+int	init_philo(t_data *data, t_philo *philo)
 {
 	int	i;
 
-	i = 0;
 	data->forks = malloc(data->num_of_philos * sizeof(pthread_mutex_t));
 	if (!data->forks)
-		exit(1);
+		return (free(philo), 1);
+	i = 0;
 	while (i < data->num_of_philos)
 		pthread_mutex_init(&data->forks[i++], NULL);
-	pthread_mutex_init(&data->organizer, NULL);
-	pthread_mutex_init(&data->msg, NULL);
-	pthread_mutex_init(&data->eat, NULL);
+	if (pthread_mutex_init(&data->organizer, NULL) != 0
+		|| pthread_mutex_init(&data->msg, NULL) != 0
+		|| pthread_mutex_init(&data->eat, NULL) != 0)
+		return (free_exit(data, philo), 1);
 	i = 0;
 	while (i < data->num_of_philos)
 	{
@@ -36,6 +37,7 @@ void	init_philo(t_data *data, t_philo *philo)
 		philo[i].right_fork = &data->forks[(i + 1) % data->num_of_philos];
 		i++;
 	}
+	return (0);
 }
 
 void	init_data(char **argv, int argc, t_data *data)
@@ -84,7 +86,7 @@ int	create_and_join_threads(t_data data, t_philo *philo)
 
 int	check_args(t_data *data, int argc)
 {
-	if (data->num_of_philos < 0 || data->time_to_die < 0
+	if (data->num_of_philos <= 0 || data->time_to_die < 0
 		|| data->time_to_eat < 0 || data->time_to_sleep < 0)
 	{
 		printf("Error:\n invalid value in args");

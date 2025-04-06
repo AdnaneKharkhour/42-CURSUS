@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:43:01 by akharkho          #+#    #+#             */
-/*   Updated: 2025/04/05 16:36:06 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/06 15:59:54 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_philo
 int		ft_isdigit(int n);
 long	ft_atoi(const char *str);
 // init_struct.c
-void	init_philo(t_data *data, t_philo *philo);
+int		init_philo(t_data *data, t_philo *philo);
 void	init_data(char **argv, int argc, t_data *data);
 int		create_and_join_threads(t_data data, t_philo *philo);
 int		check_args(t_data *data, int argc);
@@ -70,5 +70,5 @@ int		death_flag(int died, t_data *data);
 void	ft_usleep(long time, t_data *data);
 long	get_time(void);
 void	last_eat(t_philo *philo, int flag, time_t *time, int *num_eat);
-int		free_exit(t_data *data, t_philo *philo);
+void	free_exit(t_data *data, t_philo *philo);
 #endif

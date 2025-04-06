@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:49:53 by akharkho          #+#    #+#             */
-/*   Updated: 2025/04/05 16:57:02 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:00:39 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,17 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	init_data(argv, argc, &data);
+	if (data.max_num_to_eat == 0)
+		return (0);
 	if (check_args(&data, argc))
 		return (1);
 	philo = malloc(data.num_of_philos * sizeof(t_philo));
 	if (!philo)
 		return (1);
-	init_philo(&data, philo);
+	if (init_philo(&data, philo))
+		return (1);
 	if (create_and_join_threads(data, philo) != 0)
-		return (free_exit(&data, philo));
+		return (free_exit(&data, philo), 1);
 	free_exit(&data, philo);
 	return (0);
 }

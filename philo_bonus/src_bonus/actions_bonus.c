@@ -6,7 +6,7 @@
 /*   By: akharkho <akharkho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 08:02:29 by akharkho          #+#    #+#             */
-/*   Updated: 2025/04/05 16:56:27 by akharkho         ###   ########.fr       */
+/*   Updated: 2025/04/06 14:58:42 by akharkho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	routine(t_philo *philo)
 	{
 		sem_wait(philo->data->forks);
 		print_msg("has taken a fork", philo);
-		usleep(philo->data->time_to_die);
+		usleep(philo->data->time_to_die * 1000);
 		sem_post(philo->data->forks);
 		exit(0);
 	}
